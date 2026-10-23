@@ -68,9 +68,9 @@ function makeSample(){
     // 先頭（指示文）はキャッシュさせる。2通目以降は文字列のまま渡す
     const messages=msgs.map((m,i)=>({role:m.role,content:i===0?[{type:"text",text:m.content,cache_control:{type:"ephemeral"}}]:m.content}));
     const st=s=>{try{T.status&&T.status(s)}catch(_){}};
-    let acc="",lastText="",rounds=0,calls=0,truncated=false,modelSeen="",limitHit=false,lastInfo="";
+    let acc="",lastText="",rounds=0,calls=0,truncated=false,modelSeen="",limitHit=false,lastInfo="";const detail=[];
     const use={in:0,out:0,cr:0,cw:0},t0=performance.now();
-    const snap=()=>{sample.lastRun={rounds,calls,truncated,limitHit,lastInfo,usage:{...use},tokens:use.in+use.out+use.cr+use.cw,ms:performance.now()-t0}};
+    const snap=()=>{sample.lastRun={rounds,calls,truncated,limitHit,lastInfo,detail,usage:{...use},tokens:use.in+use.out+use.cr+use.cw,ms:performance.now()-t0}};
     snap();
     try{
       for(let r=0;;r++){
@@ -89,6 +89,7 @@ function makeSample(){
         const text=content.filter(b=>b.type==="text").map(b=>b.text).join("").trim();
         const uses=content.filter(b=>b.type==="tool_use");
         lastText=text;
+        const _d={n:r+1,i:u.input_tokens||0,cr:u.cache_read_input_tokens||0,cw:u.cache_creation_input_tokens||0,o:u.output_tokens||0,stop:d.stop_reason||"?",think:content.some(b=>b.type==="thinking"||b.type==="redacted_thinking"),textLen:text.length,tools:[],resChars:0};detail.push(_d);
         lastInfo=(d.stop_reason||"?")+" "+content.map(b=>b.type).join("+")+" out="+(u.output_tokens||0)+" 文字="+text.length;
         if(text)acc+=(acc?"\n\n":"")+text;
         if(!wantJson&&o.onText)o.onText({text:acc});
@@ -99,11 +100,12 @@ function makeSample(){
         const results=[];
         for(const tu of uses){
           if(o.signal&&o.signal.aborted)throw {code:"cancelled",text:acc};
-          calls++;
+          calls++;detail[detail.length-1].tools.push(tu.name);
           const t=byName[tu.name];let out,err=false;
           try{if(!t)throw new Error("そのツールはありません");out=await t.execute(tu.input||{})}catch(e){err=true;out="エラー："+String((e&&e.message)||e)}
           results.push({type:"tool_result",tool_use_id:tu.id,content:typeof out==="string"?out:JSON.stringify(out),...(err?{is_error:true}:{})});
         }
+        detail[detail.length-1].resChars=results.reduce((a,x)=>a+String(x.content||"").length,0);
         messages.push({role:"user",content:results});
         snap();
       }
@@ -152,7 +154,7 @@ T.record=function(x){
     tab:x.tab||"",q:x.q||"",cond:x.cond||"",answer:x.answer||"",
     cites:(x.cites||[]).map(c=>(c.law||"")+" "+(c.label||"")+(c.doc?"（"+c.doc+"）":"")+" ["+c.ref+"]").join("\n"),
     rounds:run.rounds||0,cut,secs:Math.round((x.ms||0)/100)/10,tokens:run.tokens||0,
-    model:(x.model||"")+(u?"（入力 "+u.in+"・キャッシュ読 "+u.cr+"・キャッシュ書 "+u.cw+"・出力 "+u.out+"）":"")
+    model:(x.model||"")+(u?"（入力 "+u.in+"・キャッシュ読 "+u.cr+"・キャッシュ書 "+u.cw+"・出力 "+u.out+"）":"")+(run.detail&&run.detail.length?"\n各回："+run.detail.map(x=>x.n+"回目 入"+x.i+" 読"+x.cr+" 書"+x.cw+" 出"+x.o+(x.think?" 思考あり":"")+" 本文"+x.textLen+"字 "+(x.tools.length?x.tools.join("+")+" 結果"+x.resChars+"字":x.stop)).join("\n"):"")
   };
   const idp=gasPost({action:"log",rec}).then(j=>j&&j.ok?j.id:null).catch(()=>null);
   if(x.after&&!x.error)addBar(x.after,idp);
