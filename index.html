@@ -390,18 +390,24 @@ const isAbort=e=>!!e&&(e.name==="AbortError"||e.code==="cancelled");
 async function gasPost(payload,signal){
   let last=null;
   for(let i=0;i<2;i++){
+    // 1回の通信に待ち時間の上限を置く（返ってこない通信でページが止まり続けないように）
+    const ac=new AbortController();let timedOut=false;
+    const lim=Number(T.cfg&&T.cfg.timeoutMs)||(payload&&payload.action==="claude"?200000:30000);
+    const tm=setTimeout(()=>{timedOut=true;ac.abort()},lim);
+    const onAbort=()=>ac.abort();
+    if(signal){if(signal.aborted)ac.abort();else signal.addEventListener("abort",onAbort,{once:true})}
     try{
-      const r=await fetch(T.cfg.api,{method:"POST",body:JSON.stringify(payload),signal});
+      const r=await fetch(T.cfg.api,{method:"POST",body:JSON.stringify(payload),signal:ac.signal});
       if(!r.ok)throw {code:"upstream_error",detail:"http "+r.status};
       const j=await r.json();
       if(j&&j.ok===false&&(j.status>=500||j.status===529)&&i===0){last={code:"upstream_error",detail:j.error};await sleep(2500);continue}
       return j;
     }catch(e){
-      if(isAbort(e))throw {code:"cancelled"};
-      last=e&&e.code?e:{code:"upstream_error",detail:String((e&&e.message)||e)};
+      if(isAbort(e)&&!timedOut)throw {code:"cancelled"};
+      last=timedOut?{code:"upstream_error",detail:"timeout "+Math.round(lim/1000)+"s"}:(e&&e.code?e:{code:"upstream_error",detail:String((e&&e.message)||e)});
       if(i===0){await sleep(2500);continue}
       throw last;
-    }
+    }finally{clearTimeout(tm);if(signal)signal.removeEventListener("abort",onAbort)}
   }
   throw last||{code:"upstream_error"};
 }
