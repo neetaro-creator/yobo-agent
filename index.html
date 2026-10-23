@@ -392,7 +392,7 @@ async function gasPost(payload,signal){
   for(let i=0;i<2;i++){
     // 1回の通信に待ち時間の上限を置く（返ってこない通信でページが止まり続けないように）
     const ac=new AbortController();let timedOut=false;
-    const lim=Number(T.cfg&&T.cfg.timeoutMs)||(payload&&payload.action==="claude"?200000:30000);
+    const lim=Number(T.cfg&&T.cfg.timeoutMs)||(payload&&payload.action==="claude"?300000:30000);
     const tm=setTimeout(()=>{timedOut=true;ac.abort()},lim);
     const onAbort=()=>ac.abort();
     if(signal){if(signal.aborted)ac.abort();else signal.addEventListener("abort",onAbort,{once:true})}
@@ -442,9 +442,9 @@ function makeSample(){
     // 先頭（指示文）はキャッシュさせる。2通目以降は文字列のまま渡す
     const messages=msgs.map((m,i)=>({role:m.role,content:i===0?[{type:"text",text:m.content,cache_control:{type:"ephemeral"}}]:m.content}));
     const st=s=>{try{T.status&&T.status(s)}catch(_){}};
-    let acc="",lastText="",rounds=0,calls=0,truncated=false,modelSeen="",limitHit=false;
+    let acc="",lastText="",rounds=0,calls=0,truncated=false,modelSeen="",limitHit=false,lastInfo="";
     const use={in:0,out:0,cr:0,cw:0},t0=performance.now();
-    const snap=()=>{sample.lastRun={rounds,calls,truncated,limitHit,usage:{...use},tokens:use.in+use.out+use.cr+use.cw,ms:performance.now()-t0}};
+    const snap=()=>{sample.lastRun={rounds,calls,truncated,limitHit,lastInfo,usage:{...use},tokens:use.in+use.out+use.cr+use.cw,ms:performance.now()-t0}};
     snap();
     try{
       for(let r=0;;r++){
@@ -463,6 +463,7 @@ function makeSample(){
         const text=content.filter(b=>b.type==="text").map(b=>b.text).join("").trim();
         const uses=content.filter(b=>b.type==="tool_use");
         lastText=text;
+        lastInfo=(d.stop_reason||"?")+" "+content.map(b=>b.type).join("+")+" out="+(u.output_tokens||0)+" 文字="+text.length;
         if(text)acc+=(acc?"\n\n":"")+text;
         if(!wantJson&&o.onText)o.onText({text:acc});
         if(d.stop_reason==="refusal")throw {code:"refused",text:acc};
@@ -520,7 +521,7 @@ function addBar(after,idp){
 }
 T.record=function(x){
   const run=x.run||{},u=run.usage;
-  const cut=x.error?(x.error==="cancelled"?"中止":"エラー："+x.error+(run.limitHit?"／回数上限":"")+(run.truncated?"／文字数上限":"")):run.limitHit?"調べる回数の上限で打ち切り":run.truncated?"文字数の上限で打ち切り":"なし";
+  const cut=x.error?(x.error==="cancelled"?"中止":"エラー："+x.error+(run.limitHit?"／回数上限":"")+(run.truncated?"／文字数上限":"")+(run.lastInfo?"／最後："+run.lastInfo:"")):run.limitHit?"調べる回数の上限で打ち切り":run.truncated?"文字数の上限で打ち切り":"なし";
   const rec={
     tab:x.tab||"",q:x.q||"",cond:x.cond||"",answer:x.answer||"",
     cites:(x.cites||[]).map(c=>(c.law||"")+" "+(c.label||"")+(c.doc?"（"+c.doc+"）":"")+" ["+c.ref+"]").join("\n"),
@@ -547,6 +548,7 @@ function decorate(){
   const h=document.querySelector("header.top");if(h)h.after(b);else document.body.prepend(b);
   const n=document.getElementById("asknote");
   if(n)n.textContent=n.textContent.replace("質問すると、あなた自身のClaudeの利用枠を使います。","");
+  document.querySelectorAll("span.note").forEach(x=>{if(x.textContent.indexOf("あなたのClaudeの利用枠を使います")>=0)x.textContent=x.textContent.replace("（質問と同じく、あなたのClaudeの利用枠を使います）","")});
 }
 
 T.ready=function(){
