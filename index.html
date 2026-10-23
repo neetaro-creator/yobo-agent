@@ -514,7 +514,7 @@ function addBar(after,idp){
 }
 T.record=function(x){
   const run=x.run||{},u=run.usage;
-  const cut=x.error?(x.error==="cancelled"?"中止":"エラー："+x.error):run.limitHit?"調べる回数の上限で打ち切り":run.truncated?"文字数の上限で打ち切り":"なし";
+  const cut=x.error?(x.error==="cancelled"?"中止":"エラー："+x.error+(run.limitHit?"／回数上限":"")+(run.truncated?"／文字数上限":"")):run.limitHit?"調べる回数の上限で打ち切り":run.truncated?"文字数の上限で打ち切り":"なし";
   const rec={
     tab:x.tab||"",q:x.q||"",cond:x.cond||"",answer:x.answer||"",
     cites:(x.cites||[]).map(c=>(c.law||"")+" "+(c.label||"")+(c.doc?"（"+c.doc+"）":"")+" ["+c.ref+"]").join("\n"),
@@ -1418,7 +1418,7 @@ async function askBack(){
     if(memoQs.length&&!fresh.length&&qs.length)plain("新しく聞くことはありませんでした（前と同じ事項は除きました）。そのまま「確認項目を作る」を押してください。");
     if(!qs.length)plain("足りない情報はありませんでした。そのまま「確認項目を作る」を押してください。");
   }catch(e){
-    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・洗い出し",q:_rq,error:(e&&e.code)||"error",run:sample.lastRun,ms:performance.now()-_t0,model:MODEL});
+    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・洗い出し",q:_rq,answer:(e&&e.text)||"",error:(e&&e.code)||"error",run:sample.lastRun,ms:performance.now()-_t0,model:MODEL});
     st(e&&e.code==="cancelled"?"止めました。":e&&e.code==="invalid_json"?"足りない情報の形で返ってきませんでした。もう一度お試しください。":(ERR[e&&e.code]||"足りない情報を出せませんでした。もう一度お試しください。"));
   }finally{memoLock(false);mctl=null}
 }
@@ -1457,7 +1457,7 @@ async function makeMemo(){
     if(window.__TRIAL&&__TRIAL.on){const _cs=[...new Set((JSON.stringify(v).match(/\[\[\d+#s\d+\]\]/g)||[]).map(x=>x.slice(2,-2)))].map(k=>{const f=fmtRefLabel(k);return f&&f.row?{ref:k,law:short(f.law.t),label:f.row.label,doc:f.law.ntc?ctxOf(f.law):""}:{ref:k,law:"?",label:"",doc:""}});
       __TRIAL.record({tab:"協議・一覧",q:_rq,cond:m.condBrief,answer:JSON.stringify(v,null,1),cites:_cs,run:sample.lastRun,ms:performance.now()-_t0,model:MODEL,after:$("#m-out")})}
   }catch(e){
-    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・一覧",q:_rq,error:(e&&e.code)||"error",run:sample.lastRun,ms:performance.now()-_t0,model:MODEL});
+    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・一覧",q:_rq,answer:(e&&e.text)||"",error:(e&&e.code)||"error",run:sample.lastRun,ms:performance.now()-_t0,model:MODEL});
     st(e&&e.code==="cancelled"?"止めました。":e&&e.code==="invalid_json"?"一覧の形で返ってきませんでした。もう一度お試しください。":(ERR[e&&e.code]||"作れませんでした。もう一度お試しください。"));
   }finally{memoLock(false);mctl=null}
 }

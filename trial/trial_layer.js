@@ -140,7 +140,7 @@ function addBar(after,idp){
 }
 T.record=function(x){
   const run=x.run||{},u=run.usage;
-  const cut=x.error?(x.error==="cancelled"?"中止":"エラー："+x.error):run.limitHit?"調べる回数の上限で打ち切り":run.truncated?"文字数の上限で打ち切り":"なし";
+  const cut=x.error?(x.error==="cancelled"?"中止":"エラー："+x.error+(run.limitHit?"／回数上限":"")+(run.truncated?"／文字数上限":"")):run.limitHit?"調べる回数の上限で打ち切り":run.truncated?"文字数の上限で打ち切り":"なし";
   const rec={
     tab:x.tab||"",q:x.q||"",cond:x.cond||"",answer:x.answer||"",
     cites:(x.cites||[]).map(c=>(c.law||"")+" "+(c.label||"")+(c.doc?"（"+c.doc+"）":"")+" ["+c.ref+"]").join("\n"),

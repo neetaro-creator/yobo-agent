@@ -51,7 +51,7 @@ sub('renderQs(String(v.view||""),old);st("");\n    $("#m-ask").textContent="さ�
     '    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・洗い出し",q:_rq,answer:JSON.stringify(v,null,1),run:sample.lastRun,ms:performance.now()-_t0,model:MODEL,after:$("#m-qs")});',
     "askBack:成功")
 sub('    st(e&&e.code==="cancelled"?"止めました。":e&&e.code==="invalid_json"?"足りない情報の形で',
-    '    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・洗い出し",q:_rq,error:(e&&e.code)||"error",run:sample.lastRun,ms:performance.now()-_t0,model:MODEL});\n'
+    '    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・洗い出し",q:_rq,answer:(e&&e.text)||"",error:(e&&e.code)||"error",run:sample.lastRun,ms:performance.now()-_t0,model:MODEL});\n'
     '    st(e&&e.code==="cancelled"?"止めました。":e&&e.code==="invalid_json"?"足りない情報の形で',
     "askBack:失敗")
 
@@ -67,7 +67,7 @@ sub('memoCur=m;saveMemo(m);renderMemo(m);st("");renderMemoHist();',
     '      __TRIAL.record({tab:"協議・一覧",q:_rq,cond:m.condBrief,answer:JSON.stringify(v,null,1),cites:_cs,run:sample.lastRun,ms:performance.now()-_t0,model:MODEL,after:$("#m-out")})}',
     "makeMemo:成功")
 sub('    st(e&&e.code==="cancelled"?"止めました。":e&&e.code==="invalid_json"?"一覧の形で',
-    '    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・一覧",q:_rq,error:(e&&e.code)||"error",run:sample.lastRun,ms:performance.now()-_t0,model:MODEL});\n'
+    '    if(window.__TRIAL&&__TRIAL.on)__TRIAL.record({tab:"協議・一覧",q:_rq,answer:(e&&e.text)||"",error:(e&&e.code)||"error",run:sample.lastRun,ms:performance.now()-_t0,model:MODEL});\n'
     '    st(e&&e.code==="cancelled"?"止めました。":e&&e.code==="invalid_json"?"一覧の形で',
     "makeMemo:失敗")
 
