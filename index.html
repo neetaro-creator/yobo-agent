@@ -544,7 +544,7 @@ function decorate(){
     ".trate summary{cursor:pointer;color:var(--muted);margin-top:4px}.trate .tstat{font-size:12px;color:var(--muted)}";
   document.head.append(css);
   const b=document.createElement("div");b.className="tbanner";
-  b.textContent="試行版です。質問・回答・根拠・評価は記録され、改良に使います。事業所名・個人名は書かないでください。回答の下の「役に立った／誤りがある」を押してもらえると助かります。";
+  b.textContent="試行版";
   const h=document.querySelector("header.top");if(h)h.after(b);else document.body.prepend(b);
   const n=document.getElementById("asknote");
   if(n)n.textContent=n.textContent.replace("質問すると、あなた自身のClaudeの利用枠を使います。","");
