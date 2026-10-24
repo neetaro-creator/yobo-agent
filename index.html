@@ -1598,7 +1598,7 @@ function renderMemoHist(){
   const l=loadMemos();const box=$("#m-hist");if(!box)return;
   box.innerHTML=l.length?`<h2 class="mh2">前に作った一覧（${ST.on?(ST.bad?"一部はこの端末だけ":"アカウントに保存"):"この端末だけ"}）</h2>`+l.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
 }
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#m-hist .mh,#hmemo .mh");if(!b)return;const m=loadMemos()[+b.dataset.mi];if(m){if(b.closest("#hmemo"))showTab("memo");memoCur=m;memoQs=null;$("#m-qs").innerHTML="";$("#m-plan").value=m.plan||"";$("#m-ledger").value=m.ledger||"";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=r.value===m.kind);syncKind();renderMemo(m);$("#m-out").scrollIntoView({behavior:"smooth"})}});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#m-hist .mh,#hmemo .mh");if(!b)return;const m=loadMemos()[+b.dataset.mi];if(m){if(b.closest("#hmemo"))showTab("memo");{const s=$("#m-status");if(s&&!memoBusy)s.textContent=""}memoCur=m;memoQs=null;$("#m-qs").innerHTML="";$("#m-plan").value=m.plan||"";$("#m-ledger").value=m.ledger||"";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=r.value===m.kind);syncKind();renderMemo(m);$("#m-out").scrollIntoView({behavior:"smooth"})}});
 $("#m-go").addEventListener("click",makeMemo);
 $("#m-ask").addEventListener("click",askBack);
 $("#m-stop").addEventListener("click",()=>{if(mctl)mctl.abort()});
