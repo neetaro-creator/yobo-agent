@@ -239,8 +239,8 @@ details.hq .answer{margin-top:8px}
 .memo .mbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .memo .mwarn{font-size:12px;color:var(--muted);margin-top:10px}
 #m-hist .mh2{font-size:13px;color:var(--muted);margin:18px 0 4px;letter-spacing:.06em}
-#m-hist .mh{display:flex;justify-content:space-between;gap:8px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-top:6px;cursor:pointer;width:100%;text-align:left;color:var(--fg);font:inherit}
-#m-hist .mh span:last-child{font-size:12px;color:var(--muted);white-space:nowrap}
+#m-hist .mh,#hmemo .mh{display:flex;justify-content:space-between;gap:8px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-top:6px;cursor:pointer;width:100%;text-align:left;color:var(--fg);font:inherit}
+#m-hist .mh span:last-child,#hmemo .mh span:last-child{font-size:12px;color:var(--muted);white-space:nowrap}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #m-print{position:fixed;left:-10000px;top:0;width:794px;background:#fff;color:#000;-webkit-text-size-adjust:none;text-size-adjust:none}
 #m-print *{-webkit-text-size-adjust:none;text-size-adjust:none;max-height:none}
@@ -353,6 +353,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
       <p class="note" id="stnote">この端末のこのブラウザにだけ保存されます。他の人や他の端末には見えません。共用の端末では、使い終わったら消してください。</p>
       <p class="note err" id="stwarn" hidden>この端末（iPhone・iPad）では、アプリを閉じると履歴・しおり・前に作った一覧が消えることがあります。残したい回答は、コピーして別に保存してください。</p>
       <div id="hlist"></div>
+      <div id="hmemo"></div>
     </section>
 
     <p class="foot" id="foot"></p>
@@ -906,7 +907,7 @@ $("#yobo").addEventListener("click",e=>{
    iPhone は、Claudeの画面に埋め込まれたページの localStorage をメモリにしか置かず、アプリが終わると消す。
    そのため db（各自の data/users/<id>/nav/ の下、1件1ドキュメント）に保存し、localStorage は控えとして書く。 */
 const SKEY={hist:"reiki-nav-hist-v1",bm:"reiki-nav-bm-v1",memo:"reiki-nav-memo-v1"},SCAP={hist:100,bm:60,memo:20},SMIG="reiki-nav-dbmig-v1";
-const ST={on:false,ready:false,col:{},cache:{},q:Promise.resolve(),dead:false,wrote:false,full:false,pre:{hist:new Set,bm:new Set,memo:new Set},preDel:{hist:new Set,bm:new Set,memo:new Set}};
+const ST={err:"",on:false,ready:false,col:{},cache:{},q:Promise.resolve(),dead:false,wrote:false,full:false,pre:{hist:new Set,bm:new Set,memo:new Set},preDel:{hist:new Set,bm:new Set,memo:new Set}};
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 function lsGet(k){try{const v=JSON.parse(localStorage.getItem(SKEY[k])||"[]");return Array.isArray(v)?v:[]}catch(e){return[]}}
 function lsSet(k,l){
@@ -939,7 +940,7 @@ async function stDo(k,[kind,id,s]){
   for(let i=0;i<4;i++){
     try{if(kind==="del")await ref.delete();else await ref.set(JSON.parse(s));ST.wrote=true;return}
     catch(e){
-      const c=e&&e.code;
+      const c=e&&e.code;ST.err=k+"/"+kind+": "+(c||"error")+(e&&e.message?" "+String(e.message).slice(0,80):"");
       if(c==="resource_exhausted"||c==="unavailable"){await new Promise(r=>setTimeout(r,800*(i+1)+Math.random()*400));continue}
       if(c==="quota_exceeded"){if(!ST.full){ST.full=true;toast("アカウントへの保存の容量がいっぱいです。古い履歴を消してください（この端末には残します）")}return}
       if(c==="invalid_argument"&&ST.wrote)return;
@@ -951,6 +952,7 @@ function stWhere(){return ST.on?"Claudeのアカウントに保存され、同�
 function stNote(){
   const el=$("#stnote");if(el){el.textContent=ST.on?"Claudeのアカウントに保存されます。同じアカウントなら、ほかの端末でも同じ履歴が出ます。他の人には見えません。":"この端末のこのブラウザにだけ保存されます。他の人や他の端末には見えません。共用の端末では、使い終わったら消してください。"}
   const w=$("#stwarn");if(w)w.hidden=!(ST.ready&&!ST.on&&IOS&&(()=>{try{return window.top!==window}catch(_){return true}})());
+  if(el&&ST.err&&!ST.on)el.textContent+="（アカウントへの保存を止めました："+ST.err+"）";
   try{renderHist();renderBM();renderMemoHist()}catch(_){}
 }
 async function stInit(){
@@ -1594,7 +1596,7 @@ function renderMemoHist(){
   const l=loadMemos();const box=$("#m-hist");if(!box)return;
   box.innerHTML=l.length?`<h2 class="mh2">前に作った一覧（${ST.on?"アカウントに保存":"この端末だけ"}）</h2>`+l.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
 }
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#m-hist .mh");if(!b)return;const m=loadMemos()[+b.dataset.mi];if(m){memoCur=m;memoQs=null;$("#m-qs").innerHTML="";$("#m-plan").value=m.plan||"";$("#m-ledger").value=m.ledger||"";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=r.value===m.kind);syncKind();renderMemo(m);$("#m-out").scrollIntoView({behavior:"smooth"})}});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#m-hist .mh,#hmemo .mh");if(!b)return;const m=loadMemos()[+b.dataset.mi];if(m){if(b.closest("#hmemo"))showTab("memo");memoCur=m;memoQs=null;$("#m-qs").innerHTML="";$("#m-plan").value=m.plan||"";$("#m-ledger").value=m.ledger||"";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=r.value===m.kind);syncKind();renderMemo(m);$("#m-out").scrollIntoView({behavior:"smooth"})}});
 $("#m-go").addEventListener("click",makeMemo);
 $("#m-ask").addEventListener("click",askBack);
 $("#m-stop").addEventListener("click",()=>{if(mctl)mctl.abort()});
@@ -1697,6 +1699,8 @@ function renderHist(){
   const l=loadHist(),box=$("#hlist");
   $("#hcount").textContent=l.length?l.length+"件の質問が残っています":"まだ質問の履歴はありません。";
   $("#hclear").hidden=!l.length;
+  const mm=loadMemos(),hm=$("#hmemo");
+  if(hm)hm.innerHTML=mm.length?`<h2 class="mh2" style="font-size:13px;color:var(--muted);margin:18px 0 4px;letter-spacing:.06em">協議で作った一覧（${ST.on?"アカウントに保存":"この端末だけ"}）</h2>`+mm.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
   box.innerHTML=l.map((e,i)=>`<details class="hq" data-i="${i}"><summary><span class="hqq">${esc(e.q)}</span><span class="hqd">${esc(fmtT(e.t))}</span></summary><div class="hqb"></div></details>`).join("");
 }
 $("#hlist").addEventListener("toggle",async ev=>{
