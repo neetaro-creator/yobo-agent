@@ -907,7 +907,7 @@ $("#yobo").addEventListener("click",e=>{
    iPhone は、Claudeの画面に埋め込まれたページの localStorage をメモリにしか置かず、アプリが終わると消す。
    そのため db（各自の data/users/<id>/nav/ の下、1件1ドキュメント）に保存し、localStorage は控えとして書く。 */
 const SKEY={hist:"reiki-nav-hist-v1",bm:"reiki-nav-bm-v1",memo:"reiki-nav-memo-v1"},SCAP={hist:100,bm:60,memo:20},SMIG="reiki-nav-dbmig-v1";
-const ST={err:"",on:false,ready:false,col:{},cache:{},q:Promise.resolve(),dead:false,wrote:false,full:false,pre:{hist:new Set,bm:new Set,memo:new Set},preDel:{hist:new Set,bm:new Set,memo:new Set}};
+const ST={err:"",bad:false,on:false,ready:false,col:{},cache:{},q:Promise.resolve(),dead:false,wrote:false,full:false,pre:{hist:new Set,bm:new Set,memo:new Set},preDel:{hist:new Set,bm:new Set,memo:new Set}};
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 function lsGet(k){try{const v=JSON.parse(localStorage.getItem(SKEY[k])||"[]");return Array.isArray(v)?v:[]}catch(e){return[]}}
 function lsSet(k,l){
@@ -943,16 +943,18 @@ async function stDo(k,[kind,id,s]){
       const c=e&&e.code;ST.err=k+"/"+kind+": "+(c||"error")+(e&&e.message?" "+String(e.message).slice(0,80):"");
       if(c==="resource_exhausted"||c==="unavailable"){await new Promise(r=>setTimeout(r,800*(i+1)+Math.random()*400));continue}
       if(c==="quota_exceeded"){if(!ST.full){ST.full=true;toast("アカウントへの保存の容量がいっぱいです。古い履歴を消してください（この端末には残します）")}return}
-      if(c==="invalid_argument"&&ST.wrote)return;
+      if(c==="invalid_argument"&&ST.wrote){stBad();return} // この1件だけ断られた：ほかは保存を続け、断られたことを見せる
       stOff();return; // 書き込めない画面（閲覧だけの共有など）：この端末のブラウザだけで続ける
     }
   }
+  stBad(); // 混み合いで4回とも書けなかった
 }
+function stBad(){if(!ST.bad){ST.bad=true;toast("アカウントに保存できなかった記録があります（この端末には残しています）。履歴タブに理由を出しています")}stNote()}
 function stWhere(){return ST.on?"Claudeのアカウントに保存され、同じアカウントならほかの端末でも出ます":"この端末のこのブラウザだけに残ります"}
 function stNote(){
   const el=$("#stnote");if(el){el.textContent=ST.on?"Claudeのアカウントに保存されます。同じアカウントなら、ほかの端末でも同じ履歴が出ます。他の人には見えません。":"この端末のこのブラウザにだけ保存されます。他の人や他の端末には見えません。共用の端末では、使い終わったら消してください。"}
   const w=$("#stwarn");if(w)w.hidden=!(ST.ready&&!ST.on&&IOS&&(()=>{try{return window.top!==window}catch(_){return true}})());
-  if(el&&ST.err&&!ST.on)el.textContent+="（アカウントへの保存を止めました："+ST.err+"）";
+  if(el&&ST.err&&(!ST.on||ST.bad))el.textContent+=(ST.on?"（アカウントに保存できなかった記録があります：":"（アカウントへの保存を止めました：")+ST.err+"）";
   try{renderHist();renderBM();renderMemoHist()}catch(_){}
 }
 async function stInit(){
@@ -1594,7 +1596,7 @@ function loadMemos(){return stGet("memo")}
 function saveMemo(m){const l=loadMemos().filter(x=>x.t!==m.t);l.unshift(m);stSet("memo",l)}
 function renderMemoHist(){
   const l=loadMemos();const box=$("#m-hist");if(!box)return;
-  box.innerHTML=l.length?`<h2 class="mh2">前に作った一覧（${ST.on?"アカウントに保存":"この端末だけ"}）</h2>`+l.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
+  box.innerHTML=l.length?`<h2 class="mh2">前に作った一覧（${ST.on?(ST.bad?"一部はこの端末だけ":"アカウントに保存"):"この端末だけ"}）</h2>`+l.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
 }
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#m-hist .mh,#hmemo .mh");if(!b)return;const m=loadMemos()[+b.dataset.mi];if(m){if(b.closest("#hmemo"))showTab("memo");memoCur=m;memoQs=null;$("#m-qs").innerHTML="";$("#m-plan").value=m.plan||"";$("#m-ledger").value=m.ledger||"";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=r.value===m.kind);syncKind();renderMemo(m);$("#m-out").scrollIntoView({behavior:"smooth"})}});
 $("#m-go").addEventListener("click",makeMemo);
@@ -1700,7 +1702,7 @@ function renderHist(){
   $("#hcount").textContent=l.length?l.length+"件の質問が残っています":"まだ質問の履歴はありません。";
   $("#hclear").hidden=!l.length;
   const mm=loadMemos(),hm=$("#hmemo");
-  if(hm)hm.innerHTML=mm.length?`<h2 class="mh2" style="font-size:13px;color:var(--muted);margin:18px 0 4px;letter-spacing:.06em">協議で作った一覧（${ST.on?"アカウントに保存":"この端末だけ"}）</h2>`+mm.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
+  if(hm)hm.innerHTML=mm.length?`<h2 class="mh2" style="font-size:13px;color:var(--muted);margin:18px 0 4px;letter-spacing:.06em">協議で作った一覧（${ST.on?(ST.bad?"一部はこの端末だけ":"アカウントに保存"):"この端末だけ"}）</h2>`+mm.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
   box.innerHTML=l.map((e,i)=>`<details class="hq" data-i="${i}"><summary><span class="hqq">${esc(e.q)}</span><span class="hqd">${esc(fmtT(e.t))}</span></summary><div class="hqb"></div></details>`).join("");
 }
 $("#hlist").addEventListener("toggle",async ev=>{
