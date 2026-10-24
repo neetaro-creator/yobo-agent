@@ -426,6 +426,16 @@ function parseJSON(t){
   if(a>=0&&b>a){try{return JSON.parse(t.slice(a,b+1))}catch(_){}}
   return null;
 }
+// 調べる回数の上限に達したとき（または本文が空だったとき）に、最後の利用者発言へ足す指示
+const FINAL_NOTE="【調べる回数の上限に達しました】これ以上は調べられません。ここまでに読んで確かめた範囲だけで、最初の指示で指定された形式のとおり、いま答えを出してください。JSONを求められている場合は、JSONだけを返します。確かめきれなかった事項は、指定の欄に、調べる回数の上限で途中までであることを含めて書きます。";
+const EMPTY_NOTE="（前回の応答は本文が空でした。長く考え込まず、本文を必ず出力してください。）";
+const withNudge=(ms,note)=>{
+  if(!note)return ms;
+  const c=JSON.parse(JSON.stringify(ms)),last=c[c.length-1];
+  if(typeof last.content==="string")last.content=[{type:"text",text:last.content}];
+  last.content.push({type:"text",text:note});
+  return c;
+};
 const withCache=ms=>{
   const c=JSON.parse(JSON.stringify(ms)),last=c[c.length-1];
   if(typeof last.content==="string")last.content=[{type:"text",text:last.content}];
@@ -442,16 +452,16 @@ function makeSample(){
     // 先頭（指示文）はキャッシュさせる。2通目以降は文字列のまま渡す
     const messages=msgs.map((m,i)=>({role:m.role,content:i===0?[{type:"text",text:m.content,cache_control:{type:"ephemeral"}}]:m.content}));
     const st=s=>{try{T.status&&T.status(s)}catch(_){}};
-    let acc="",lastText="",rounds=0,calls=0,truncated=false,modelSeen="",limitHit=false,lastInfo="";const detail=[];
+    let acc="",lastText="",rounds=0,calls=0,truncated=false,modelSeen="",limitHit=false,lastInfo="",forceFinal=false,emptyRetried=false;const detail=[];
     const use={in:0,out:0,cr:0,cw:0},t0=performance.now();
     const snap=()=>{sample.lastRun={rounds,calls,truncated,limitHit,lastInfo,detail,usage:{...use},tokens:use.in+use.out+use.cr+use.cw,ms:performance.now()-t0}};
     snap();
     try{
       for(let r=0;;r++){
         if(o.signal&&o.signal.aborted)throw {code:"cancelled",text:acc};
-        const final=r>=cfg.maxRounds;
+        const final=forceFinal||r>=cfg.maxRounds;
         st(r===0?"考えています…":final?"回答を書いています…":"次に調べる点を考えています…");
-        const body={model:o.model,max_tokens:cfg.maxTokens,messages:withCache(messages)};
+        const body={model:o.model,max_tokens:cfg.maxTokens,messages:withCache(withNudge(messages,final?(FINAL_NOTE+(emptyRetried?EMPTY_NOTE:"")):""))};
         if(apiTools.length){body.tools=apiTools;if(final)body.tool_choice={type:"none"}}
         let res;
         try{res=await gasPost({action:"claude",body},o.signal)}catch(e){if(e&&e.code==="cancelled")e.text=acc;throw e}
@@ -468,6 +478,7 @@ function makeSample(){
         if(text)acc+=(acc?"\n\n":"")+text;
         if(!wantJson&&o.onText)o.onText({text:acc});
         if(d.stop_reason==="refusal")throw {code:"refused",text:acc};
+        if(!uses.length&&!text&&!emptyRetried&&d.stop_reason!=="max_tokens"){emptyRetried=true;forceFinal=true;detail[detail.length-1].retry=true;continue}
         if(!uses.length||final){truncated=d.stop_reason==="max_tokens";limitHit=final&&rounds>=cfg.maxRounds;break}
         messages.push({role:"assistant",content});
         rounds++;snap();
