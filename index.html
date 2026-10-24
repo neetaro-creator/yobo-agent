@@ -1,4 +1,3 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>例規ナビ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -286,7 +285,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
           <button class="btn ghost" id="reset" hidden>新しい質問から始める</button>
         </div>
         <div class="chips" id="chips"></div>
-        <p class="note" id="asknote">回答は、例規集・国の法令（e-Gov）・国の通知・通達・京都市消防局の運用基準など、取り込んだ本文だけを根拠にします。消防職員に当てはまる規定かどうかも確認して答えます。質問すると、あなた自身のClaudeの利用枠を使います。質問と回答は「履歴」に残ります（この端末のこのブラウザだけ）。</p>
+        <p class="note" id="asknote">回答は、例規集・国の法令（e-Gov）・国の通知・通達・京都市消防局の運用基準など、取り込んだ本文だけを根拠にします。消防職員に当てはまる規定かどうかも確認して答えます。質問すると、あなた自身のClaudeの利用枠を使います。質問と回答は「履歴」に残ります（保存先は履歴タブに書いてあります）。</p>
       </div>
       <div id="thread"></div>
     </section>
@@ -351,7 +350,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
         <span class="note" id="hcount"></span>
         <button class="btn ghost" id="hclear" hidden>履歴をすべて消す</button>
       </div>
-      <p class="note">この端末のこのブラウザにだけ保存されます。他の人や他の端末には見えません。共用の端末では、使い終わったら消してください。</p>
+      <p class="note" id="stnote">この端末のこのブラウザにだけ保存されます。他の人や他の端末には見えません。共用の端末では、使い終わったら消してください。</p>
+      <p class="note err" id="stwarn" hidden>この端末（iPhone・iPad）では、アプリを閉じると履歴・しおり・前に作った一覧が消えることがあります。残したい回答は、コピーして別に保存してください。</p>
       <div id="hlist"></div>
     </section>
 
@@ -902,10 +902,85 @@ $("#yobo").addEventListener("click",e=>{
   const b=e.target.closest("[data-l]");if(b)openLaw(b.dataset.l,{sid:b.dataset.s,fresh:true});
 });
 
-/* ---------- しおり(この端末のこのブラウザだけ) ---------- */
-const BK="reiki-nav-bm-v1";
-function loadBM(){try{const v=JSON.parse(localStorage.getItem(BK)||"[]");return Array.isArray(v)?v:[]}catch(e){return[]}}
-function saveBM(l){try{localStorage.setItem(BK,JSON.stringify(l.slice(0,60)));return true}catch(e){return false}}
+/* ---------- 保存先：Claudeのアカウント（db）。使えない画面では、この端末のブラウザ ----------
+   iPhone は、Claudeの画面に埋め込まれたページの localStorage をメモリにしか置かず、アプリが終わると消す。
+   そのため db（各自の data/users/<id>/nav/ の下、1件1ドキュメント）に保存し、localStorage は控えとして書く。 */
+const SKEY={hist:"reiki-nav-hist-v1",bm:"reiki-nav-bm-v1",memo:"reiki-nav-memo-v1"},SCAP={hist:100,bm:60,memo:20},SMIG="reiki-nav-dbmig-v1";
+const ST={on:false,ready:false,col:{},cache:{},q:Promise.resolve(),dead:false,wrote:false,full:false,pre:{hist:new Set,bm:new Set,memo:new Set},preDel:{hist:new Set,bm:new Set,memo:new Set}};
+const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+function lsGet(k){try{const v=JSON.parse(localStorage.getItem(SKEY[k])||"[]");return Array.isArray(v)?v:[]}catch(e){return[]}}
+function lsSet(k,l){
+  if(!l.length){try{localStorage.removeItem(SKEY[k]);return true}catch(e){return false}}
+  for(let n=l.length;n>0;n=n>10?n-10:n-1){try{localStorage.setItem(SKEY[k],JSON.stringify(l.slice(0,n)));return n===l.length}catch(e){}}
+  return false;
+}
+const sdid=(k,x)=>k[0]+String(Math.round(Number(x&&x.t)||0));
+function stGet(k){if(!ST.cache[k]){ST.cache[k]=lsGet(k);if(k==="bm"){let t=Date.now();ST.cache[k].forEach(b=>{if(!b.t)b.t=t--})}}return ST.cache[k].slice()}
+function stSet(k,l){
+  l=l.slice(0,SCAP[k]);
+  if(k==="bm"){let t=Date.now();l.forEach(b=>{if(!b.t)b.t=t--})}
+  const old=ST.cache[k]||lsGet(k);ST.cache[k]=l;
+  const ok=lsSet(k,l);
+  if(ST.on)stSync(k,old,l);
+  else if(!ST.ready){const om=new Set(old.map(x=>sdid(k,x))),nm=new Set(l.map(x=>sdid(k,x)));nm.forEach(id=>{if(!om.has(id)){ST.pre[k].add(id);ST.preDel[k].delete(id)}});om.forEach(id=>{if(!nm.has(id)){ST.preDel[k].add(id);ST.pre[k].delete(id)}})}
+  return ST.on||ok;
+}
+function stSync(k,old,l){
+  const om=new Map(old.map(x=>[sdid(k,x),JSON.stringify(x)])),nm=new Map(l.map(x=>[sdid(k,x),x]));
+  nm.forEach((x,id)=>{const s=JSON.stringify(x);if(om.get(id)!==s)stQueue(k,["set",id,s])});
+  om.forEach((_,id)=>{if(!nm.has(id))stQueue(k,["del",id])});
+}
+function stQueue(k,op){ST.q=ST.q.then(()=>stDo(k,op)).catch(()=>{})}
+function stOff(){ST.dead=true;ST.on=false;stNote()}
+async function stDo(k,[kind,id,s]){
+  if(ST.dead)return;
+  if(kind==="set"&&s.length>240000)return; // 大きすぎる1件は、この端末だけに残す
+  const ref=ST.col[k].doc(id);
+  for(let i=0;i<4;i++){
+    try{if(kind==="del")await ref.delete();else await ref.set(JSON.parse(s));ST.wrote=true;return}
+    catch(e){
+      const c=e&&e.code;
+      if(c==="resource_exhausted"||c==="unavailable"){await new Promise(r=>setTimeout(r,800*(i+1)+Math.random()*400));continue}
+      if(c==="quota_exceeded"){if(!ST.full){ST.full=true;toast("アカウントへの保存の容量がいっぱいです。古い履歴を消してください（この端末には残します）")}return}
+      if(c==="invalid_argument"&&ST.wrote)return;
+      stOff();return; // 書き込めない画面（閲覧だけの共有など）：この端末のブラウザだけで続ける
+    }
+  }
+}
+function stWhere(){return ST.on?"Claudeのアカウントに保存され、同じアカウントならほかの端末でも出ます":"この端末のこのブラウザだけに残ります"}
+function stNote(){
+  const el=$("#stnote");if(el){el.textContent=ST.on?"Claudeのアカウントに保存されます。同じアカウントなら、ほかの端末でも同じ履歴が出ます。他の人には見えません。":"この端末のこのブラウザにだけ保存されます。他の人や他の端末には見えません。共用の端末では、使い終わったら消してください。"}
+  const w=$("#stwarn");if(w)w.hidden=!(ST.ready&&!ST.on&&IOS&&(()=>{try{return window.top!==window}catch(_){return true}})());
+  try{renderHist();renderBM();renderMemoHist()}catch(_){}
+}
+async function stInit(){
+  try{
+    if(!window.claude||!claude.use)return;
+    const [db,user]=await Promise.all([claude.use("db").catch(()=>null),claude.use("user").catch(()=>null)]);
+    if(!db||!user)return;
+    const uid=await user.id();if(!uid)return;
+    const base=db.doc("data/users/"+uid+"/nav");
+    const col={hist:base.collection("hist"),bm:base.collection("bm"),memo:base.collection("memo")};
+    const got={};
+    for(const k in SKEY){const s=await col[k].orderBy("t","desc").limit(SCAP[k]).get();got[k]=s.docs.map(d=>d.data()).filter(Boolean).map(x=>JSON.parse(JSON.stringify(x)))}
+    let mig=false;try{mig=localStorage.getItem(SMIG)===uid}catch(e){}
+    ST.col=col;ST.on=true;
+    for(const k in SKEY){
+      const cur=stGet(k),m=new Map(got[k].map(x=>[sdid(k,x),x]));
+      // 初めてこの端末で使うときは、この端末の控えをすべて足す。2回目からは、db を正とし、db が読めるまでに足した分だけ足す
+      cur.forEach(x=>{const id=sdid(k,x);if((!mig||ST.pre[k].has(id))&&!m.has(id))m.set(id,x)});
+      ST.preDel[k].forEach(id=>m.delete(id));
+      const l=[...m.values()].sort((a,b)=>(Number(b.t)||0)-(Number(a.t)||0)).slice(0,SCAP[k]);
+      ST.cache[k]=l;lsSet(k,l);stSync(k,got[k],l);
+    }
+    try{localStorage.setItem(SMIG,uid)}catch(e){}
+  }catch(e){ST.on=false}
+  finally{ST.ready=true;stNote()}
+}
+
+/* ---------- しおり ---------- */
+function loadBM(){return stGet("bm")}
+function saveBM(l){return stSet("bm",l)}
 function bmLabel(id,sid){
   const li=LAWIDX[id];if(li==null)return null;const law=IDX.laws[li];
   const r=sid?rowFor(li,sid):null;
@@ -932,7 +1007,7 @@ $("#lv-bm").addEventListener("click",()=>{
 });
 function renderBM(){
   const box=$("#ybm"),l=loadBM();
-  if(!l.length){box.innerHTML='<div class="yg"><h3>しおり</h3><p class="note">よく開く条文は、条文を開いた画面の「☆しおり」で、ここに登録できます（この端末のこのブラウザだけに残ります）。</p></div>';return}
+  if(!l.length){box.innerHTML=`<div class="yg"><h3>しおり</h3><p class="note">よく開く条文は、条文を開いた画面の「☆しおり」で、ここに登録できます（${stWhere()}）。</p></div>`;return}
   box.innerHTML='<div class="yg"><h3>しおり</h3><div class="chips">'+l.map((b,i)=>`<span class="bmc"><button class="chip ych" data-l="${esc(b.id)}"${b.sid?` data-s="${esc(b.sid)}"`:""}>${esc(b.lab)}</button><button class="bmx" data-bmx="${i}" aria-label="しおりを外す">×</button></span>`).join("")+"</div></div>";
 }
 $("#ybm").addEventListener("click",e=>{
@@ -1513,11 +1588,11 @@ function renderMemo(m){
   const ns=()=>!!($("#m-nostaff")&&$("#m-nostaff").checked);$("#m-docx").onclick=()=>saveMemoFile(m,"docx",ns());$("#m-pdf").onclick=()=>saveMemoFile(m,"pdf",ns());
   $("#m-new").onclick=()=>{memoCur=null;memoQs=null;$("#m-ask").textContent="足りない情報を洗い出す";$("#m-out").innerHTML="";$("#m-qs").innerHTML="";$("#m-plan").value="";$("#m-ledger").value="";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=false);syncKind();$("#m-plan").focus()};
 }
-function loadMemos(){try{const v=JSON.parse(localStorage.getItem(MHK)||"[]");return Array.isArray(v)?v:[]}catch(e){return[]}}
-function saveMemo(m){const l=loadMemos().filter(x=>x.t!==m.t);l.unshift(m);for(let n=Math.min(l.length,20);n>=0;n--){try{localStorage.setItem(MHK,JSON.stringify(l.slice(0,n)));return}catch(e){}}}
+function loadMemos(){return stGet("memo")}
+function saveMemo(m){const l=loadMemos().filter(x=>x.t!==m.t);l.unshift(m);stSet("memo",l)}
 function renderMemoHist(){
   const l=loadMemos();const box=$("#m-hist");if(!box)return;
-  box.innerHTML=l.length?`<h2 class="mh2">前に作った一覧（この端末だけ）</h2>`+l.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
+  box.innerHTML=l.length?`<h2 class="mh2">前に作った一覧（${ST.on?"アカウントに保存":"この端末だけ"}）</h2>`+l.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
 }
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#m-hist .mh");if(!b)return;const m=loadMemos()[+b.dataset.mi];if(m){memoCur=m;memoQs=null;$("#m-qs").innerHTML="";$("#m-plan").value=m.plan||"";$("#m-ledger").value=m.ledger||"";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=r.value===m.kind);syncKind();renderMemo(m);$("#m-out").scrollIntoView({behavior:"smooth"})}});
 $("#m-go").addEventListener("click",makeMemo);
@@ -1613,15 +1688,9 @@ async function memoPdf(m,noStaff){
   return pdf.output("blob");
 }
 
-/* ---------- history (この端末のブラウザだけ) ---------- */
-const HK="reiki-nav-hist-v1";
-function loadHist(){try{const v=JSON.parse(localStorage.getItem(HK)||"[]");return Array.isArray(v)?v:[]}catch(e){return[]}}
-function saveHist(list){
-  for(let n=list.length;n>=0;n=Math.max(0,n-10)){
-    try{localStorage.setItem(HK,JSON.stringify(list.slice(0,n)));return true}catch(e){if(n===0)return false}
-  }
-  return false;
-}
+/* ---------- history ---------- */
+function loadHist(){return stGet("hist")}
+function saveHist(list){return stSet("hist",list)}
 function addHistory(e){const l=loadHist();l.unshift(e);saveHist(l.slice(0,100))}
 function fmtT(t){try{return new Date(t).toLocaleString("ja-JP",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})}catch(e){return""}}
 function renderHist(){
@@ -1647,13 +1716,14 @@ $("#hlist").addEventListener("click",e=>{
   const b=e.target.closest("[data-l]");if(b)openLaw(b.dataset.l,{sid:b.dataset.s,fresh:true});
 });
 $("#hclear").addEventListener("click",()=>{
-  if($("#hclear").dataset.armed){try{localStorage.removeItem(HK)}catch(e){}renderHist();$("#hclear").dataset.armed="";$("#hclear").textContent="履歴をすべて消す";return}
+  if($("#hclear").dataset.armed){saveHist([]);renderHist();$("#hclear").dataset.armed="";$("#hclear").textContent="履歴をすべて消す";return}
   $("#hclear").dataset.armed="1";$("#hclear").textContent="もう一度押すと全部消えます";
   setTimeout(()=>{$("#hclear").dataset.armed="";$("#hclear").textContent="履歴をすべて消す"},4000);
 });
 
 /* ---------- init ---------- */
 (async function init(){
+  stInit();
   try{
     IDX=await getJSON("index.json");
   }catch(e){$("#asof").textContent="データを読み込めませんでした";return}
@@ -1691,5 +1761,3 @@ $("#hclear").addEventListener("click",()=>{
 })();
 })();
 </script>
-
-</body></html>
