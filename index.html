@@ -351,7 +351,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
         <button class="btn ghost" id="hclear" hidden>履歴をすべて消す</button>
       </div>
       <p class="note" id="stnote">この端末のこのブラウザにだけ保存されます。他の人や他の端末には見えません。共用の端末では、使い終わったら消してください。</p>
-      <p class="note err" id="stwarn" hidden>この端末（iPhone・iPad）では、アプリを閉じると履歴・しおり・前に作った一覧が消えることがあります。残したい回答は、コピーして別に保存してください。</p>
+      <p class="note err" id="stwarn" hidden>この端末（iPhone・iPad）では、アプリを閉じると履歴・しおり・協議で作った一覧が消えることがあります。残したい回答は、コピーして別に保存してください。</p>
       <div id="hlist"></div>
       <div id="hmemo"></div>
     </section>
@@ -1595,10 +1595,22 @@ function renderMemo(m){
 function loadMemos(){return stGet("memo")}
 function saveMemo(m){const l=loadMemos().filter(x=>x.t!==m.t);l.unshift(m);stSet("memo",l)}
 function renderMemoHist(){
-  const l=loadMemos();const box=$("#m-hist");if(!box)return;
-  box.innerHTML=l.length?`<h2 class="mh2">前に作った一覧（${ST.on?(ST.bad?"一部はこの端末だけ":"アカウントに保存"):"この端末だけ"}）</h2>`+l.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
+  const box=$("#m-hist");if(box)box.innerHTML='<p class="note">作った一覧は「履歴」タブに残ります。開くと、Word・PDFでも保存できます。</p>'; // 前に作った一覧は「履歴」タブで見る
 }
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#m-hist .mh,#hmemo .mh");if(!b)return;const m=loadMemos()[+b.dataset.mi];if(m){if(b.closest("#hmemo"))showTab("memo");{const s=$("#m-status");if(s&&!memoBusy)s.textContent=""}memoCur=m;memoQs=null;$("#m-qs").innerHTML="";$("#m-plan").value=m.plan||"";$("#m-ledger").value=m.ledger||"";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=r.value===m.kind);syncKind();renderMemo(m);$("#m-out").scrollIntoView({behavior:"smooth"})}});
+$("#hmemo").addEventListener("toggle",ev=>{
+  const d=ev.target;if(!d.matches||!d.matches("details.hm")||!d.open)return;
+  const body=d.querySelector(".hqb");if(body.dataset.done)return;
+  const m=loadMemos().find(x=>String(x.t)===d.dataset.t);if(!m)return;
+  body.dataset.done="1";
+  body.innerHTML=`<div class="memo">${memoHTML(m)}<div class="mbtns"><button class="btn" data-mk="docx">Wordで保存</button><button class="btn" data-mk="pdf">PDFで保存</button><label class="note" style="display:flex;gap:6px;align-items:center"><input type="checkbox" class="mns"> 先方用（職員用を除く）</label></div><div class="mwarn"></div></div><button class="btn ghost hdel" data-mdel="1">この一覧を消す</button>`;
+},true);
+$("#hmemo").addEventListener("click",e=>{
+  const d=e.target.closest("details.hm");if(!d)return;
+  const m=loadMemos().find(x=>String(x.t)===d.dataset.t);if(!m)return;
+  const k=e.target.closest("[data-mk]");
+  if(k){const ns=d.querySelector(".mns");saveMemoFile(m,k.dataset.mk,!!(ns&&ns.checked),d.querySelector(".mwarn"));return}
+  if(e.target.closest("[data-mdel]")){stSet("memo",loadMemos().filter(x=>x.t!==m.t));renderHist()}
+});
 $("#m-go").addEventListener("click",makeMemo);
 $("#m-ask").addEventListener("click",askBack);
 $("#m-stop").addEventListener("click",()=>{if(mctl)mctl.abort()});
@@ -1609,8 +1621,8 @@ function loadLib(k){if(!libP[k])libP[k]=new Promise((res,rej)=>{const sc=documen
 let downloads=null,downloadsP=null;
 async function getDownloads(){if(!downloadsP)downloadsP=(async()=>{try{return window.claude&&claude.use?await claude.use("downloads"):null}catch(e){return null}})();return downloads=await downloadsP}
 function memoFileName(m,ext,noStaff){const d=new Date(m.t);const p=n=>String(n).padStart(2,"0");return `予防協議_確認事項${noStaff?"_先方用":""}_${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}.${ext}`}
-async function saveMemoFile(m,kind,noStaff){
-  const msg=t=>{const el=$("#m-save");if(el)el.textContent=t};
+async function saveMemoFile(m,kind,noStaff,out){
+  const msg=t=>{const el=out||$("#m-save");if(el)el.textContent=t};
   try{
     msg(kind==="docx"?"Wordファイルを作っています…":"PDFを作っています…");
     const blob=kind==="docx"?await memoDocx(m,noStaff):await memoPdf(m,noStaff);
@@ -1702,7 +1714,7 @@ function renderHist(){
   $("#hcount").textContent=l.length?l.length+"件の質問が残っています":"まだ質問の履歴はありません。";
   $("#hclear").hidden=!l.length;
   const mm=loadMemos(),hm=$("#hmemo");
-  if(hm)hm.innerHTML=mm.length?`<h2 class="mh2" style="font-size:13px;color:var(--muted);margin:18px 0 4px;letter-spacing:.06em">協議で作った一覧（${ST.on?(ST.bad?"一部はこの端末だけ":"アカウントに保存"):"この端末だけ"}）</h2>`+mm.map((m,i)=>`<button class="mh" data-mi="${i}"><span>${esc((m.plan||m.condBrief||"（計画なし）").slice(0,40))}</span><span>${esc(fmtT(m.t))}</span></button>`).join(""):"";
+  if(hm)hm.innerHTML=mm.length?`<h2 class="mh2" style="font-size:13px;color:var(--muted);margin:18px 0 4px;letter-spacing:.06em">協議で作った一覧（${ST.on?(ST.bad?"一部はこの端末だけ":"アカウントに保存"):"この端末だけ"}）</h2>`+mm.map(m=>`<details class="hq hm" data-t="${esc(String(m.t))}"><summary><span class="hqq">${esc((m.plan||m.condBrief||"（計画なし）").slice(0,60))}</span><span class="hqd">${esc(fmtT(m.t))}</span></summary><div class="hqb"></div></details>`).join(""):"";
   box.innerHTML=l.map((e,i)=>`<details class="hq" data-i="${i}"><summary><span class="hqq">${esc(e.q)}</span><span class="hqd">${esc(fmtT(e.t))}</span></summary><div class="hqb"></div></details>`).join("");
 }
 $("#hlist").addEventListener("toggle",async ev=>{
