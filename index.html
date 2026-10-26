@@ -82,6 +82,9 @@ select{background:var(--surface);border:1px solid var(--line);border-radius:8px;
 .nb.nb3{color:var(--ok);border-color:var(--ok)}
 .nb.nbx{color:#fff;background:#b3261e;border-color:#b3261e}.nb.nbr{color:var(--warn);border-color:var(--warn)}
 .relbar{font-size:13px;border:1px solid #b3261e;border-radius:8px;padding:8px 10px;margin:8px 0}.relbar.rv{border-color:#8a5a00}
+.kyol{font-size:12.5px;border-left:3px solid #2f6f4f;background:rgba(47,111,79,.06);border-radius:0 6px 6px 0;padding:6px 8px;margin:8px 0}.kyol b{font-weight:600}.kyol .kyn{color:var(--sub,#666);font-size:12px}
+.kyb{font:inherit;font-size:12.5px;background:none;border:1px solid #2f6f4f;border-radius:6px;padding:3px 6px;margin:4px 6px 0 0;color:inherit;cursor:pointer;text-align:left}
+.fignote{font-size:12.5px;border:1px dashed var(--line);border-radius:6px;padding:6px 8px;margin:4px 0;color:var(--muted)}.rawrow{margin:6px 0}a.relb{display:inline-block;text-decoration:none}
 .relb{font:inherit;font-size:12.5px;background:none;border:1px solid var(--line);border-radius:6px;padding:3px 6px;margin:4px 6px 0 0;color:inherit;cursor:pointer;text-align:left}
 pre.ntx{white-space:pre-wrap;word-break:break-all;font-family:inherit;font-size:13.5px;line-height:1.7;margin:4px 0 12px}
 .pgh{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px;margin:10px 0 0}
@@ -118,6 +121,9 @@ pre.ntx{white-space:pre-wrap;word-break:break-all;font-family:inherit;font-size:
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .seg button{background:var(--surface);border:0;padding:7px 16px;font-size:14px;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+#chips[hidden],#asknote[hidden],#tocmode[hidden]{display:none!important}
+.tsrc{display:flex;width:100%}.tsrc button{flex:1 1 auto;padding:7px 6px;font-size:13.5px}
+.lawitem .lt{flex:1 1 auto;min-width:0}.lawitem .tg{font-size:11.5px;color:var(--muted);flex:0 1 38%;text-align:right;overflow-wrap:anywhere}.lawitem .tg.own{color:#8a5a00}
 details.ed{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-top:8px}
 details.ed>summary{list-style:none;cursor:pointer;padding:11px 14px;font-weight:700;display:flex;justify-content:space-between;gap:8px}
 details.ed>summary::-webkit-details-marker{display:none}
@@ -214,7 +220,25 @@ details.hq .answer{margin-top:8px}
 .hdel{margin-top:10px;font-size:12px;padding:4px 10px}
 .mlab{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 #m-plan{min-height:110px}
-#m-ledger-box{display:flex;flex-direction:column}
+#m-ledger-box{display:flex;flex-direction:column}#m-ledger-box[hidden]{display:none}
+.mbld{border:1px solid var(--line);border-radius:10px;padding:8px 10px 10px;margin:10px 0 4px;background:var(--surface)}
+.mbh{font-weight:700;font-size:14px;margin-bottom:2px}.mbs{display:block;font-size:13px;font-weight:600;margin:8px 0 2px;color:var(--fg)}
+.mbld details.cond>summary,.mbld details.cond .row .note{display:none}
+.mfr{margin:10px 0 0}.mfl{font-size:13px;font-weight:600;margin:0 0 3px}.mfl .mbn{display:inline;margin-left:6px}
+.mfi{display:grid;grid-template-columns:4.2em 1fr;gap:4px 6px;align-items:center}.mfi>span{font-size:12px;color:var(--muted)}
+.mfi input,.mfi select{width:100%;min-width:0;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:7px 9px;background:var(--surface);font-size:14px;color:var(--fg)}
+.mfi input.aft,.mfi select.aft{border-style:dashed}
+.mfc{display:flex;flex-wrap:wrap;gap:4px}.mfc button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:14px;padding:4px 9px;cursor:pointer}
+.mfc button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+table.mft{width:100%;border-collapse:collapse;font-size:13px}.mft th{font-weight:400;color:var(--muted);text-align:left;padding:2px 4px}.mft td{padding:2px 4px}.mft input{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:6px;padding:5px 7px;background:var(--surface);font-size:14px;color:var(--fg)}.mft td.aft input{border-style:dashed}
+.dzn{font-size:13.5px;padding:5px 0;border-top:1px solid var(--line)}.dzn:first-child{border-top:0}.dzn .mbn{display:block}
+.mfe{border-top:1px solid var(--line);padding:7px 0}.mfe:first-of-type{border-top:0}.mfe .mfn{font-size:13.5px;font-weight:600}.mfe .mft2{font-size:11.5px;color:var(--muted);margin:1px 0 4px}.mfe .mft2.req{color:#2f6f4f}.mfe .mft2 b{font-weight:600}
+.mfe .mfc button.on.a{background:#2f6f4f;border-color:#2f6f4f;color:#fff}.mfe .mfc button.on.n{background:#b3261e;border-color:#b3261e;color:#fff}
+.mcard{border-left:3px solid var(--fg);background:var(--bg);border-radius:0 8px 8px 0;padding:6px 10px 8px;margin:10px 0 0}
+.mbs .mbn{display:block;font-weight:400;font-size:12px;color:var(--muted);margin-top:1px}
+.mbld .cgrid label{font-size:13px;color:var(--fg)}.mbld .cgrid{gap:8px 10px}
+.mbld details.cond .row{justify-content:flex-end;margin-top:4px}.mbld #c-clear{font-size:12px;padding:4px 10px;min-height:0}
+#m-ledger{min-height:0}.mbld details.cond{margin:0;border:0;padding:0;background:none}
 #m-ledger{width:100%;box-sizing:border-box;min-height:70px;resize:vertical}
 .mkind{display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:10px}
 .mkind label{display:flex;gap:8px;align-items:flex-start;font-size:14px;cursor:pointer}
@@ -269,15 +293,15 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
         <details id="cond" class="cond"><summary id="cond-s">対象物の条件を入れる（わかる分だけ・任意）</summary>
           <div class="cgrid">
             <label class="wide">用途（令別表第一。目安なので、判定は条文で確認します）<select id="c-use"><option value="">未選択</option><option value="令別表第一(1)項イ 劇場・映画館・演芸場・観覧場">(1)項イ　劇場・映画館・演芸場・観覧場</option><option value="令別表第一(1)項ロ 公会堂・集会場">(1)項ロ　公会堂・集会場</option><option value="令別表第一(2)項イ キャバレー・ナイトクラブ等">(2)項イ　キャバレー・ナイトクラブ等</option><option value="令別表第一(2)項ロ 遊技場・ダンスホール">(2)項ロ　遊技場・ダンスホール</option><option value="令別表第一(2)項ハ 性風俗関連特殊営業の店舗等">(2)項ハ　性風俗関連特殊営業の店舗等</option><option value="令別表第一(2)項ニ カラオケボックス等">(2)項ニ　カラオケボックス等</option><option value="令別表第一(3)項イ 待合・料理店等">(3)項イ　待合・料理店等</option><option value="令別表第一(3)項ロ 飲食店">(3)項ロ　飲食店</option><option value="令別表第一(4)項 百貨店・物品販売店舗・展示場">(4)項　百貨店・物品販売店舗・展示場</option><option value="令別表第一(5)項イ 旅館・ホテル・宿泊所等">(5)項イ　旅館・ホテル・宿泊所等</option><option value="令別表第一(5)項ロ 寄宿舎・下宿・共同住宅">(5)項ロ　寄宿舎・下宿・共同住宅</option><option value="令別表第一(6)項イ 病院・診療所・助産所">(6)項イ　病院・診療所・助産所</option><option value="令別表第一(6)項ロ 老人短期入所施設・特養・障害者支援施設等">(6)項ロ　老人短期入所施設・特養・障害者支援施設等</option><option value="令別表第一(6)項ハ 老人デイサービスセンター・保育所等">(6)項ハ　老人デイサービスセンター・保育所等</option><option value="令別表第一(6)項ニ 幼稚園・特別支援学校">(6)項ニ　幼稚園・特別支援学校</option><option value="令別表第一(7)項 小・中・高校、大学、専修学校等">(7)項　小・中・高校、大学、専修学校等</option><option value="令別表第一(8)項 図書館・博物館・美術館等">(8)項　図書館・博物館・美術館等</option><option value="令別表第一(9)項イ 蒸気浴場・熱気浴場">(9)項イ　蒸気浴場・熱気浴場</option><option value="令別表第一(9)項ロ 9イ以外の公衆浴場">(9)項ロ　9イ以外の公衆浴場</option><option value="令別表第一(10)項 車両の停車場・船舶航空機の発着場">(10)項　車両の停車場・船舶航空機の発着場</option><option value="令別表第一(11)項 神社・寺院・教会等">(11)項　神社・寺院・教会等</option><option value="令別表第一(12)項イ 工場・作業場">(12)項イ　工場・作業場</option><option value="令別表第一(12)項ロ 映画・テレビスタジオ">(12)項ロ　映画・テレビスタジオ</option><option value="令別表第一(13)項イ 自動車車庫・駐車場">(13)項イ　自動車車庫・駐車場</option><option value="令別表第一(13)項ロ 飛行機等の格納庫">(13)項ロ　飛行機等の格納庫</option><option value="令別表第一(14)項 倉庫">(14)項　倉庫</option><option value="令別表第一(15)項 前各項以外の事業場">(15)項　前各項以外の事業場</option><option value="令別表第一(16)項イ 複合用途(特定用途あり)">(16)項イ　複合用途(特定用途あり)</option><option value="令別表第一(16)項ロ 複合用途(イ以外)">(16)項ロ　複合用途(イ以外)</option><option value="令別表第一(16の2)項 地下街">(16の2)項　地下街</option><option value="令別表第一(16の3)項 準地下街">(16の3)項　準地下街</option><option value="令別表第一(17)項 文化財">(17)項　文化財</option><option value="令別表第一(18)項 アーケード">(18)項　アーケード</option><option value="令別表第一(19)項 山林">(19)項　山林</option><option value="令別表第一(20)項 舟車">(20)項　舟車</option></select></label>
-            <label>延べ面積（㎡）<input type="text" id="c-area" inputmode="decimal" autocomplete="off"></label>
-            <label>収容人員（人）<input type="text" id="c-cap" inputmode="numeric" autocomplete="off"></label>
-            <label>地上の階数<input type="text" id="c-up" inputmode="numeric" autocomplete="off"></label>
-            <label>地階の階数<input type="text" id="c-dn" inputmode="numeric" autocomplete="off"></label>
+            <label>延べ面積（㎡）<input type="text" id="c-area" placeholder="例：300" inputmode="decimal" autocomplete="off"></label>
+            <label>収容人員（人）<input type="text" id="c-cap" placeholder="例：50" inputmode="numeric" autocomplete="off"></label>
+            <label>地上の階数<input type="text" id="c-up" placeholder="例：3" inputmode="numeric" autocomplete="off"></label>
+            <label>地階の階数<input type="text" id="c-dn" placeholder="例：0" inputmode="numeric" autocomplete="off"></label>
             <label>構造<select id="c-str"><option value="">未選択</option><option>耐火構造</option><option>準耐火構造</option><option>木造</option><option>その他</option></select></label>
             <label class="ck"><input type="checkbox" id="c-mado"> 無窓階がある</label>
-            <label class="wide">その他の条件（改築中、既存、危険物の品名・数量など）<input type="text" id="c-etc" autocomplete="off"></label>
+            <label class="wide">その他の条件（改築中、既存、危険物の品名・数量など）<input type="text" id="c-etc" placeholder="例：既存のテナントビル、灯油200L" autocomplete="off"></label>
           </div>
-          <div class="row"><button class="btn ghost" id="c-clear" type="button">条件を消す</button><span class="note">入れた条件は、質問の後ろに付けて送ります。空欄の条件は「不明」として扱い、仮定しません。</span></div>
+          <div class="row"><button class="btn ghost" id="c-clear" type="button">入力を消す</button><span class="note">入れた条件は、質問の後ろに付けて送ります。空欄の条件は「不明」として扱い、仮定しません。</span></div>
         </details>
         <div class="row">
           <button class="btn" id="go">質問する</button>
@@ -286,32 +310,35 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
           <button class="btn ghost" id="reset" hidden>新しい質問から始める</button>
         </div>
         <div class="chips" id="chips"></div>
-        <p class="note" id="asknote">回答は、例規集・国の法令（e-Gov）・国の通知・通達・京都市消防局の運用基準など、取り込んだ本文だけを根拠にします。消防職員に当てはまる規定かどうかも確認して答えます。質問すると、あなた自身のClaudeの利用枠を使います。質問と回答は「履歴」に残ります（保存先は履歴タブに書いてあります）。</p>
+        <p class="note" id="asknote">取り込んだ例規・法令・通知・運用基準の本文だけを根拠に答えます。</p>
       </div>
       <div id="thread"></div>
     </section>
 
     <section class="panel" id="p-memo" hidden>
       <div class="askbox">
-        <p class="note">予防協議の確認事項の一覧を作ります。先方から聞いた計画を書くと、先方に確かめることを条文から挙げ、Word と PDF（A4）で保存できます。電話で聞きながら書き足してから作っても構いません。事業者名・所在地は書かないでください（印刷後に手書きする欄があります）。</p>
+        <p class="note">先方の計画から、協議で確かめる事項の一覧を作ります（Word・PDFで保存）。事業者名・所在地は書かないでください。</p>
         <div class="mkind" role="radiogroup" aria-label="計画の種類">
           <span class="mlab" style="margin:0 0 4px">まず計画の種類を選ぶ</span>
           <label><input type="radio" name="mkind" value="new"> 新築（これから建てる）</label>
           <label><input type="radio" name="mkind" value="exist"> 既存の建物を変える（用途変更・テナント入替・改修・増築・間仕切り変更）</label>
         </div>
-        <div id="m-cond-slot"></div>
         <label class="mlab" for="m-plan">先方の計画（わかったことを書く）</label>
         <textarea id="m-plan" placeholder="例：2階の事務所区画（約120㎡）を個室カラオケ店に。個室8室、簡単な厨房あり。内装工事のみで11月着工、12月開店予定。建物は3階建て、1階は物販店。"></textarea>
-        <div id="m-ledger-box" hidden><label class="mlab" for="m-ledger">台帳から（既存の建物のとき・任意）：今ある設備、これまでの届出、区画や図面でわかること</label>
-        <textarea id="m-ledger" placeholder="例：(16)項イ、延べ1,850㎡。自火報あり（平成20年設置、受信機は1階事務室）、誘導灯あり、屋内消火栓なし。防火管理者選任済み。1階テナント境は耐火の壁。"></textarea></div>
+        <div class="mbld" id="m-bld">
+          <div class="mbh" id="m-bld-h">建物のこと<span class="mbn">わかる分だけ。空欄は「不明」として扱います</span></div>
+          <div id="mf"></div>
+          <div class="mcard" id="m-ledger-box" hidden><label class="mbs" for="m-ledger">台帳のメモ<span class="mbn">これまでの届出、区画、図面で分かることなど（自由に）</span></label>
+          <textarea id="m-ledger" rows="2" placeholder="例：平成20年に用途変更の届出。1階テナント境は耐火の壁。"></textarea></div>
+        </div>
         <div id="m-qs"></div>
         <div class="row">
           <button class="btn ghost" id="m-ask">足りない情報を洗い出す</button>
           <button class="btn" id="m-go">確認項目を作る</button>
           <button class="btn ghost" id="m-stop" hidden>止める</button>
-          <span class="note">作成モデル：Sonnet 5.5（質問と同じく、あなたのClaudeの利用枠を使います）</span>
+          <span class="note">作成モデル：Sonnet 5.5</span>
         </div>
-        <p class="note">「足りない情報を洗い出す」：一覧を作る前に、用途や設備の判定に足りない情報を3〜5問出します（30秒〜1分）。台帳で分かることと先方に聞くことに分けて出るので、答えを入れてから「確認項目を作る」を押すと、判定が「条件しだい」になりにくくなります。答えを入れて「さらに洗い出す」を押すと、その答えを前提に次の問いを出します。急ぐときは使わずに「確認項目を作る」だけでも作れます。</p>
+        <p class="note">「足りない情報を洗い出す」は任意です。判定に足りない情報を先に3〜5問出します。</p>
         <div class="status" id="m-status"></div>
       </div>
       <div id="m-out"></div>
@@ -330,8 +357,11 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
     </section>
 
     <section class="panel" id="p-toc" hidden>
-      <div class="row" style="justify-content:space-between">
-        <div class="seg" role="group" aria-label="並び順">
+      <div class="seg tsrc" role="group" aria-label="目次の種類" id="tsrc">
+        <button data-src="reiki" aria-pressed="true">例規</button><button data-src="nat" aria-pressed="false">国の法令</button><button data-src="ntc" aria-pressed="false">通知</button><button data-src="kyo" aria-pressed="false">京都市基準</button>
+      </div>
+      <div class="row" style="justify-content:space-between;margin-top:8px">
+        <div class="seg" role="group" aria-label="並び順" id="tocmode">
           <button id="m-tree" aria-pressed="true">体系</button>
           <button id="m-kana" aria-pressed="false">五十音</button>
         </div>
@@ -634,7 +664,7 @@ const kindOf=ty=>{ty=ty||"";if(/条例/.test(ty))return"条例";if(/規則/.test
 function showTab(p){
   for(const b of document.querySelectorAll(".tab"))b.setAttribute("aria-selected",String(b.dataset.p===p));
   for(const el of document.querySelectorAll(".panel"))el.hidden=el.id!=="p-"+p;
-  const cd=$("#cond");if(cd){if(p==="memo"){$("#m-cond-slot").append(cd);cd.open=true;renderMemoHist()}else if(p==="ask"&&cd.parentElement.id==="m-cond-slot"){$("#q").after(cd)}}
+  if(p==="memo"){renderMemoHist();if(!document.querySelector("#mf .mfr"))renderMF()}
   if(p==="hist")renderHist();
   if(p==="yobo"){renderBM();renderYobo()}
 }
@@ -724,7 +754,57 @@ $("#results").addEventListener("click",e=>{const b=e.target.closest(".hit");if(b
 /* ---------- toc ---------- */
 let tocMode="tree";
 function lawItem(l){const k=kindOf(l.ty);return `<button class="lawitem" data-l="${l.id}"><span class="lt">${esc(short(l.t))}</span><small>${esc(k)}${l.d?" ・ "+esc(l.d):""}</small></button>`}
+let tocSrc="reiki";
+const TOCPH={reiki:"例規名で絞り込み",nat:"法令名で絞り込み",ntc:"件名・文書番号で絞り込み",kyo:"見出し・条で絞り込み（例：スプリンクラー、第44条）"};
+const NATFIRE=/消防|火災|危険物|救急|石油コンビナート|建築基準|高圧ガス|液化石油ガス|火薬類|風俗営業|医療法|老人福祉|児童福祉|障害者|介護保険|文化財/;
+function kyoTag(L){if(L.own)return'<span class="tg own">組合になし</span>';if(!L.lk)return"";const u=L.lk.filter(x=>x[2]!=="n"),n=L.lk.filter(x=>x[2]==="n");
+  return '<span class="tg">'+esc(u.length?u.map(x=>(x[2]==="u2"?"関係 ":"組合")+x[1]).join("・"):n.slice(0,2).map(x=>(LKAB[x[0]]||x[0])+x[1]).join("・")+(n.length>2?"ほか":""))+"</span>"}
+function kyoItem(L){return `<button class="lawitem" data-l="${esc(L.id)}"><span class="lt">${esc(L.st||short(L.t))}</span>${kyoTag(L)}</button>`}
+function ntcItem(L){return `<button class="lawitem" data-l="${esc(L.id)}"><span class="lt">${esc(L.t)}${L.ab?'<span class="nb nbx">廃止</span>':L.rv?'<span class="nb nbr">改正あり</span>':""}</span><small>${esc([L.num,(L.date||"").split("（")[0]].filter(Boolean).join(" "))}</small></button>`}
+const NTCYEAR=new Map();
+function renderToc2(){
+  const el=$("#toc"),f=nz($("#tq").value.trim());
+  if(tocSrc!=="nat"&&!NTCOK){
+    if(NTCERR){el.innerHTML='<p class="note" style="padding:12px">通知・運用基準のデータを読み込めませんでした。</p>';return}
+    el.innerHTML='<p class="note" style="padding:12px">通知・運用基準のデータを読み込み中です。</p>';loadNotices().then(()=>{if(tocSrc!=="reiki"&&!$("#p-toc").hidden)renderToc()});return}
+  if(tocSrc==="nat"){
+    const ls=IDX.laws.filter(l=>l.nat&&(!f||nz(l.t).includes(f)||(l.al||[]).some(a=>nz(a).includes(f)))).sort((a,b)=>a.t.localeCompare(b.t,"ja"));
+    if(f){el.innerHTML=`<div class="flat">${ls.map(lawItem).join("")||'<p class="note" style="padding:12px">該当する法令がありません。</p>'}</div>`;return}
+    const g1=ls.filter(l=>NATFIRE.test(l.t)),g2=ls.filter(l=>!NATFIRE.test(l.t));
+    el.innerHTML=[["消防・予防・危険物・用途の判定に関係する法令",g1,true],["その他の法令（例規が引用しているもの）",g2,false]].map(([h,a,o])=>`<details class="ed"${o?" open":""}><summary><span>${esc(h)}</span><span class="note">${a.length}本</span></summary><div class="lawlist">${a.map(lawItem).join("")}</div></details>`).join("");
+    return}
+  if(tocSrc==="ntc"){
+    const ds=IDX.laws.filter(l=>l.ntc&&l.ntc!=="kyo");
+    if(f){const m=ds.filter(l=>nz(l.t+" "+(l.num||"")+" "+(l.date||"")).includes(f)).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+      el.innerHTML=`<div class="flat">${m.slice(0,300).map(ntcItem).join("")||'<p class="note" style="padding:12px">該当する通知がありません。</p>'}</div>`+(m.length>300?`<p class="note" style="padding:8px 12px">ほか${m.length-300}件。語句を足して絞り込んでください。</p>`:"");return}
+    NTCYEAR.clear();
+    const CL={y:"予防（危険物・規格省令・告示を含む）",k:"警防（消防活動・救助・人事労務など）",q:"救急"};
+    el.innerHTML=["y","k","q"].filter(c=>ds.some(l=>(l.cat||"y")===c)).map(c=>{
+      const a=ds.filter(l=>(l.cat||"y")===c),by=new Map();
+      for(const l of a){const y=/^\d{4}/.test(l.date||"")?l.date.slice(0,4):"年の記載なし";if(!by.has(y))by.set(y,[]);by.get(y).push(l)}
+      const ys=[...by.keys()].sort((x,y)=>y.localeCompare(x));
+      return `<details class="ed"><summary><span>${esc(CL[c])}</span><span class="note">${a.length}件</span></summary>`+ys.map(y=>{const k=c+"|"+y;NTCYEAR.set(k,by.get(y).sort((p,q)=>(q.date||"").localeCompare(p.date||"")));
+        const lab=/^\d{4}$/.test(y)?y+"年（"+(+y>=2019?"令和"+(+y-2018===1?"元":+y-2018):+y>=1989?"平成"+(+y-1988===1?"元":+y-1988):"昭和"+(+y-1925))+"年）":y;
+        return `<details class="ch" data-ny="${esc(k)}"><summary>${esc(lab)} <span class="note">${by.get(y).length}</span></summary><div class="lawlist"></div></details>`}).join("")+`</details>`}).join("");
+    return}
+  // 京都市の運用基準
+  const ks=IDX.laws.filter(l=>l.ntc==="kyo");
+  if(f){const m=ks.filter(l=>nz(l.t+" "+(l.lk||[]).map(x=>x[1]).join(" ")).includes(f)||(f.startsWith("第")&&(l.lk||[]).some(x=>x[2]!=="n"&&nz(x[1])===f)));
+    el.innerHTML=`<div class="flat">${m.map(kyoItem).join("")||'<p class="note" style="padding:12px">該当する見出しがありません。</p>'}</div>`;return}
+  const gs=[],by=new Map();
+  for(const l of ks){const g=l.grp||l.t;if(!by.has(g)){by.set(g,[]);gs.push(g)}by.get(g).push(l)}
+  const ORD=["京都市消防用設備等運用基準","京都市火災予防条例運用基準","京都市危険物審査基準"];gs.sort((a,b)=>(ORD.indexOf(a)+1||9)-(ORD.indexOf(b)+1||9));
+  el.innerHTML='<p class="note" style="margin:8px 2px">京都市消防局の運用基準です。本部の予防審査で採用している基準で、法令ではありません。右の「組合○条」は、組合の火災予防条例で当たる条です。</p>'
+    +gs.map(g=>{const a=by.get(g).slice().sort((x,y)=>(x.sk||0)-(y.sk||0));
+      if(a.length===1&&!a[0].pid)return `<div class="flat" style="margin-top:8px">${lawItem(a[0])}</div>`;
+      return `<details class="ed"><summary><span>${esc(g)}</span><span class="note">${a.length}</span></summary><div class="lawlist">${a.map(kyoItem).join("")}</div></details>`}).join("");
+}
+$("#toc").addEventListener("toggle",e=>{const d=e.target;if(!d.matches||!d.matches("details[data-ny]")||!d.open)return;const box=d.querySelector(".lawlist");if(box&&!box.children.length)box.innerHTML=(NTCYEAR.get(d.dataset.ny)||[]).map(ntcItem).join("")},true);
+$("#tsrc").addEventListener("click",e=>{const b=e.target.closest("button[data-src]");if(!b)return;tocSrc=b.dataset.src;
+  for(const x of document.querySelectorAll("#tsrc button"))x.setAttribute("aria-pressed",String(x===b));
+  $("#tocmode").hidden=tocSrc!=="reiki";$("#tq").placeholder=TOCPH[tocSrc];$("#tq").value="";renderToc()});
 function renderToc(){
+  if(tocSrc!=="reiki")return renderToc2();
   const el=$("#toc"), f=nz($("#tq").value.trim());
   if(f){
     const m=IDX.laws.filter(l=>nz(l.t).includes(f));
@@ -752,6 +832,44 @@ const NTCK={ntc:"通知",kik:"規格",kyo:"京都",mhl:"厚労",npa:"警察庁",
 const NTCL={ntc:"国の通知・通達",kik:"技術上の規格省令・告示",kyo:"京都市消防局の運用基準",mhl:"厚生労働省の告示・通知",npa:"警察庁の解釈運用基準",oth:"その他の資料"};
 const NTCNOTE={ntc:"国の通知・通達（技術的助言）。法令そのものではない。PDFから文字を取り出したもので、表は崩れていることがある",kik:"技術上の規格を定める省令・告示（PDFから文字を取り出したもの。表は崩れていることがある）",kyo:"京都市消防局の運用基準。当本部が予防審査で採用している基準で、法令ではない。PDFから文字を取り出したもので、表は崩れていることがある",mhl:"厚生労働省の告示・通知（厚生労働省法令等データベースサービスの本文。改正を反映した版）。告示は救急救命士法施行規則第21条の委任で薬剤・器具を定めるもので、規則と一体で働く。通知は法令ではない。表は崩れていることがある",oth:"資料（PDFから文字を取り出したもの）",npa:"警察庁の通達（風営法等の解釈運用基準）。消防法令ではなく、風営法の営業の定義（接待、店舗型性風俗特殊営業など）の解釈。令別表第一の項の判定の参考にする。PDFから文字を取り出したもので、表は崩れていることがある"};
 let NTCOK=false,NTCDEEP=false,NTCERR=null,NTCP=null,NTCDP=null,NTC=null;const ntcGroups=new Map();
+/* 京都市の運用基準などは見出しごとの文書に分けた（tools/kyosplit.py）。分ける前の id・番号は alias で子の文書に読み替える（履歴・しおりの古い参照のため） */
+let NTCAL={};const C2ALIAS={};
+function aliasTo(id,sid){const a=NTCAL[id];if(!a||!a.to||!a.to.length)return null;const p=+String(sid||"").replace(/^s/,"");let t=a.to[0][1];if(p){for(const [f,cid] of a.to){if(f<=p)t=cid}const L=IDX.laws[LAWIDX[t]];if(L&&L.pn&&!L.pn.includes(p)){const h=a.to.map(x=>x[1]).find(cid=>{const M=IDX.laws[LAWIDX[cid]];return M&&M.pn&&M.pn.includes(p)});if(h)t=h}}return LAWIDX[t]==null?null:t}
+/* 京都市の運用基準(子の文書)の lk:[[法令名,条,種類]] … u=組合の火災予防条例の対応する条、u2=関係する条、n=国の法令。own=組合の条例に当たる条なし(tools/kyo_links.json) */
+let KYOREV=null;
+function lkRow(li,a){return ROWS&&ROWS.find(x=>x.li===li&&(x.label===a||(x.label.startsWith(a)&&/^[\s(（]/.test(x.label.slice(a.length)))))}
+function kyoRev(){
+  if(KYOREV)return KYOREV;if(!NTCOK||!NATOK||!ROWS)return null;
+  const byT=new Map();IDX.laws.forEach((l,i)=>{if(!l.ntc&&!byT.has(l.t))byT.set(l.t,i)});const m=new Map();
+  for(const L of IDX.laws){if(L.ntc!=="kyo"||!L.lk)continue;L.lkr=[];
+    for(const [t,a,k] of L.lk){const li=byT.get(t),r=li==null?null:lkRow(li,a);L.lkr.push({t,a,k,li,sid:r&&r.sid,lab:r&&r.label});
+      if(r){const key=li+"#"+r.sid;if(!m.has(key))m.set(key,[]);m.get(key).push({id:L.id,k})}}}
+  return KYOREV=m;
+}
+const LKAB={"消防法施行令":"令","消防法施行規則":"規則","危険物の規制に関する政令":"危政令","消防法":"法","甲賀広域行政組合火災予防条例":"組合"};
+const lkRef=x=>x.sid&&x.li!=null?lid2n(IDX.laws[x.li].id)+"#"+x.sid:"";
+async function addKyoLinks(doc,li,id){
+  for(let i=0;i<20&&!kyoRev();i++){try{if(!NTCOK&&!NTCERR)await loadNotices()}catch(e){}if(NTCERR)return;if(!kyoRev())await new Promise(r=>setTimeout(r,500))}
+  const m=kyoRev();if(!m||curLaw!==id)return;
+  doc.querySelectorAll("section.sec[id]").forEach(sc=>{const a=m.get(li+"#"+sc.id);if(!a||sc.querySelector(".kyol"))return;
+    const dv=document.createElement("div");dv.className="kyol";
+    dv.innerHTML="<b>京都市消防局の運用基準</b> <span class=\"kyn\">（本部の予防審査で採用。法令ではない）</span><br>"+a.map(x=>{const L=IDX.laws[LAWIDX[x.id]];return `<button class="kyb" data-l="${esc(L.id)}">${esc(L.t)}${x.k==="u2"?"（関係する条）":""}</button>`}).join("");
+    sc.append(dv)});
+}
+function kyoBar(L){
+  if(L.ntc!=="kyo"||!(L.lk||L.own))return"";kyoRev();
+  const btn=x=>x.sid?`<button class="kyb" data-l="${esc(IDX.laws[x.li].id)}" data-s="${esc(x.sid)}">${esc((x.k==="n"?x.t+" ":"")+(x.lab||x.a))}</button>`:`<span>${esc((x.k==="n"?x.t+" ":"")+x.a)}</span>`;
+  const r=L.lkr||(L.lk||[]).map(([t,a,k])=>({t,a,k})),u=r.filter(x=>x.k==="u"),u2=r.filter(x=>x.k==="u2"),n=r.filter(x=>x.k==="n");
+  let h="";
+  if(L.own)h+="<b>組合の火災予防条例に、この条に当たる規定はありません。</b>京都市条例独自の規定なので、当本部では根拠になりません。";
+  if(u.length)h+="<b>組合の火災予防条例で当たる条</b><br>"+u.map(btn).join("")+(u2.length?"<br>関係する条："+u2.map(btn).join(""):"")+"<br><span class=\"kyn\">条の主題が対応するもので、細部の規定が同じとは限りません。組合の条例の本文で確かめてください。</span>";
+  else if(u2.length)h+="<b>組合の火災予防条例で関係する条</b>（内容の範囲が違います）<br>"+u2.map(btn).join("");
+  if(n.length)h+=(h?"<br>":"")+"<b>関係する法令の条</b><br>"+n.map(btn).join("");
+  if(L.pt==="京都市火災予防条例運用基準")h+="<br><span class=\"kyn\">見出しの条番号は京都市火災予防条例の条番号です。</span>";
+  return `<div class="kyol">${h}</div>`;
+}
+document.addEventListener("click",e=>{const b=e.target.closest(".kyb");if(b&&b.dataset.l)openLaw(b.dataset.l,{sid:b.dataset.s})});
+const n2lidA=n=>{const id=n2lid(n);return LAWIDX[id]==null&&C2ALIAS[n]?(aliasTo(C2ALIAS[n],"")||id):id};
 const ctxOf=l=>[l.num,(l.date||"").split("（")[0]].filter(Boolean).join(" ");
 function badge(l){return l.nat?'<span class="nb">国</span>':l.ntc?'<span class="nb nb2">'+NTCK[l.ntc]+(l.ntc==="ntc"&&l.cat&&l.cat!=="y"?"・"+NTCCAT[l.cat]:"")+'</span>'+(l.ab?'<span class="nb nbx">廃止</span>':l.rv?'<span class="nb nbr">改正あり</span>':""):'<span class="nb nb3">例規</span>'}
 function rowFor(li,sid){
@@ -780,9 +898,10 @@ function loadNotices(){
       NTC={docs:okp.flatMap(x=>x.docs.map(d=>Object.assign(d,{cat:d.cat||x.cat}))),built:okp.map(x=>x.built).filter(Boolean).sort().pop()||"",cats:okp.map(x=>x.cat)};
       const base=IDX.laws.length;
       NTC.docs.forEach(d=>{
-        const l={id:d.id,t:d.t,c:d.c,ntc:d.ntc,meta:[d.num,d.date].filter(Boolean),ty:NTCL[d.ntc],path:NTCL[d.ntc],f:d.f,n:d.n,pn:d.pn,desc:d.desc,num:d.num,date:d.date,dk:d.dk,fld:d.fld,cat:d.cat,u:d.u,ab:d.ab,rv:d.rv};
+        const l={id:d.id,t:d.t,c:d.c,ntc:d.ntc,meta:[d.num,d.date].filter(Boolean),ty:NTCL[d.ntc],path:NTCL[d.ntc],f:d.f,n:d.n,pn:d.pn,desc:d.desc,num:d.num,date:d.date,dk:d.dk,fld:d.fld,cat:d.cat,u:d.u,ab:d.ab,rv:d.rv,pid:d.pid,pt:d.pt,st:d.st,sk:d.sk,grp:d.grp,lk:d.lk,own:d.own};
         LAWIDX[l.id]=IDX.laws.length;NATC[l.id]=String(d.c);C2ID[d.c]=l.id;IDX.laws.push(l);
       });
+      okp.forEach(x=>{if(x.alias)Object.assign(NTCAL,x.alias)});for(const [oid,a] of Object.entries(NTCAL))if(a&&a.c!=null)C2ALIAS[a.c]=oid;
       // 京都市の運用基準と規格省令・告示は本文まで。通知は件名と1ページ目の冒頭だけ
       const full=new Set(NTC.docs.filter(d=>d.ntc!=="ntc"||d.ft).map(d=>d.f));
       const sum=[],rows=[];
@@ -812,16 +931,66 @@ function loadNoticeDeep(cats){
     }));
   })();
 }
+/* PDFから取り出した本文の改行を整える(表示とAIの読み取り用)。
+   - ページ下のページ番号の行(「基準 1‐1」「-12-」「11-3」「別記9の2-3」「ⅰ」)を外す
+   - 行頭に取り残された閉じかっこ等を前の行につなぐ
+   - 原本の1行ごとの改行は、前の行がページの幅いっぱいまであり、次の行が項目の頭でなく、どちらも表らしくないときにつなぐ
+   - 連続する空行は1つにする */
+function pdfReflow(t){
+  const W=s=>{let n=0;for(const c of s)n+=c.charCodeAt(0)>255?2:1;return n};
+  const lines=String(t).replace(/\r/g,"").split("\n");
+  const FOOT=/^\s*(基準\s*[0-9０-９]+(\s*の\s*[0-9０-９]+)?\s*[‐\-－‑–]\s*[0-9０-９]+|-\s*[0-9０-９]+\s*-|[0-9０-９]+(の[0-9０-９]+)?\s*[－\-‐]\s*[0-9０-９]+|別記\s*[0-9０-９]+(の[0-9０-９]+)?\s*[－\-‐]\s*[0-9０-９]+|資料\s*[0-9０-９]+\s*[－\-‐]\s*[0-9０-９]+|[ⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹ]|[ivx]{1,4})\s*$/;
+  const TABLE=s=>/\S[ 　]{3,}\S/.test(s.trim().replace(/^([（(]?[^\s　]{1,8}?[）)]?)[ 　]+/,"$1 "));
+  const HEAD=/^([0-9０-９]{1,3}[ 　\.．、]|[⑴-⒇①-⑳]|[（(][0-9０-９]{1,3}[）)]|[ア-ンｱ-ﾝ][ 　]|[（(][ア-ンｱ-ﾝ][）)]|[a-zａ-ｚ][ 　\.．]|第[0-9０-９一二三四五六七八九十百]+[条章節款項]|【|〔|※|・|●|○|〇|■|□|◆|◇|▲|△|☆|★|∇|注[0-9０-９]|別表|別紙|別記|別添|基準\s*[0-9０-９]|図[0-9０-９]|表[0-9０-９]|例[0-9０-９]|（参考|\(参考|記$|以上$)/;
+  const depth=x=>{let d=0;for(const c of x){if(c==="（"||c==="(")d++;else if((c==="）"||c===")")&&d>0)d--}return d};
+  const UNIT=/^[0-9０-９]+\s*(号|条|項|年|月|日|件|人|㎡|m|％|%|倍|時間|分|個|台|階|cm|mm|kW|L|リットル|メートル|平方|キロ|度)/;
+  // ページの右端(各行の終わりの桁)の目安
+  let maxEnd=0;const ends=[];
+  for(const s of lines){const m=s.match(/^\s*/)[0].length,e=m+W(s.trim());ends.push(e);if(s.trim()&&!TABLE(s)&&!FOOT.test(s))maxEnd=Math.max(maxEnd,e)}
+  const wide=e=>maxEnd>0&&e>=maxEnd*0.82;
+  const out=[];let lastEnd=0,lastTable=false,blank=false;
+  for(let i=0;i<lines.length;i++){
+    const s=lines[i].replace(/\s+$/,""),tr=s.trim();
+    if(!tr){blank=out.length>0;continue}
+    if(FOOT.test(s))continue;
+    if(/^[ぁ-ゖ]{1,8}$/.test(tr)&&/^\s{4,}/.test(lines[i]))continue;  // ふりがな(ルビ)だけの行
+    const tb=TABLE(s);
+    if(out.length){
+      const prev=out[out.length-1];
+      // 取り残された閉じかっこ・句読点
+      if(/^[）」』\)〕］】、。，]/.test(tr)&&tr.length<=40&&!lastTable){out[out.length-1]=prev+tr;lastEnd+=W(tr);blank=false;continue}
+      // 原本の行の折り返し
+      if(!blank&&!tb&&!lastTable&&wide(lastEnd)&&(!/[。：:]$/.test(prev)||depth(prev)>0)&&(!HEAD.test(tr)||UNIT.test(tr))){out[out.length-1]=prev+tr;lastEnd=ends[i];continue}
+    }
+    if(blank&&out.length)out.push("");
+    out.push(tb?s:s.replace(/^[ \t]+/,m=>m.length>8?"　　　　":"　".repeat(Math.ceil(m.length/2))));
+    lastEnd=ends[i];lastTable=tb;blank=false;
+  }
+  return out.join("\n");
+}
+/* 図が中心のページ(短い語が散らばる行が多い、または「第8－9図」「図1」などの見出しがある)。文字の並びが崩れるので、原本で見るよう案内する */
+function isFigPage(t){const ls=String(t).split("\n").filter(l=>l.trim());if(!ls.length)return false;
+  const sc=ls.filter(l=>/^\s{8,}/.test(l)&&l.trim().length<=14).length;
+  return sc/ls.length>=0.3||/(^|\n)\s*(第\s*[0-9０-９]+\s*[－\-‐]\s*[0-9０-９]+\s*図|例図|図\s*[0-9０-９]+[\s　]|第[0-9０-９]+図)/.test(t)}
+/* 原本PDF(荒木のドライブ)。分けた京都市の運用基準は親の id で引く */
+const KYOPDF={Nc1c6c8ed6a0e:"https://drive.google.com/file/d/12lYH0R0At9F-oXaHS_yYcYxmyDniAjNj/view",Ne017422d27b4:"https://drive.google.com/file/d/1zwxj4NHa3JOmb8YaCVJrFpN_bejLnvg1/view",K35c5a9dbe1da:"https://drive.google.com/file/d/1xS-0GSy0avc1carx_b8Yuws1sdKw6hf8/view",K14ab208830d1:"https://drive.google.com/file/d/1oRPa-Sok8mplRhSNJWaT5zVL8keMxQhS/view",K4642bec9fd0b:"https://drive.google.com/file/d/1tgbv1T5xtD-vWD3ccgENNW8rvimJwH1m/view",K4a787edfd8e9:"https://drive.google.com/file/d/1-QHrvWpc4IDA2GKkca-saxZOrRfhMZrH/view",K894277f3d56a:"https://drive.google.com/file/d/1VNdcTvWb3PDwm852khNVR5BGlm_SDPj5/view"};
+const pdfOf=L=>L&&(L.u||KYOPDF[L.pid||L.id]||"");
+function ntcPagesHtml(pages,L,raw){const pu=pdfOf(L);
+  return pages.map(([n,t])=>{const fig=isFigPage(t);
+    return `<section class="sec k-pg" id="s${n}"><h3 class="pgh">p.${n}</h3>${fig?`<p class="fignote">このページは図・表が中心で、文字だけでは読めない部分があります。原本PDFの p.${n} で確かめてください。${pu?` <a href="${esc(pu)}" target="_blank" rel="noopener">原本を開く</a>`:""}</p>`:""}<pre class="ntx">${esc(raw?t:pdfReflow(t))}</pre></section>`}).join("")}
+let NTCVIEW=null;
+document.addEventListener("click",e=>{const b=e.target.closest("#rawtg");if(!b||!NTCVIEW)return;const raw=b.dataset.raw!=="1";b.dataset.raw=raw?"1":"";b.textContent=raw?"改行を整えて見る":"原本どおりの改行で見る";
+  const a=document.querySelector("#lv-in .doc");if(a)a.innerHTML=ntcPagesHtml(NTCVIEW.d.raw,NTCVIEW.L,raw)});
 async function ntcDoc(L){
   const g=await ntcGroup(L.f),x=g[L.id];if(!x)throw new Error("not found");
   return {t:L.t,ntc:L.ntc,meta:L.meta,path:x.path,tbl:x.tbl,desc:L.desc,toc:x.pages.map(([n])=>({k:"art",label:"p."+n,id:"s"+n})),
-    html:x.pages.map(([n,t])=>`<section class="sec k-pg" id="s${n}"><h3 class="pgh">p.${n}</h3><pre class="ntx">${esc(t)}</pre></section>`).join("")};
+    html:ntcPagesHtml(x.pages,L,false),raw:x.pages};
 }
-function ntcView(d,L){
+function ntcView(d,L){NTCVIEW={d,L};
   const bar={ntc:"国の通知・通達（技術的助言）です。法令そのものではありません。",kik:"技術上の規格を定める省令・告示です。",kyo:"京都市消防局の運用基準です。当本部が予防審査で採用している基準で、法令ではありません。",oth:""}[d.ntc]||"";
   const rel=(L.ab?`<div class="relbar"><b>この通知は廃止されています。</b>${L.ab.via?"改正元の通知（"+esc(L.ab.via)+"）が、":""}${esc(L.ab.d)} ${esc(L.ab.n)} により廃止。現行の根拠にはなりません。<br><button class="relb" data-l="${esc(L.ab.id)}">廃止した通知を開く</button></div>`:"")
     +(L.rv&&L.rv.length?`<div class="relbar rv"><b>一部改正されています</b>（新しい順）。この本文は改正前のものです。<br>${L.rv.map(r=>`<button class="relb" data-l="${esc(r.id)}">${esc(r.d)} ${esc(r.n)}</button>`).join("")}</div>`:"");
-  return rel+`<div class="lv-meta"><span>${esc(NTCL[d.ntc])}</span>${L.num?`<span>${esc(L.num)}</span>`:""}${L.date?`<span>${esc(L.date)}${L.dk?"（"+esc(L.dk)+"）":""}</span>`:""}${L.fld?`<span>${esc(L.fld)}</span>`:""}</div><h2 class="lv-title">${esc(d.t)}</h2><p class="natbar">${esc(bar)}PDFから文字を取り出したもので、表や様式は崩れていることがあります${d.tbl?"（表の崩れの候補："+esc(d.tbl)+"）":""}。数値や表を根拠にするときは、原本のPDFで確認してください。${d.desc?"<br>概要："+esc(d.desc):""}</p><article class="doc">${d.html}</article><p class="foot">本文は、総務省消防庁などが公開しているPDFから文字を取り出したものです（取り込み ${esc(NTC&&NTC.built||"")}）。その後の改正・廃止は反映していないことがあります。${L.u?`原本：<a href="${esc(L.u)}" target="_blank" rel="noopener">${esc(L.u)}</a>`:""}</p>`;
+  return rel+`<div class="lv-meta"><span>${esc(NTCL[d.ntc])}</span>${L.pt?`<span>${esc(L.pt)}</span>`:""}${L.num?`<span>${esc(L.num)}</span>`:""}${L.date?`<span>${esc(L.date)}${L.dk?"（"+esc(L.dk)+"）":""}</span>`:""}${L.fld?`<span>${esc(L.fld)}</span>`:""}</div><h2 class="lv-title">${esc(d.t)}</h2>${kyoBar(L)}<div class="rawrow"><button class="relb" id="rawtg">原本どおりの改行で見る</button>${pdfOf(L)?`<a class="relb" href="${esc(pdfOf(L))}" target="_blank" rel="noopener">原本PDF</a>`:""}</div><article class="doc">${d.html}</article><p class="foot">PDFから文字を取り出した本文です（取り込み ${esc(NTC&&NTC.built||"")}）。表・図・数値は原本で確かめてください。${L.u?`原本：<a href="${esc(L.u)}" target="_blank" rel="noopener">${esc(L.u)}</a>`:""}</p>`;
 }
 function deepBtn(){
   const b=$("#deep");if(!b)return;const sc=$("#scope").value,q=$("#sq").value.trim();
@@ -874,7 +1043,7 @@ const YOBO=[
   ["消防用設備等の点検・報告",[[YK,"第31条の6"],[YK,"第31条の6の2"]]],
   ["火災予防条例の届出",[[YJ,"第43条"],[YJ,"第44条"],[YJ,"第45条"],[YJ,"第46条"]]]]},
  {g:"京都市の運用基準・通知",items:[
-  ["京都市消防局の運用基準（本部の予防審査で採用。法令ではない）",[["京都市 消防用設備等運用基準",null],["京都市火災予防条例 運用基準",null]]]]},
+  ["京都市消防局の運用基準（本部の予防審査で採用。法令ではない）",[["京都市消防用設備等運用基準 目次・用語・凡例",null],["京都市火災予防条例運用基準 凡例・目次",null],["京都市危険物審査基準 目次・用語の凡例（第11章の細目次を含む）",null]]]]},
  {g:"火災予防条例",items:[
   ["火を使用する設備（炉・厨房設備・ボイラー・変電設備など）",[[YJ,"第3条"],[YJ,"第3条の2"],[YJ,"第3条の4"],[YJ,"第4条"],[YJ,"第11条"],[YJ,"第11条の2"],[YJ,"第13条"],[YJ,"第17条の3"]]],
   ["指定数量未満の危険物・指定可燃物",[[YJ,"第30条"],[YJ,"第31条"],[YJ,"第33条"],[YJ,"第34条"],[YJ,"別表第8"]]],
@@ -889,14 +1058,15 @@ function yRow(title,pre){
 let yoboDone=false;
 function renderYobo(){
   const box=$("#yobo");if(yoboDone)return;
-  if(!ROWS||!NATOK){box.innerHTML='<p class="note">本文データを読み込み中です。</p>';setTimeout(()=>{if(!$("#p-yobo").hidden)renderYobo()},800);return}
+  if(!ROWS||!NATOK||(!NTCOK&&!NTCERR)){if(!NTCP&&ROWS&&NATOK)loadNotices();box.innerHTML='<p class="note">本文データを読み込み中です。</p>';setTimeout(()=>{if(!$("#p-yobo").hidden)renderYobo()},800);return}
   yoboDone=true;
   box.innerHTML=YOBO.map(g=>`<div class="yg"><h3>${esc(g.g)}</h3>`+g.items.map(([name,refs])=>`<div class="yi"><div class="yh"><span>${esc(name)}</span><button class="yq" data-yq="${esc(name.replace(/（.*）$/,""))}" data-eq="${/設備|警報|避難|消防用水/.test(g.g)&&!/特例|届出|条例/.test(g.g)?1:""}">これを質問する</button></div><div class="chips">`+refs.map(([t,pre])=>{
     const f=yRow(t,pre);
     const lab=pre==null?short(t).replace(/における必要とされる防火安全性能を有する消防の用に供する設備等に関する省令$/,"…省令").replace(/^必要とされる防火安全性能を有する消防の用に供する設備等に関する省令$/,"必要とされる防火安全性能…省令").replace(/^排煙設備に代えて用いることができる.*$/,"排煙設備に代えて…省令"):(YABBR[t]||short(t))+" "+pre;
     const tip=f&&f.row?f.row.label:t;
     return f?`<button class="chip ych" data-l="${f.law.id}"${f.row?` data-s="${f.row.sid}"`:""} title="${esc(tip)}">${esc(lab)}</button>`:`<button class="chip ych" disabled title="見つかりません">${esc(lab)}</button>`;
-  }).join("")+`</div></div>`).join("")+`</div>`).join("");
+  }).join("")+(()=>{const m=kyoRev();if(!m)return"";const ks=new Map();refs.forEach(([t,pre])=>{const f=yRow(t,pre);if(f&&f.row)(m.get(f.li+"#"+f.row.sid)||[]).forEach(x=>{if(x.k!=="u2")ks.set(x.id,1)})});
+    return [...ks.keys()].map(id=>{const L=IDX.laws[LAWIDX[id]];const lab=(L.pt==="京都市消防用設備等運用基準"?"京都 ":L.pt==="京都市火災予防条例運用基準"?"京都 条例運用 ":"京都 審査 ")+String(L.st).split(/[\s（〈(]/)[0];return `<button class="chip ych kyc" data-l="${esc(L.id)}" title="${esc(L.t)}（京都市消防局の運用基準。法令ではない）">${esc(lab)}</button>`}).join("")})()+`</div></div>`).join("")+`</div>`).join("");
 }
 $("#yobo").addEventListener("click",e=>{
   const q=e.target.closest("[data-yq]");
@@ -1087,6 +1257,7 @@ function markTerms(root,terms){
   }
 }
 async function openLaw(id,o={}){
+  if(LAWIDX[id]==null&&/^[NKF]/.test(String(id))){try{await loadNotices()}catch(e){}const t=aliasTo(id,o.sid);if(t)id=t;if(LAWIDX[id]==null)return}
   if(o.fresh)navStack=[];
   else if(curLaw&&!o.noPush&&!lv.hidden)navStack.push({id:curLaw,top:lvs.scrollTop});
   curLaw=id;lv.hidden=false;$("#drawer").hidden=true;updateBack();
@@ -1103,6 +1274,7 @@ async function openLaw(id,o={}){
   doc.querySelectorAll("table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.replaceWith(w);w.append(t)});
   doc.querySelectorAll("img.fig").forEach(im=>{const w=document.createElement("div");w.className="figw";im.replaceWith(w);w.append(im);im.alt="様式・図（読み込み中）"});
   if(d.img)loadImgs(id,doc);
+  addKyoLinks(doc,LAWIDX[id],id);
   if(o.terms&&o.sid){const s=doc.querySelector("#"+CSS.escape(o.sid));if(s)markTerms(s,o.terms)}
   buildDrawer(d);
   if(typeof o.top==="number")lvs.scrollTop=o.top;
@@ -1142,7 +1314,9 @@ function followRef(ds){
 
 /* ---------- ask ---------- */
 const MODEL="claude-sonnet-5-5";
-const EXAMPLES=["飲食店で消火器が必要になるのはどんな場合ですか","共同住宅に必要な消防用設備等と使える特例は？","少量危険物の届出はどの条例の何条ですか","直近の救急関係の通知は？","宿日直勤務の手当はどう決まりますか","育児休業はどのくらいの期間取得できますか"];
+/* 質問の例は日替わりで3つ(日本時間の日付で決まる。同じ日は同じ3つ)。並びは 予防・救急・警防/人事 が混ざるようにしてある */
+const EXAMPLES=["飲食店で消火器が必要になるのはどんな場合ですか","特定行為で使える薬剤と器具は何ですか","宿日直勤務の手当はどう決まりますか","共同住宅に必要な消防用設備等と使える特例は？","心肺機能停止前の輸液はどんな傷病者に行えますか","育児休業はどのくらいの期間取得できますか","少量危険物の届出はどの条例の何条ですか","直近の救急関係の通知は？","緊急消防援助隊の出動の流れは？","厨房設備の排気ダクトの基準は？","救急活動記録の保存期間は？","ハラスメントの相談窓口と対応の手順は？","無窓階かどうかの判定のしかたは？","救急救命士の再教育の時間数は？","火災調査で質問調査ができる根拠は？","自動火災報知設備が必要になる延べ面積は用途ごとにどう違いますか","傷病者の搬送及び受入れの実施基準とは何ですか","消防職員委員会で審議する事項は？","防火管理者の選任届はいつまでに出しますか","口頭指導の要領はどの通知に書かれていますか","年次休暇は何日まで繰り越せますか","使用開始届が必要な防火対象物と期限は？","転院搬送の要請で確認することは？","訓練時の安全管理で守ることは？","スプリンクラー設備が必要になる条件と京都市の運用基準は？","AEDの使用と救命講習の通知は？","懲戒処分の種類と手続きは？","火を使用する設備等の設置届が必要なものは？","救急車の適正利用の通知は？","職員の服務で禁じられていることは？"];
+function dailyExamples(){const n=EXAMPLES.length,day=Math.floor((Date.now()+9*3600e3)/864e5),b=(day*3)%n;return [0,1,2].map(k=>EXAMPLES[(b+k)%n])}
 const NONFIRE=/衛生センター|一般廃棄物|廃棄物の処理及び清掃|し尿|ごみ処理|ごみ処分|生活環境影響/;
 let ctl=null, turns=[], answering=false;
 const INSTR_HEAD=`あなたは甲賀広域行政組合の例規集（条例・規則・訓令・要綱など）の検索アシスタントです。職員が正確に条文を確認できるように答えます。
@@ -1172,7 +1346,7 @@ const INSTR_HEAD=`あなたは甲賀広域行政組合の例規集（条例・�
 13. 予防業務の質問（防火対象物の用途、消防用設備等の設置・技術基準、防火管理、危険物、火災予防条例の届出・基準、査察など）は、8.の代わりに次の形で書きます。各項目の頭に「結論：」「根拠：」「運用・解釈：」「特例・緩和：」「確認が必要な事項：」と書き、項目の間は1行空けます。
   結論：1〜3文。条件によって変わるときは、条件ごとに分けて書きます。
   根拠：法→政令→省令→火災予防条例・規則の順に、法令名と条・項・号を1行ずつ書き、それぞれに参照記号を付けます。用途の判断が要るときは消防法施行令別表第一の該当項を、面積・階数・収容人員の算定が要るときは算定の規定も挙げます。
-  運用・解釈：関係する国の通知・通達と、京都市消防局の運用基準を、文書番号・日付（運用基準は該当ページ）とともに挙げ、何を定めているかを書きます。search_regulations の scope=notice で探します。読んで確認したものだけを書き、無ければ「見当たらない」と書きます。用途の判定と消防用設備等の要否の質問では、京都市消防局の運用基準を必ず探して読みます（「検索していません」で済ませない）。
+  運用・解釈：関係する国の通知・通達と、京都市消防局の運用基準を、文書番号・日付（運用基準は該当ページ）とともに挙げ、何を定めているかを書きます。search_regulations の scope=notice で探します。読んで確認したものだけを書き、無ければ「見当たらない」と書きます。用途の判定と消防用設備等の要否の質問では、京都市消防局の運用基準を必ず探して読みます（「検索していません」で済ませない）。京都市の運用基準は見出しごとの文書に分けてあり、末尾の一覧に番号があります。用途の判定は「消防用設備等運用基準 基準1」、設置単位は基準2、階数・床面積は基準3、無窓階の開口部は基準4、収容人員は基準5の2、令8区画は基準8、各設備はその設備の基準（例：スプリンクラー設備は基準14、自動火災報知設備は基準24）を読みます。火を使用する設備・少量危険物・指定可燃物・避難管理は「火災予防条例運用基準」の該当する条、危険物施設は「危険物審査基準」の該当する章・別記を読みます。火災予防条例運用基準の条番号は京都市火災予防条例の条番号で、組合の条例の条番号とは違います（一覧の［組合○条］が当たる組合の条。根拠には組合の条例の条を書きます）。read_section の結果に、京都市の運用基準なら union_ordinance（当たる組合の火災予防条例の条。「なし」は京都市条例独自の規定で根拠にしない）と related_laws（関係する政令・規則の条）、組合の条例や国の法令の条なら kyoto_unyou_kijun（対応する京都市の運用基準）が付きます。付いていれば、それも読んで確かめます。
   特例・緩和：消防法施行令第32条、同令第8条（別の防火対象物とみなす区画）、同令第9条・第9条の2、「必要とされる防火安全性能を有する消防の用に供する設備等に関する省令」などの特定の省令、火災予防条例の特例など、結論を変えうる規定を、読んで確認した範囲で書きます。既存の防火対象物の質問（増築・改修・用途変更を含む）では、現行基準の適用（遡及）の根拠は法第17条の2の5（第2項第4号は特定防火対象物）、用途変更のときは法第17条の3です。条番号を取り違えないよう、本文を読んで書きます。該当しなければ「読んだ範囲では該当なし」と書きます。
   確認が必要な事項：質問に書かれていない条件（用途、延べ面積、階数、地階・無窓階かどうか、収容人員、構造、危険物の品名・数量など）で結論が変わるときは、それを箇条書きにします。条件を勝手に仮定しません。告示や通知で決まる細目は、scope=notice で告示・規格省令・通知を探して読みます。見つからないときは、確認すべき告示・通知の内容を書きます。
   長さ：全体で画面2つ分程度までにします。条文の文言を長く書き写さず（本文は画面下の「根拠にした条文」で読めます）、要点と条・項・号だけを書きます。文中に書く条番号と、付ける参照記号の条は必ず一致させます（参照記号は、その条そのものの ref を付ける）。
@@ -1197,10 +1371,18 @@ function instr(){
   return today+hint+INSTR_HEAD+reiki.map(l=>lid2n(l.id)+" "+short(l.t)+(NONFIRE.test(l.t)&&!/消防/.test(l.t)?" 【環境衛生部門】":"")).join("\n")
     +"\n\n国の法令の一覧（e-Govの現行の条文。★は本文の語句まで検索できるもの。★のないものは条の見出しだけが検索の対象で、本文は read_section で読めます。例規で使われている略称は（）内）:\n"
     +nat.map(l=>lid2n(l.id)+" "+(l.full?"★":"")+cut(l.t)+(l.al&&l.al.length?"（"+l.al.join("、")+"）":"")).join("\n")
-    +(NTCOK?"\n\n通知・通達など（一覧には載せていません。search_regulations の scope=notice で探します）: 国の通知・通達（総務省消防庁。"+NTC.cats.map(c=>NTCCAT[c]+(c==="y"?"・危険物":"")+" "+NTC.docs.filter(d=>d.ntc==="ntc"&&d.cat===c).length+"件").join("、")+"。分野を絞るときは scope=notice_yobo / notice_keibo / notice_kyukyu）、技術上の規格省令・告示（"+NTC.docs.filter(d=>d.ntc==="kik").length+"件）、厚生労働省の救急救命士に関する告示・通知（"+NTC.docs.filter(d=>d.ntc==="mhl").map(d=>d.num+"「"+d.t.slice(0,30)+"」").join("、")+"。scope=notice_kyukyu で探せる）、京都市消防局の運用基準（"+NTC.docs.filter(d=>d.ntc==="kyo").map(d=>d.t).join("、")+"）。通知・通達は、ふだんは件名と1ページ目の冒頭だけが検索の対象です。本文まで探すときは deep=true にします（時間がかかります）。京都市の運用基準と規格省令・告示は、いつも本文まで検索できます。参照記号は国の法令と同じ形です。":"\n\n（通知・通達などのデータは、今は読み込めていません。）");
+    +(NTCOK?"\n\n通知・通達など（一覧には載せていません。search_regulations の scope=notice で探します）: 国の通知・通達（総務省消防庁。"+NTC.cats.map(c=>NTCCAT[c]+(c==="y"?"・危険物":"")+" "+NTC.docs.filter(d=>d.ntc==="ntc"&&d.cat===c).length+"件").join("、")+"。分野を絞るときは scope=notice_yobo / notice_keibo / notice_kyukyu）、技術上の規格省令・告示（"+NTC.docs.filter(d=>d.ntc==="kik").length+"件）、厚生労働省の救急救命士に関する告示・通知（"+NTC.docs.filter(d=>d.ntc==="mhl").map(d=>d.num+"「"+d.t.slice(0,30)+"」").join("、")+"。scope=notice_kyukyu で探せる）。"+kyoCatalog()+"。通知・通達は、ふだんは件名と1ページ目の冒頭だけが検索の対象です。本文まで探すときは deep=true にします（時間がかかります）。京都市の運用基準と規格省令・告示は、いつも本文まで検索できます。参照記号は国の法令と同じ形です。":"\n\n（通知・通達などのデータは、今は読み込めていません。）");
+}
+function kyoCatalog(){
+  const ks=NTC.docs.filter(d=>d.ntc==="kyo"),gs=[];const by=new Map();
+  for(const d of ks){const g=d.grp||d.t;if(!by.has(g)){by.set(g,[]);gs.push(g)}by.get(g).push(d)}
+  return "京都市消防局の運用基準（当本部が予防審査で採用している基準。法令ではない）は、見出しごとの文書に分けてあり、次の番号で read_section・list_law_sections を直接使えます（ページ番号は原本PDFのまま）:\n"
+    +gs.map(g=>{const a=by.get(g).slice().sort((x,y)=>(x.sk||0)-(y.sk||0));const d0=a[0];
+      return a.length===1&&!d0.pid?d0.c+" "+d0.t+(d0.date?"（"+d0.date.split("（").pop().replace("）","")+"）":""):"［"+g+(d0.date?"（"+d0.date.split("（").pop().replace("）","")+"）":"")+"］\n"+a.map(d=>d.c+" "+String(d.st||d.t).replace(/（指定数量の5分の1以上指定数量未満の危険物）$/,"")+(d.own?" ［組合の条例に当たる条なし］":d.lk?" ［"+d.lk.slice(0,3).map(([t,x,k])=>(k==="u2"?"関係 ":"")+(LKAB[t]||t)+x).join("・")+(d.lk.length>3?"ほか":"")+"］":"")).join("\n")}).join("\n")
+    +"\n（京都市の運用基準の一覧はここまで）";
 }
 function fmtRefLabel(ref){
-  const [n,sid]=ref.split("#");const li=LAWIDX[n2lid(n)];if(li==null)return null;
+  const [n,sid]=ref.split("#");let li=LAWIDX[n2lid(n)];if(li==null&&C2ALIAS[n]){const t=aliasTo(C2ALIAS[n],sid);if(t)li=LAWIDX[t]}if(li==null)return null;
   const law=IDX.laws[li];const r=rowFor(li,sid);
   return {law,row:r,id:law.id,sid};
 }
@@ -1248,7 +1430,7 @@ async function rowText(r){
   if(law.ntc)t=t.replace(/^p\.\d+\n/,"").replace(/[ \u3000]{2,}/g," ");
   textCache.set(k,t);return t;
 }
-function lawFilter(v){if(v==null||v==="")return"";const id=n2lid(parseInt(v,10));return LAWIDX[id]==null?"":id}
+function lawFilter(v){if(v==null||v==="")return"";const id=n2lidA(parseInt(v,10));return LAWIDX[id]==null?"":id}
 function tools(setStatus){
   return [
     {name:"search_regulations",description:"組合の例規と国の法令（法律・政令・省令）の条文を語句で検索します。queryは空白区切りのキーワード（例: 育児 休業 期間）。複数の検索を一度に行うときは queries に最大4つ入れます。すべての語を含む条文を優先して返し、無いときは一部の語を含む条文を返します。法令名に含まれる語も一致として扱うので、「消防法施行令 消火器」のように法令名と語句を並べると、その法令の中で探せます。scopeを省くと、例規と国の法令の両方から探します（例規7件、国の法令5件まで）。国の法令のうち一覧で★のないものは、条の見出しだけが検索の対象です。各結果のrefを read_section に渡せます。",
@@ -1286,6 +1468,13 @@ function tools(setStatus){
          if(t.length>cap){o.truncated=true;o.total_chars=t0.length;o.next_from=from+cap;o.how_to_continue="続きは read_section に ref:\""+ref+"\" と from:"+(from+cap)+" を指定して読む"}
          budget-=Math.min(t.length,cap);
          if(f.law.nat){o.national=true;o.note="国の法令（e-Gov、施行日 "+(f.law.enf||"不明")+"）"}
+         {const km=kyoRev();
+          if(f.law.ntc==="kyo"){const r=f.law.lkr||[],u=r.filter(x=>x.k!=="n"),n=r.filter(x=>x.k==="n");
+            if(f.law.own)o.union_ordinance="なし（甲賀広域行政組合火災予防条例に当たる条が無い。京都市条例独自の規定で、当本部では根拠にしない）";
+            else if(u.length)o.union_ordinance=u.map(x=>(x.k==="u2"?"関係する条 ":"")+"甲賀広域行政組合火災予防条例 "+(x.lab||x.a)+(lkRef(x)?"（ref "+lkRef(x)+"）":"")).join("、")+"。条の主題が対応するもので、細部の規定は組合の条例の本文で確かめる";
+            if(n.length)o.related_laws=n.map(x=>x.t+" "+(x.lab||x.a)+(lkRef(x)?"（ref "+lkRef(x)+"）":"")).join("、")}
+          else if(km){const a=km.get(LAWIDX[f.id]+"#"+f.sid);if(a)o.kyoto_unyou_kijun=a.map(x=>{const L=IDX.laws[LAWIDX[x.id]];return L.t+"（ref "+L.c+"#s"+L.pn[0]+"。京都市消防局の運用基準で法令ではない"+(x.k==="u2"?"。関係する条":"")+"）"}).join("、")}}
+         if(f.law.ntc&&isFigPage(t0))o.figure_page="このページは図・表が中心で、PDFから取り出した文字の並びが崩れている。図の配置や数値の対応は推測で補わず、原本で確かめるよう書く";
          if(f.law.ntc){o.kind=NTCL[f.law.ntc];o.doc=ctxOf(f.law);o.pages=f.law.n;o.note=NTCNOTE[f.law.ntc];if(f.law.ab)o.abolished=(f.law.ab.via?"改正元の "+f.law.ab.via+" が":"")+f.law.ab.d+" "+f.law.ab.n+" により廃止（現行の根拠にしない）";if(f.law.rv)o.revised_by=f.law.rv.map(r=>r.d+" "+r.n)}
          out.push(o);
        }
@@ -1294,7 +1483,7 @@ function tools(setStatus){
     {name:"list_law_sections",description:"1つの法令（例規または国の法令）に含まれる条・附則・別表・様式の一覧（ref付き）を返します。lawは法令の番号（一覧の先頭の数字）です。条文の位置が分からないときに使います。400件を超える法令は from で続きを取れます。",
      inputSchema:{type:"object",properties:{law:{type:"string"},from:{type:"integer",description:"任意。この番号の項目から返す（0始まり）"}},required:["law"]},
      execute:async input=>{
-       const id=n2lid(parseInt(input.law,10)),li=LAWIDX[id];if(li==null)throw new Error("その番号の法令はありません");
+       const id=n2lidA(parseInt(input.law,10)),li=LAWIDX[id];if(li==null)throw new Error("その番号の法令はありません");
        setStatus("一覧を確認中："+short(IDX.laws[li].t));
        const L=IDX.laws[li];const all=L.ntc?L.pn.map(n=>({sid:"s"+n,label:"p."+n})):ROWS.filter(r=>r.li===li),from=Math.max(0,parseInt(input.from||0,10)||0);
        const part=all.slice(from,from+400);
@@ -1433,7 +1622,10 @@ const MEMO_INSTR=`
 - 特定用途の部分が避難階以外の階にあり、屋内の直通階段が1つしかない建物は、特定一階段等防火対象物かどうか（令第4条の2の2第2号）を確かめ、当たるなら自動火災報知設備（令第21条第1項第7号）・避難器具・防火対象物点検などへの影響を書きます。
 - 境目の数値に届かないことが計画の値で分かるとき（例：延べ140㎡で消火器の150㎡）は「不要」とし、cond に「延べ面積が150㎡以上になれば要」と書きます。「境目に近い」だけで「条件しだい」にしません。
 - 既存の防火対象物への現行基準の適用（遡及）の根拠は法第17条の2の5（第2項第4号は特定防火対象物）、用途変更のときは法第17条の3です。条番号を取り違えないよう、本文を読んで書きます。
-- 届出の出す人・期限は、次の条を読んでから書きます：着工届（法第17条の14・規則第33条の18）、設置届と検査（法第17条の3の2・令第35条・規則第31条の3）、甲種消防設備士の工事の範囲（令第36条の2）、防火管理者選任届と消防計画（法第8条・規則第3条・第3条の2）、使用開始届（組合の火災予防条例第43条）。読めなければ when を「要確認」とします。
+- 着工届（法第17条の14）・設置届と検査（法第17条の3の2・令第35条）・防火対象物使用開始届（組合の火災予防条例第43条）と、それらの添付図書は、画面が組合の例規の表から出します。filings に入れず、そのために条を読みにも行きません。filings には、それ以外の届出（防火管理者選任届と消防計画（法第8条・規則第3条）、火を使用する設備等の届出（条例第44条）、少量危険物・指定可燃物の届出、建築確認と消防同意など）を挙げ、出す人・期限は条を読んでから書きます。読めなければ when を「要確認」とします。
+- 【先方に求める資料】に挙がっている資料で分かる事項（各階の床面積、収容人員、無窓階など）は、items で聞き直しません。
+- 【建物】の表は職員の入力です。「いま → 変更後」の変更後が「同じ」なら変わりません。設備の要否は変更後の値で判定し、いまの値と比べて変わる点（用途・面積・階数・収容人員）を決め手に書きます。
+- 【今ある消防用設備等】の「ある（…見込みから付けた初期値。職員はまだ確かめていない）」は、職員が確かめた事実ではありません。既存の設備として前提にしてよいのは「ある（職員が確かめた）」だけです。見込みの「ある」と「不明」の設備で結論が変わるときは、items に to「台帳」で確かめる問いとして挙げます。「ない（職員が入力）」の設備にいまの用途・規模で設置義務がかかるなら、今回の変更と別に既存の違反の是正が要ることを notes に書きます。【今ある消防用設備等】が付いているときは、台帳欄が空でも、それを台帳の情報として扱います（次の「台帳欄が空」の扱いより優先）。
 - 台帳欄が空、または「台帳なし」のときは、既存の設備があるとも、無いとも書きません。どの設備の行も「既存の設備は不明。現地で確かめる」とそろえます（一般住宅でも住宅用火災警報器や消火器が置かれていることがあります）。
 - 既存の建物の変更（用途変更・増築・改修・大規模の模様替え）では、建築確認の要否と消防同意（法第7条）の要否を、届出か問いに必ず挙げます。
 - 調べる回数には限りがあるので、equip（必要な設備）を先に固め、細かな問いは後にします。調べきれなかった設備は、unverified に設備名を挙げます。
@@ -1442,7 +1634,7 @@ const MEMO_INSTR=`
 - 届出や問いに挙げる境目は、この計画で効くものにします。規模から明らかに届かない境目（例：小さな飲食店の厨房設備の入力の合計350kW）は、届出の予定や問いに挙げません。厨房設備なら、入力で決まる離隔距離など、その計画で効く基準を確かめます。
 - 既存の建物では、台帳や聞き返しの答えで分かっている既存の設備を前提にし、今回の変更で増設・移設・新設が要るかを exist に書きます。用途の変更・増築では、法第17条の2の5・第17条の3（現行基準への適合）を確かめ、変更後の用途が特定防火対象物か（令第34条の4）を条文を読んで判定します（読まずに「確認が要る」としない）。
 - filings は、この計画で出る届出（消防法・施行令・施行規則の届出、組合の火災予防条例・規則の届出）を、期限が早い順に。出す人と期限は条文のとおりに書きます。
-- 京都市の運用基準を使うときは、京都市条例独自の規定でないかに注意し、独自の規定なら使いません。通知・運用基準は法令ではないので、notes に書くときは文書番号か基準名を添えます。
+- 京都市の運用基準を使うときは、京都市条例独自の規定でないかに注意し、独自の規定なら使いません。京都市の運用基準は見出しごとの文書（消防用設備等運用基準の基準1〜38、火災予防条例運用基準の条ごと、危険物審査基準の章・別記ごと）に分けてあり、一覧の番号で直接読めます。用途の見立ては基準1、各設備はその設備の基準を読みます。通知・運用基準は法令ではないので、notes に書くときは文書番号か基準名を添えます。
 - 文中に参照記号は書かず、refs にだけ入れます。です・ます調で書きます。
 - 聞き返しの答えは、電話で聞きながら急いで打った短い言葉や打ち間違い（「うn」「うん」＝はい、「ない」「なし」＝ありません、「普通のやつ」など）を含みます。意味が取れるものは、そのとおりに読み取ります。
 - use・why・notes・filings には、「読めた」「読めていない」「確認していない」などの作業の経過を書きません。調べきれなかった条文・通知は unverified に、この計画の結論を左右するものだけを最大5件、1行ずつ（どの条・通知か、それで何が決まらないか）書きます。読んだ条文の一覧などの作業の記録は書きません。filings の when は、条文で確かめた期限だけを書き、確かめていなければ「要確認」とだけ書きます。notes は先方に伝えることだけにします。
@@ -1460,22 +1652,514 @@ const MEMO_Q_INSTR=`
 `;
 let mctl=null,memoBusy=false,memoCur=null,memoQs=null;
 const MHK="reiki-nav-memo-v1";
-function memoCondVals(){
-  const g=k=>z2h($(CF[k]).value),use=$("#c-use").value;
-  const up=g("up"),dn=g("dn");
-  return {use:use.replace(/^令別表第一/,""),area:g("area")?g("area").replace(/[㎡m²]+$/,"")+"㎡":"",cap:g("cap")?g("cap").replace(/人$/,"")+"人":"",
-    floors:up||dn?"地上"+(up||"不明")+"階・地階"+(dn?dn+"階":"不明"):"",mado:$("#c-mado").checked?"ある":"",str:$("#c-str").value,etc:g("etc")};
-}
+function memoCondVals(){return mfVals()}
 function refText(r){const m=String(r).match(/\[\[(\d+)#(s\d+)\]\]/)||String(r).match(/^(\d+)#(s\d+)$/);if(!m)return"";const f=fmtRefLabel(m[1]+"#"+m[2]);if(!f||!f.row)return"";const lab=f.row.label.replace(/\s*[(（].*$/,"").trim();return short(f.law.t)+(f.law.ntc&&f.law.num?"（"+f.law.num+"）":"")+" "+lab}
 function refsText(a){return [...new Set((Array.isArray(a)?a:[]).map(refText).filter(Boolean))].join("、")}
 const MKIND={new:"新築（これから建てる建物）",exist:"既存の建物の変更（用途変更・テナント入替・改修・増築・間仕切り変更）"};
 const MKIND_RULE={new:"【この計画は新築です】既存の設備・台帳・変更前の用途についての問いは出しません。すべての設備を新設として判定し、建築確認の消防同意、着工届、設置届と検査、使用開始届の流れで届出を並べます。",
  exist:"【この計画は既存の建物の変更です】変更前の用途・既存の設備・これまでの届出を前提にし、今回の変更で何が変わるか（用途・収容人員・区画・設備の増設や移設）を中心にします。用途変更・増築・改修では、法第17条の2の5・第17条の3（現行基準への適合）を確かめ、変更後の用途が特定防火対象物か（令第34条の4）を条文を読んで判定します。消防の台帳で職員が分かることは to を「台帳」にします。もとが一般住宅など台帳のない建物なら、そのことを前提にします。"};
 function memoKind(){const r=document.querySelector('input[name="mkind"]:checked');return r?r.value:""}
-function syncKind(){const k=memoKind();$("#m-ledger-box").hidden=k!=="exist";$("#m-plan").placeholder=k==="new"?"例：(電話)甲賀市内で2階建ての飲食店を新築予定。1階客席40席、2階は宴会場。鉄骨造で延べ約300㎡。来年春に着工。":"例：2階の事務所区画（約120㎡）を個室カラオケ店に。個室8室、簡単な厨房あり。内装工事のみで11月着工、12月開店予定。建物は3階建て、1階は物販店。"}
+function syncKind(){const k=memoKind();$("#m-ledger-box").hidden=k!=="exist";renderMF();$("#m-plan").placeholder=k==="new"?"例：(電話)甲賀市内で2階建ての飲食店を新築予定。1階客席40席、2階は宴会場。鉄骨造で延べ約300㎡。来年春に着工。":"例：2階の事務所区画（約120㎡）を個室カラオケ店に。個室8室、簡単な厨房あり。内装工事のみで11月着工、12月開店予定。建物は3階建て、1階は物販店。"}
 document.addEventListener("change",e=>{if(e.target&&e.target.name==="mkind")syncKind()});
+
+/* ---------- 協議タブ：建物の入力表と、今ある消防用設備等 ---------- */
+/* 協議タブ：建物の条件から、消防用設備等の設置義務の見込みを判定する(既存の設備の初期値に使う)。
+   入れた条件だけで確実に言えるときだけ req(義務あり)／no(義務なし)を返し、ほかは unk(条件しだい)と足りない条件を返す。
+   条文は消防法施行令(令)第10条〜第29条の3。消防用設備等の免除・代替(令第32条、特例省令など)は見ていない。
+   B = {use:"3ロ"|"6イ"|..., sub:"1".."5"|"入居"|"通所"|"" , A:延べ面積, up:地上階数, dn:地階数, P:収容人員,
+        tai:"耐火"|"準耐火"|"その他"|"", mado:"あり"|"なし"|"", fl:{"1":㎡,"2":㎡,"B1":㎡,...}} */
+const SETSUBI=[
+ ["ext","消火器具"],["hyd","屋内消火栓設備"],["sp","スプリンクラー設備"],["ohyd","屋外消火栓設備"],
+ ["afa","自動火災報知設備"],["gas","ガス漏れ火災警報設備"],["leak","漏電火災警報器"],["call","消防機関へ通報する火災報知設備"],
+ ["bell","非常警報設備（非常ベル・自動式サイレン）"],["pa","放送設備"],["esc","避難器具"],["exit","誘導灯"],
+ ["smoke","排煙設備"],["sprk","連結散水設備"],["stand","連結送水管"],["outlet","非常コンセント設備"],["water","消防用水"]];
+function judgeSetsubi(B){
+  const u=B.use||"",n=u.replace(/[イロハニ]$/,""),s=u.slice(n.length),sub=B.sub||"";
+  const num=v=>v===""||v==null||isNaN(+v)?null:+v;
+  const A=num(B.A),up=num(B.up),dn=num(B.dn),P=num(B.P),tai=B.tai||"",mado=B.mado||"";
+  const fl=B.fl||{};const fa=k=>num(fl[k]);
+  const inU=(...l)=>l.includes(u)||l.includes(n);
+  const R=(st,why,need)=>({st,why:why||"",need:need||""});
+  const req=w=>R("req",w),no=w=>R("no",w),unk=(need,w)=>R("unk",w,need);
+  const is16=n==="16",six=(sub6)=>u==="6イ"&&sub===sub6;
+  // 階の集合ごとに「床面積が X 以上の階があるか」（true/false/null）
+  const upKeys=up==null?[]:Array.from({length:up},(_,i)=>String(i+1)),dnKeys=dn==null?[]:Array.from({length:dn},(_,i)=>"B"+(i+1));
+  function anyFloor(keys,X){if(!keys.length)return false;if(A!=null&&A<X)return false;let unknown=false;for(const k of keys){const a=fa(k);if(a==null){unknown=true;continue}if(a>=X)return true}return unknown?null:false}
+  // 地階・無窓階・n階以上の階で床面積X以上の階があるか
+  function floorRule(X,fromFloor){
+    if(A!=null&&A<X)return false;
+    if(up==null||dn==null)return null;
+    const sets=[dnKeys];if(fromFloor)sets.push(upKeys.filter(k=>+k>=fromFloor));
+    let r=false;for(const ks of sets){const v=anyFloor(ks,X);if(v)return true;if(v===null)r=null}
+    if(mado==="なし")return r;
+    const g=anyFloor(upKeys,X);if(mado==="あり"){if(g===false)return r;return null}
+    if(g===false)return r;return null;  // 無窓階が不明
+  }
+  const needF=fromFloor=>"階数・各階の床面積"+(mado?"":"・無窓階の有無");
+  if(!u)return Object.fromEntries(SETSUBI.map(([k])=>[k,unk("用途")]));
+  const out={};
+  const per16=unk("用途ごとの部分の床面積（複合用途は部分ごとに判定。令第9条）");
+  // ---- 消火器具 令10 ----
+  out.ext=(()=>{
+    if(inU("1イ","2","6ロ","16の2","16の3","17","20"))return req("令第10条第1項第1号");
+    if(u==="6イ"){if(["1","2","3"].includes(sub))return req("令第10条第1項第1号");if(A!=null&&A>=150)return req("令第10条第1項第1号・第2号");if(sub==="4")return A==null?unk("延べ面積"):fl10(150);return unk("(6)項イの細分（入院・入所の有無）")}
+    if(is16)return per16;
+    if(n==="3"){if(A!=null&&A>=150)return req("令第10条第1項第2号");return unk("火を使用する設備・器具の有無（令第10条第1項第1号ロ）")}
+    const t150=inU("1ロ","4","5","6ハ","6ニ","9","12","13","14"),t300=inU("7","8","10","11","15");
+    if(t150||t300){const X=t150?150:300;if(A==null)return unk("延べ面積");if(A>=X)return req("令第10条第1項第"+(t150?"2":"3")+"号");return fl10(X)}
+    return no("");
+    function fl10(X){const f=floorRule(50,3);if(f===true)return req("令第10条第1項第5号（地階・無窓階・3階以上で50㎡以上）");if(f===false)return no("延べ"+X+"㎡未満。少量危険物・指定可燃物があれば要");return unk(needF(3),"延べ"+X+"㎡未満。地階・無窓階・3階以上の階が50㎡以上なら要")}
+  })();
+  // ---- 屋内消火栓 令11 ----
+  out.hyd=(()=>{
+    if(is16)return per16;
+    let base=inU("1")?500:inU("2","3","4","5","6","7","8","9","10","12","14")?700:inU("11","15")?1000:inU("16の2")?150:null;
+    if(base==null)return no("");
+    if(A==null)return unk("延べ面積");
+    // 構造・内装で基準の面積が2倍・3倍になる（令11条2項）
+    const lo=tai==="耐火"?2:1,hi=tai==="耐火"||tai===""?3:tai==="準耐火"?2:1;
+    if(n==="16の2")return A>=150*hi?req("令第11条第1項第4号"):A<150*lo?no(""):unk(tai?"内装の仕上げ（令第11条第2項）":"耐火の別・内装の仕上げ（令第11条第2項）","延べ150㎡が構造・内装で2倍・3倍になる");
+    // 令第12条第1項第1号の対象は、割増し後の面積が「千㎡＋総務省令で定める部分」で頭打ち（令第11条第2項かっこ書）
+    const cap=u==="6ロ"||(u==="6イ"&&(sub==="1"||sub==="2"||!sub));
+    const loA=cap?Math.min(base*lo,1000):base*lo;
+    if(A>=base*hi)return req("令第11条第1項（延べ"+base+"㎡×"+hi+"）");
+    const fb=inU("1")?100:inU("11","15")?200:150;
+    const f=inU("13","16の3")?false:floorRule(fb*lo,4),fHi=inU("13","16の3")?false:floorRule(fb*hi,4);
+    if(fHi===true)return req("令第11条第1項第6号（地階・無窓階・4階以上の階）");
+    if(A<loA&&f===false)return no("延べ・各階とも基準の面積に届かない（指定可燃物750倍以上なら要）");
+    if(A<loA)return unk(needF(4),"延べ"+base+"㎡"+(lo>1?"×"+lo:"")+"未満。地階・無窓階・4階以上の階の床面積で決まる");
+    return unk(tai?"内装の仕上げ（難燃材料か。令第11条第2項）":"耐火の別・内装の仕上げ（令第11条第2項）","延べ"+base+"㎡が構造・内装で2倍・3倍になる"+(cap?"（千㎡＋総務省令の部分で頭打ち）":""));
+  })();
+  // ---- スプリンクラー 令12 ----
+  out.sp=(()=>{
+    if(up!=null&&up>=11)return req("令第12条第1項第3号・第12号（11階以上）");
+    if(u==="6イ"){if(sub==="1"||sub==="2")return req("令第12条第1項第1号イ（延焼抑制構造なら不要）");if(!sub)return unk("(6)項イの細分")}
+    if(u==="6ロ"){if(sub==="1"||sub==="3")return req("令第12条第1項第1号ロ");if(A!=null&&A>=275)return req("令第12条第1項第1号ハ");return unk("(6)項ロの細分・介助が要る者の入所の有無")}
+    if(n==="16の2")return A==null?unk("延べ面積"):A>=1000?req("令第12条第1項第6号"):unk("(6)項イ・ロの部分の有無");
+    if(is16||n==="16の3")return per16;
+    if(n==="14"&&(A==null||A>=700))return unk((A==null?"延べ面積・":"")+"ラック式倉庫で天井高10m超か（令第12条第1項第5号）");
+    const big=inU("1","2","3","4","5イ","6","9イ");
+    if(big){
+      if(A==null||up==null)return unk("延べ面積・階数");
+      const X=(n==="4"||(u==="6イ"&&["1","2","3"].includes(sub)))?3000:6000;
+      if(up>=2&&A>=X)return req("令第12条第1項第4号（延べ"+X+"㎡以上。総務省令の除外部分あり）");
+      if(up===1&&A>=X&&dn!==0)return unk(dn==null?"地階の有無（平屋建以外か。令第12条第1項第4号）":"地階がある場合の「平屋建以外」の扱い（令第12条第1項第4号）");
+    }
+    if(A!=null&&A<1000)return no("指定可燃物1,000倍以上・舞台部があれば要");
+    const f1=floorRule(1000,99),f2=up==null?null:anyFloor(upKeys.filter(k=>+k>=4&&+k<=10),inU("2","4")?1000:1500);
+    if(inU("1","2","3","4","5イ","6","9イ")){if(f1===true||f2===true)return req("令第12条第1項第11号");if(f1===false&&f2===false)return no("")}
+    else{if(up!=null&&up<=10)return no("")}
+    return unk("各階の床面積（地階・無窓階1,000㎡、4〜10階1,500㎡）");
+  })();
+  // ---- 屋外消火栓 令19 ----
+  out.ohyd=(()=>{
+    const site="同一敷地内に建物が複数あれば合わせて判定（令第19条第2項）";
+    if(!inU("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"))return no("");
+    if(A!=null&&A<3000)return no(site);
+    const f12=up==null?null:up===1?fa("1"):(fa("1")==null||fa("2")==null?null:fa("1")+fa("2"));
+    const X=tai==="耐火"?9000:tai==="準耐火"?6000:tai==="その他"?3000:null;
+    if(f12!=null&&f12<3000)return no(site);
+    if(is16)return per16;
+    if(f12!=null&&X!=null)return f12>=X?req("令第19条（1・2階の床面積"+X+"㎡以上）"):no(site);
+    return unk(f12==null?"1階・2階の床面積":"耐火建築物・準耐火建築物の別");
+  })();
+  // ---- 自動火災報知設備 令21 ----
+  out.afa=(()=>{
+    if(up!=null&&up>=11)return req("令第21条第1項第14号（11階以上の階）");
+    if(inU("2ニ","5イ","6ロ","13ロ","17"))return req("令第21条第1項第1号");
+    if(u==="6イ"){if(["1","2","3"].includes(sub))return req("令第21条第1項第1号");if(!sub&&!(A!=null&&A>=300))return unk("(6)項イの細分")}
+    if(u==="6ハ"){if(sub==="入居")return req("令第21条第1項第1号ロ");if(!sub&&!(A!=null&&A>=300))return unk("利用者を入居・宿泊させるか")}
+    if(n==="16の3"||u==="16ロ")return per16;
+    let X=null;
+    if(u==="9イ")X=200;else if(inU("1","2イ","2ロ","2ハ","3","4","6イ","6ニ","16イ","16の2","6ハ"))X=300;else if(inU("5ロ","7","8","9ロ","10","12","13イ","14"))X=500;else if(inU("11","15"))X=1000;
+    if(X==null)return no("");
+    if(A==null)return unk("延べ面積");
+    if(A>=X)return req("令第21条第1項（延べ"+X+"㎡以上）");
+    const sp1=inU("1","2","3","4","5イ","6","9イ","16イ");
+    const f10=inU("2イ","2ロ","2ハ","3")?floorRule(100,99):false;
+    const f11=floorRule(300,3);
+    if(f10===true||f11===true)return req("令第21条第1項第10号・第11号（地階・無窓階・3階以上）");
+    if(u==="16イ")return unk("(2)項ニ・(5)項イ・(6)項イ(1)〜(3)・(6)項ロ・(6)項ハ（入居）の部分の有無、地階・無窓階の(2)項・(3)項の部分の床面積（令第9条、令第21条第1項第1号・第10号）","延べ300㎡未満の複合用途");
+    if(n==="16の2")return unk("(2)項ニ・(5)項イ・(6)項イ(1)〜(3)・(6)項ロ・(6)項ハ（入居）の部分の有無（令第21条第1項）","延べ300㎡未満の地下街");
+    if(u==="13イ"){const pk=anyFloor(dnKeys.concat(upKeys.filter(k=>+k>=2)),200);if(pk!==false)return unk("地階・2階以上の駐車の部分の床面積（200㎡）と、すべての車両が同時に屋外へ出られる構造か（令第21条第1項第13号）")}
+    const multi=(up!=null&&up>=2)||(dn!=null&&dn>=1);
+    if(sp1&&(multi||up==null||dn==null))return unk("避難階以外の階への直通階段の数（特定一階段。令第21条第1項第7号）");
+    if(f10===false&&f11===false)return no("延べ"+X+"㎡未満（地階・2階以上の駐車の部分200㎡以上、指定可燃物500倍以上などは別に要）");
+    return unk(needF(3),"延べ"+X+"㎡未満。地階・無窓階・3階以上の階の床面積で決まる");
+  })();
+  // ---- ガス漏れ 令21の2 ----
+  out.gas=(()=>{
+    if(n==="16の2")return A==null?unk("延べ面積"):A>=1000?req("令第21条の2第1項第1号"):no("温泉採取設備があれば要");
+    if(n==="16の3")return per16;
+    if(dn===0)return no("温泉採取設備があれば要");
+    if(dn==null)return unk("地階の有無");
+    if(!inU("1","2","3","4","5イ","6","9イ","16イ"))return no("温泉採取設備があれば要");
+    let sum=0;for(const k of dnKeys){const a=fa(k);if(a==null)return unk("地階の床面積");sum+=a}
+    if(sum<1000)return no("温泉採取設備があれば要");
+    return is16?unk("地階の特定用途部分の床面積（500㎡）"):req("令第21条の2第1項第4号（地階1,000㎡以上）");
+  })();
+  // ---- 漏電火災警報器 令22（鉄網入りの壁・床・天井があるもの）----
+  out.leak=unk("ラスモルタルなど鉄網入りの壁・床・天井の有無と、契約電流（50Aを超えるか）","鉄網入りの壁等がなければ不要");
+  // ---- 消防機関へ通報する火災報知設備 令23 ----
+  out.call=(()=>{
+    const far="（消防機関から著しく離れた場所などは除く。令第23条第1項ただし書）";
+    if(inU("6ロ"))return req("令第23条第1項第1号"+far);
+    if(inU("16の2","16の3"))return unk("消防機関へ常時通報できる電話の有無（令第23条第3項で代えられる）","令第23条第1項第1号");
+    if(u==="6イ"){if(["1","2","3"].includes(sub))return req("令第23条第1項第1号"+far);if(!sub)return unk("(6)項イの細分")}
+    if(is16)return per16;
+    let X=null;if(inU("1","2","4","5イ","6","12","17"))X=500;else if(inU("3","5ロ","7","8","9","10","11","13","14","15"))X=1000;
+    if(X==null)return no("");
+    if(A==null)return unk("延べ面積");
+    if(A<X)return no("延べ"+X+"㎡未満");
+    const noTel=inU("5イ","6ハ")||(u==="6イ"&&sub==="4");
+    return noTel?req("令第23条第1項（電話で代えられない）"+far):unk("消防機関へ常時通報できる電話の有無（令第23条第3項で代えられる）","延べ"+X+"㎡以上");
+  })();
+  // ---- 非常警報（放送設備）令24③ ----
+  out.pa=(()=>{
+    if(inU("16の2","16の3"))return req("令第24条第3項第1号");
+    if(up!=null&&up>=11||dn!=null&&dn>=3)return req("令第24条第3項第2号");
+    if(P==null)return unk("収容人員");
+    const fl0=up==null||dn==null?unk("地上・地階の階数（11階以上・地階3以上なら要）"):null;
+    if(u==="16イ"){if(P>=500)return req("令第24条第3項第3号");if(P>=300)return unk("特定の用途の部分の収容人員（300人以上なら要。令第24条第3項第4号）");return fl0||no("")}
+    if(u==="16ロ"){if(P>=800)return unk("(5)項ロ・(7)項・(8)項の部分の収容人員（800人以上なら要。令第24条第3項第4号）");return fl0||no("")}
+    if(inU("1","2","3","4","5イ","6","9イ")&&P>=300)return req("令第24条第3項第4号（収容人員300人以上）");
+    if(inU("5ロ","7","8")&&P>=800)return req("令第24条第3項第4号（収容人員800人以上）");
+    return fl0||no("");
+  })();
+  // ---- 非常警報（ベル・サイレン）令24② ----
+  out.bell=(()=>{
+    if(out.pa.st==="req")return no("放送設備と併せて要るが、規則第25条の2の放送設備・自動火災報知設備の有効範囲は省略できる（令第24条第5項）");
+    if(!inU("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"))return no("");
+    if(P==null)return unk("収容人員");
+    const X=inU("5イ","6イ","9イ")?20:50;
+    const need=P>=X;
+    if(!need&&u==="16イ"&&P>=20)return unk("(5)項イ・(6)項イ・(9)項イの部分の有無（20人以上なら要。令第24条第2項第1号）");
+    if(!need){if(X===20||(dn===0&&mado==="なし"))return no("収容人員"+X+"人未満"+(X===50?"（20人以上で(4)(6)ロ〜ニ(9)ロ(12)項は非常警報器具）":""));return unk("地階・無窓階の収容人員（20人以上なら要）")}
+    if(out.afa.st==="req")return no("収容人員"+X+"人以上だが、自動火災報知設備で代えられる（令第24条第2項ただし書）");
+    if(out.afa.st==="unk")return unk("自動火災報知設備の有無（あれば代えられる）","収容人員"+X+"人以上");
+    return req("令第24条第2項（収容人員"+X+"人以上）");
+  })();
+  // ---- 避難器具 令25（階ごとの収容人員で決まる）----
+  out.esc=(()=>{
+    if(up===1&&dn===0)return no("平屋で地階なし");
+    if(P!=null&&P<10)return no("収容人員10人未満");
+    return unk("階ごとの収容人員と直通階段の数（令第25条）");
+  })();
+  // ---- 誘導灯 令26 ----
+  out.exit=(()=>{
+    if(inU("1","2","3","4","5イ","6","9","16イ","16の2","16の3"))return req("令第26条第1項第1号・第2号（避難が容易な小規模なものは規則第28条の2で不要）");
+    if(!inU("5ロ","7","8","10","11","12","13","14","15","16ロ"))return no("");
+    if(up!=null&&up>=11||dn!=null&&dn>=1||mado==="あり")return req("令第26条第1項（地階・無窓階・11階以上の部分）");
+    if(dn===0&&mado==="なし"&&up!=null)return no("");
+    return unk("地階・無窓階の有無");
+  })();
+  // ---- 排煙設備 令28 ----
+  out.smoke=(()=>{
+    if(n==="16の2")return A==null?unk("延べ面積"):A>=1000?req("令第28条第1項第1号"):no("");
+    if(n==="1")return unk("舞台部の床面積（500㎡以上なら要）");
+    if(!inU("2","4","10","13","16"))return no("");
+    const f=floorRule(1000,99);
+    if(is16)return f===false?no(""):unk("地階・無窓階の(2)項・(4)項・(10)項・(13)項の部分の床面積（1,000㎡。令第28条第1項第3号）");
+    return f===true?req("令第28条第1項第3号"):f===false?no(""):unk("地階・無窓階の床面積（1,000㎡）");
+  })();
+  // ---- 連結散水設備 令28の2 ----
+  out.sprk=(()=>{
+    if(n==="16の2")return A==null?unk("延べ面積"):A>=700?req("令第28条の2"):no("");
+    if(!inU("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"))return no("");
+    if(dn===0)return no("地階なし");if(dn==null)return unk("地階の有無");
+    let sum=0;for(const k of dnKeys){const a=fa(k);if(a==null)return unk("地階の床面積");sum+=a}
+    if(is16)return sum>=700?unk("地階の用途ごとの部分の床面積（700㎡。令第9条・令第28条の2）"):no("");
+    return sum>=700?req("令第28条の2（地階の床面積700㎡以上）"):no("");
+  })();
+  // ---- 連結送水管 令29 ----
+  out.stand=(()=>{
+    if(up!=null&&up>=7)return req("令第29条第1項第1号（7階以上）");
+    if(n==="16の2")return A==null?unk("延べ面積"):A>=1000?req("令第29条第1項第3号"):no("");
+    if(n==="18")return req("令第29条第1項第4号");
+    if(up!=null&&up>=5){if(A==null)return unk("延べ面積");return A>=6000?req("令第29条第1項第2号"):no("")}
+    if(up!=null)return no("道路の用に供する部分があれば要");
+    return unk("階数");
+  })();
+  // ---- 非常コンセント 令29の2 ----
+  out.outlet=(()=>{
+    if(up!=null&&up>=11)return req("令第29条の2第1項第1号");
+    if(n==="16の2")return A==null?unk("延べ面積"):A>=1000?req("令第29条の2第1項第2号"):no("");
+    return up!=null?no(""):unk("階数");
+  })();
+  // ---- 消防用水 令27 ----
+  out.water=(()=>{
+    if(A!=null&&A<5000)return no("同一敷地内に建物が複数あれば合わせて判定（令第27条第2項）");
+    return unk("敷地の面積（2万㎡）・建物の高さ（31m）","延べ5,000㎡以上の大きな建物で関係する");
+  })();
+  return out;
+}
+const MF_KOZO=["RC・SRC造","鉄骨造","木造","一部鉄骨造","一部木造","その他"],MF_TAI=["耐火","準耐火","その他"],MF_MADO=["ある","ない"];
+const MF_SUB={"6イ":[["1","(1)"],["2","(2)"],["3","(3)"],["4","(4)"]],"6ロ":[["1","(1)"],["2","(2)"],["3","(3)"],["4","(4)"],["5","(5)"]],"6ハ":[["入居","入居・宿泊させる"],["通所","通所だけ"]]};
+const mfSide=()=>({use:"",sub:"",A:"",P:"",up:"",dn:"",kozo:"",tai:"",mado:"",fl:{}});
+function mfNew(){const a=mfSide();a.kozo=a.tai=a.mado="同じ";return {now:mfSide(),aft:a,part:"",etc:"",eq:{}}}
+let MF=mfNew();
+const mfCode=v=>{const m=String(v||"").match(/\((\d+(?:の\d+)?)\)項([イロハニ]?)/);return m?m[1]+m[2]:""};
+const mfNum=v=>{const t=z2h(v).replace(/[,，㎡m²人階]/g,"");return t===""||isNaN(+t)?"":String(+t)};
+function mfJudgeIn(){const x=MF.now;return {use:mfCode(x.use),sub:x.sub,A:x.A,up:x.up,dn:x.dn,P:x.P,tai:x.tai==="不明"?"":x.tai,mado:x.mado==="ある"?"あり":x.mado==="ない"?"なし":"",fl:x.fl}}
+function mfApplyJudge(){
+  const r=judgeSetsubi(mfJudgeIn());
+  for(const [k] of SETSUBI){const e=MF.eq[k]||(MF.eq[k]={v:"不明",manual:false});e.j=r[k];if(!e.manual)e.v=r[k].st==="req"?"ある":"不明"}
+}
+function mfTag(j){if(!j)return"";if(j.st==="req")return `<div class="mft2 req"><b>義務あり（見込み）</b> ${esc(j.why)}</div>`;if(j.st==="no")return `<div class="mft2"><b>義務なし（見込み）</b>${j.why?" "+esc(j.why):""}</div>`;return `<div class="mft2">判定に要る：${esc(j.need)}${j.why?"（"+esc(j.why)+"）":""}</div>`}
+function renderMF(){
+  const box=$("#mf");if(!box)return;const k=memoKind(),ex=k==="exist";
+  if(!k){box.innerHTML='<p class="note">まず計画の種類を選んでください。</p>';return}
+  const uses=$("#c-use")?$("#c-use").innerHTML:"";
+  const sel=(side,f)=>`<select data-mf="${side}.${f}" class="${side==="aft"?"aft":""}">${uses}</select>`;
+  const inp=(side,f,ph)=>`<input data-mf="${side}.${f}" inputmode="decimal" autocomplete="off" placeholder="${esc(side==="aft"?"変わらなければ空欄":ph)}" class="${side==="aft"?"aft":""}">`;
+  const pair=(lab,mk,note)=>`<div class="mfr"><div class="mfl">${lab}${note?`<span class="mbn">${note}</span>`:""}</div><div class="mfi">${ex?`<span>いま</span>${mk("now")}<span>変更後</span>${mk("aft")}`:`<span>計画</span>${mk("now")}`}</div></div>`;
+  const chips=(side,f,opts,withSame)=>`<div class="mfc">${(withSame?["同じ"]:[]).concat(opts,["不明"]).map(o=>`<button type="button" data-mfc="${side}.${f}" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
+  const cpair=(lab,f,opts)=>`<div class="mfr"><div class="mfl">${lab}</div><div class="mfi">${ex?`<span>いま</span>${chips("now",f,opts)}<span>変更後</span>${chips("aft",f,opts,true)}`:`<span>計画</span>${chips("now",f,opts)}`}</div></div>`;
+  let h=pair("用途",side=>sel(side,"use"),"令別表第一。目安なので、判定は条文で確かめます")+`<div id="mf-sub"></div>`
+    +pair("延べ面積（㎡）",side=>inp(side,"A","例：300"))
+    +(ex?`<div class="mfr"><div class="mfl">変える部分の面積（㎡）</div><div class="mfi"><span></span><input data-mf="part" inputmode="decimal" autocomplete="off" placeholder="例：120"></div></div>`:"")
+    +pair("地上の階数",side=>inp(side,"up","例：3"))+pair("地階の階数",side=>inp(side,"dn","例：0"))
+    +`<div class="mfr"><div class="mfl">各階の床面積（㎡）<span class="mbn">階数を入れると行が出ます</span></div><div id="mf-fl"></div></div>`
+    +pair("収容人員（人）",side=>inp(side,"P","例：50"))
+    +cpair("構造","kozo",MF_KOZO)+cpair("耐火の別","tai",MF_TAI)+cpair("無窓階","mado",MF_MADO)
+    +`<div class="mfr"><div class="mfl">その他（危険物・火気設備・指定可燃物など）</div><input data-mf="etc" autocomplete="off" placeholder="例：厨房に業務用ガスこんろ、灯油200L" style="width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:7px 9px;background:var(--surface);font-size:14px;color:var(--fg)"></div>`;
+  if(ex)h+=`<div class="mcard" style="margin-top:12px"><div class="mbs">今ある消防用設備等<span class="mbn">いまの用途・面積・階数などから、設置義務がかかる見込みの設備に「ある」を付けています。違反で無いもの、確かめられないものは選び直してください。</span></div><div id="mf-eq"></div></div>`;
+  h+=`<div class="mcard" style="margin-top:12px"><div class="mbs">判定に足りない資料<span class="mbn">いまの入力で決まらない設備と、先方からもらえば決まる資料。一覧の「次回お持ちいただきたい資料」にも載ります</span></div><div id="mf-need"></div></div>`;
+  box.innerHTML=h;
+  // 値を戻す
+  box.querySelectorAll("[data-mf]").forEach(el=>{const v=mfGet(el.dataset.mf);if(v!=null)el.value=v});
+  mfSubs();mfFloors();mfChips();if(ex){mfApplyJudge();mfEq()}dzNeedRender();
+}
+function mfGet(p){const [a,b]=p.split(".");return b?MF[a][b]:MF[a]}
+function mfSet(p,v){const [a,b]=p.split(".");if(b)MF[a][b]=v;else MF[a]=v}
+function mfSubs(){const box=$("#mf-sub");if(!box)return;const ex=memoKind()==="exist";
+  const rows=["now"].concat(ex?["aft"]:[]).map(side=>{const c=mfCode(MF[side].use),o=MF_SUB[c];if(!o)return"";
+    return `<span>${side==="now"?(ex?"いま":"計画"):"変更後"}</span><div class="mfc">${o.map(([v,l])=>`<button type="button" data-mfc="${side}.sub" data-v="${esc(v)}">${esc(l)}</button>`).join("")}<button type="button" data-mfc="${side}.sub" data-v="">不明</button></div>`}).filter(Boolean);
+  box.innerHTML=rows.length?`<div class="mfr"><div class="mfl">用途の細分<span class="mbn">(6)項の細分で、スプリンクラー設備・自動火災報知設備などの判定が変わります</span></div><div class="mfi">${rows.join("")}</div></div>`:"";mfChips()}
+function mfFloors(){const box=$("#mf-fl");if(!box)return;const ex=memoKind()==="exist";
+  const n=v=>Math.min(60,+mfNum(v)||0),up=Math.max(n(MF.now.up),ex?n(MF.aft.up):0),dn=Math.max(n(MF.now.dn),ex?n(MF.aft.dn):0);
+  if(!up&&!dn){box.innerHTML='<p class="note" style="margin:0">（地上・地階の階数を入れてください）</p>';return}
+  const ks=[];for(let i=up;i>=1;i--)ks.push(String(i));for(let i=1;i<=dn;i++)ks.push("B"+i);
+  box.innerHTML=`<table class="mft"><tr><th></th><th>${ex?"いま":"計画"}</th>${ex?"<th>変更後</th>":""}</tr>${ks.map(k=>`<tr><td style="white-space:nowrap">${k[0]==="B"?"地下"+k.slice(1):k}階</td><td><input data-fl="now.${k}" inputmode="decimal" autocomplete="off" value="${esc(MF.now.fl[k]||"")}"></td>${ex?`<td class="aft"><input data-fl="aft.${k}" inputmode="decimal" autocomplete="off" value="${esc(MF.aft.fl[k]||"")}" placeholder="同じなら空欄"></td>`:""}</tr>`).join("")}</table>`}
+function mfChips(){document.querySelectorAll("#mf [data-mfc]").forEach(b=>{const v=mfGet(b.dataset.mfc)||"";b.classList.toggle("on",v===b.dataset.v||(v===""&&b.dataset.v==="不明"&&!/\.sub$/.test(b.dataset.mfc))||(v===""&&b.dataset.v===""&&/\.sub$/.test(b.dataset.mfc)))})}
+let mfEqOpen=false;
+function mfEq(){const box=$("#mf-eq");if(!box)return;
+  const row=([k,l])=>{const e=MF.eq[k]||{v:"不明"};return `<div class="mfe"><div class="mfn">${esc(l)}${e.manual?' <span class="mbn" style="display:inline">（手で選択）</span>':""}</div>${mfTag(e.j)}<div class="mfc">${["ある","ない","不明"].map(v=>`<button type="button" data-eq="${k}" data-v="${v}" class="${e.v===v?"on "+(v==="ある"?"a":v==="ない"?"n":""):""}">${v}</button>`).join("")}</div></div>`};
+  // 義務なし（見込み）で手を付けていないものは畳む
+  const quiet=([k])=>{const e=MF.eq[k];return e&&e.j&&e.j.st==="no"&&!e.manual&&e.v==="不明"};
+  const a=SETSUBI.filter(x=>!quiet(x)),b=SETSUBI.filter(quiet);
+  box.innerHTML=a.map(row).join("")+(b.length?`<details class="mfq"${mfEqOpen?" open":""}><summary class="note" style="cursor:pointer;margin:6px 0">義務なし（見込み）の設備 ${b.length}件（ある・ないを付けるときは開く）</summary>${b.map(row).join("")}</details>`:"");
+  const d=box.querySelector("details.mfq");if(d)d.addEventListener("toggle",()=>{mfEqOpen=d.open})}
+function mfChanged(){if(memoKind()==="exist"){mfApplyJudge();mfEq()}dzNeedRender()}
+document.addEventListener("input",e=>{const t=e.target;if(!t.closest||!t.closest("#mf"))return;
+  if(t.dataset.mf){const p=t.dataset.mf;mfSet(p,/\.(A|P|up|dn)$|^part$/.test(p)?mfNum(t.value):t.value);if(/\.(up|dn)$/.test(p))mfFloors();if(/\.use$/.test(p)){const side=p.split(".")[0];MF[side].sub="";mfSubs()}mfChanged()}
+  else if(t.dataset.fl){const [side,k]=t.dataset.fl.split(".");MF[side].fl[k]=mfNum(t.value);mfChanged()}});
+document.addEventListener("change",e=>{const t=e.target;if(t.closest&&t.closest("#mf")&&t.tagName==="SELECT"&&t.dataset.mf){mfSet(t.dataset.mf,t.value);const side=t.dataset.mf.split(".")[0];MF[side].sub="";mfSubs();mfChanged()}});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#mf button");if(!b)return;
+  if(b.dataset.mfc){const v=b.dataset.v==="不明"?"":b.dataset.v;mfSet(b.dataset.mfc,v);mfChips();mfChanged()}
+  else if(b.dataset.eq){const e2=MF.eq[b.dataset.eq]||(MF.eq[b.dataset.eq]={});e2.v=b.dataset.v;e2.manual=true;mfEq();dzNeedRender()}});
+function mfVals(){ // 一覧の基本項目に入れる値（変更後があれば変更後、無ければいま）
+  const ex=memoKind()==="exist",pick=f=>ex&&MF.aft[f]&&MF.aft[f]!=="同じ"?MF.aft[f]:MF.now[f];
+  const use=pick("use"),up=pick("up"),dn=pick("dn");
+  return {use:String(use||"").replace(/^令別表第一/,""),area:pick("A")?pick("A")+"㎡":"",cap:pick("P")?pick("P")+"人":"",floors:up||dn?"地上"+(up||"不明")+"階・地階"+(dn||"不明")+"階":"",mado:pick("mado")||"",str:[pick("kozo"),pick("tai")].filter(Boolean).join("・"),etc:MF.etc}}
+function mfBrief(kind){const v=mfVals();return [v.use,v.area&&"延べ"+v.area,v.floors,v.cap&&"収容"+v.cap,v.str].filter(Boolean).join("／")}
+function mfText(kind){
+  const ex=kind==="exist",L=[];
+  const show=v=>v==null||v===""?"不明":String(v).replace(/^令別表第一/,"");
+  const row=(lab,f,unit)=>{const a=MF.now[f],b=MF.aft[f];if(!ex){if(a)L.push(lab+"："+show(a)+(unit||""));return}
+    if(!a&&(!b||b==="同じ"))return;L.push(lab+"：いま "+show(a)+(a&&unit?unit:"")+" → 変更後 "+(!b||b==="同じ"?"同じ（変わらない）":show(b)+(unit||"")))};
+  const subL=side=>MF[side].sub?(MF_SUB[mfCode(MF[side].use)]||[]).filter(x=>x[0]===MF[side].sub).map(x=>x[1])[0]||"":"";
+  row("用途","use");if(MF.now.sub||MF.aft.sub)L.push("用途の細分："+(ex?"いま "+(subL("now")||"不明")+" → 変更後 "+(subL("aft")||"いまと同じか不明"):subL("now")));
+  row("延べ面積","A","㎡");if(ex&&MF.part)L.push("変える部分の面積："+MF.part+"㎡");
+  row("地上の階数","up","階");row("地階の階数","dn","階");
+  const ks=[...new Set(Object.keys(MF.now.fl).concat(Object.keys(MF.aft.fl)))].filter(k=>MF.now.fl[k]||MF.aft.fl[k]);
+  if(ks.length)L.push("各階の床面積："+ks.map(k=>(k[0]==="B"?"地下"+k.slice(1):k)+"階 "+(MF.now.fl[k]||"不明")+(ex&&MF.aft.fl[k]?"→"+MF.aft.fl[k]:"")+"㎡").join("、"));
+  row("収容人員","P","人");row("構造","kozo");row("耐火の別","tai");row("無窓階","mado");
+  if(MF.etc)L.push("その他："+MF.etc);
+  let t=L.length?(ex?"【建物（職員が入力。いま → 変更後。書かれていない項目・「不明」は分かっていない。仮定しない）】\n":"【計画の建物（職員が入力。書かれていない項目・「不明」は分かっていない。仮定しない）】\n")+L.join("\n"):"";
+  if(ex&&(MF.now.use||Object.values(MF.eq).some(e=>e.manual))){
+    const g={c:[],j:[],n:[],u:[]};
+    for(const [k,l] of SETSUBI){const e=MF.eq[k];if(!e)continue;if(e.v==="ある")(e.manual?g.c:g.j).push(l);else if(e.v==="ない")g.n.push(l);else g.u.push(l)}
+    t+="\n\n【今ある消防用設備等（既存の建物）】"
+      +(g.c.length?"\nある（職員が確かめた）："+g.c.join("、"):"")
+      +(g.j.length?"\nある（いまの用途・規模で設置義務がかかる見込みから付けた初期値。職員はまだ確かめていない）："+g.j.join("、"):"")
+      +(g.n.length?"\nない（職員が入力。設置されていない）："+g.n.join("、"):"")
+      +(g.u.length?"\n不明："+g.u.join("、"):"")
+      +"\n「ない」の設備に設置義務がかかるなら、既存の違反の是正として扱います。";
+  }
+  return t;
+}
+function mfHas(){const x=MF.now;return !!(x.use||x.A||x.up||x.dn||x.P||MF.etc||MF.aft.use||MF.aft.A)}
+/* 協議の一覧：届出（着工届・設置届・使用開始届）と添付図書、判定に足りない資料を、組合の例規の表からプログラムで出す（AIに書かせない）。
+   根拠：消防法第17条の14・規則第33条の18・火災予防事務処理規程第6条・別表第1（着工届）
+        消防法第17条の3の2・令第35条・規則第31条の3・事務処理規程第8条・令第35条第1項第3号の指定（設置届）
+        火災予防条例第43条・火災予防規則第16条・別表第2・別表第2の2（使用開始届）
+        事務処理規程第3条第1項第3号・第4号（建築確認の消防同意） */
+const DZ_EQ=[["ext",/消火器|簡易消火用具/],["hyd",/屋内消火栓/],["sp",/スプリンクラー/],["mizu",/水噴霧/],["awa",/泡消火/],["fuk",/不活性ガス/],["halo",/ハロゲン/],["funm",/粉末消火/],["ohyd",/屋外消火栓/],
+ ["afa",/自動火災報知/],["gas",/ガス漏れ/],["leak",/漏電/],["call",/消防機関へ通報|通報する火災報知/],["kigu",/非常警報器具/],["pa",/放送設備/],["bell",/非常警報設備|非常ベル|自動式サイレン/],
+ ["esc",/避難器具|避難はしご|救助袋|緩降機|避難ロープ|すべり台|避難橋/],["exit",/誘導灯/],["hyoshiki",/誘導標識/],["smoke",/排煙/],["sprk",/連結散水/],["stand",/連結送水/],["outlet",/非常コンセント/],
+ ["musen",/無線通信補助/],["water",/消防用水/],["pump",/動力消防ポンプ/]];
+/* 着工届の対象（令第36条の2）と、事務処理規程 別表第1「必要により」求める図書 */
+const DZ_B1A=["附近見取図","防火対象物等の概要表","消防用設備等の概要表","断面図又は標準図","使用機器図"],DZ_B1B=["附近見取図","防火対象物等の概要表","消防用設備等の概要表","断面図又は標準図"],DZ_B1C=["附近見取図","消防用設備等の概要表","立面図"];
+const DZ_KOJI={hyd:DZ_B1A,sp:DZ_B1A,mizu:DZ_B1A,awa:DZ_B1A,fuk:DZ_B1A,halo:DZ_B1A,funm:DZ_B1A,ohyd:DZ_B1A,afa:DZ_B1B,gas:DZ_B1B,call:DZ_B1B,esc:DZ_B1C};
+/* 火災予防規則 別表第2の2（使用開始届に添付を要する消防設備等の図書） */
+const DZ_B22={ext:["配置図"],pump:["配置図","計算書","仕様書"],leak:["配線系統図及び展開図","取付詳細図"],kigu:["配置図","仕様書"],bell:["配線系統図及び展開図","取付詳細図"],pa:["配線系統図及び展開図","取付詳細図"],
+ esc:["配置図","取付詳細図","計算書"],exit:["配線系統図及び展開図","取付詳細図"],hyoshiki:["配置図"],water:["配置図","計算書"],smoke:["配線系統図及び展開図","計算書","仕様書"],
+ sprk:["配管系統図","計算書","仕様書"],stand:["配管系統図","計算書","仕様書"],outlet:["配線系統図及び展開図","取付詳細図"],musen:["配線系統図及び展開図","取付詳細図"]};
+/* 判定に足りない条件 → 先方に求める資料 */
+const DZ_DOC={
+ plan:["資料","事業の内容が分かる資料（営業の内容、各室の使い方）"],
+ heimen:["資料","各階平面図（各階の床面積・用途・間仕切りが分かるもの。求積を含む）"],
+ dan:["資料","断面図・立面図（地上・地階の階数、高さ）"],
+ mado:["資料","無窓階の判定資料（各階の開口部の位置・大きさ・下端の高さが分かる平面図・立面図）"],
+ kakunin:["資料","確認済証または建築計画概要書の写し（構造、耐火建築物・準耐火建築物の別）"],
+ naiso:["資料","内装仕上表（壁・天井の仕上げ材料）"],
+ shuyo:["資料","収容人員の算定資料（従業者の数、客席・ベッドの数など）"],
+ youto:["資料","用途別の面積・収容人員の表（テナント・用途ごと）"],
+ riyo:["資料","入所者・利用者の状況が分かる資料（避難に介助が要る者の割合、入居・宿泊の有無）"],
+ kaidan:["資料","階段の位置と構造が分かる各階平面図（屋外階段か、避難上有効な構造か）"],
+ rack:["資料","倉庫の断面図（天井の高さ、ラックの高さ）"],
+ park:["資料","駐車部分の面積が分かる平面図（すべての車両が同時に屋外へ出られる構造か）"],
+ butai:["資料","舞台部の面積が分かる平面図"],
+ haichi:["資料","配置図（敷地の面積、同じ敷地にある建物）"],
+ leak:["資料","外壁・床・天井の仕様（ラスモルタルなど鉄網入りか）と、電気の契約電流"],
+ tel:["確認","消防機関へ常時通報できる電話を置くか"]};
+const DZ_ORDER=Object.keys(DZ_DOC);
+function dzNeedDocs(need){
+  const t=String(need||""),o=new Set();
+  if(/^用途$/.test(t)){o.add("plan");return o}
+  if(/自動火災報知設備の有無/.test(t))return o;
+  if(/延べ面積|床面積/.test(t)&&!/部分の床面積|用途ごと/.test(t))o.add("heimen");
+  if(/階数|地階の有無|高さ/.test(t))o.add("dan");
+  if(/無窓階/.test(t))o.add("mado");
+  if(/耐火の別/.test(t))o.add("kakunin");
+  if(/内装/.test(t))o.add("naiso");
+  if(/収容人員/.test(t)&&!/部分の収容人員/.test(t))o.add("shuyo");
+  if(/部分の(有無|床面積|収容人員)|用途ごと|用途の部分/.test(t))o.add("youto");
+  if(/細分|介助|入居|入所/.test(t))o.add("riyo");
+  if(/直通階段|特定一階段/.test(t))o.add("kaidan");
+  if(/ラック式/.test(t))o.add("rack");
+  if(/駐車/.test(t))o.add("park");
+  if(/舞台部/.test(t))o.add("butai");
+  if(/敷地/.test(t))o.add("haichi");
+  if(/鉄網|契約電流/.test(t))o.add("leak");
+  if(/電話/.test(t))o.add("tel");
+  return o;
+}
+/* 変更後（新築は計画）の値で、判定の入力を作る */
+function dzIn(mf,kind){
+  if(!mf)return null;const ex=kind==="exist",now=mf.now||{},aft=mf.aft||{};
+  const pick=f=>ex&&aft[f]&&aft[f]!=="同じ"?aft[f]:now[f];
+  const useChg=ex&&aft.use&&aft.use!=="同じ";
+  const fl=Object.assign({},now.fl||{});if(ex)for(const [k,v] of Object.entries(aft.fl||{}))if(v)fl[k]=v;
+  const tai=pick("tai"),mado=pick("mado");
+  return {use:mfCode(pick("use")),sub:useChg?(aft.sub||""):(ex&&aft.sub?aft.sub:now.sub||""),A:pick("A"),up:pick("up"),dn:pick("dn"),P:pick("P"),
+    tai:tai==="不明"||tai==="同じ"?"":tai||"",mado:mado==="ある"?"あり":mado==="ない"?"なし":"",fl};
+}
+/* 判定に足りない資料（変更後の値で判定。職員が「ある」と確かめた既存の設備は除く） */
+function dzNeeds(mf,kind){
+  const B=dzIn(mf,kind);if(!B)return [];
+  const r=judgeSetsubi(B),by={};
+  if(!B.use)return [{id:"plan",kind:"資料",label:DZ_DOC.plan[1],eqs:["用途の判定"]}];
+  for(const [k,l] of SETSUBI){const j=r[k];if(!j||j.st!=="unk")continue;
+    if(kind==="exist"&&mf.eq&&mf.eq[k]&&mf.eq[k].manual&&mf.eq[k].v==="ある")continue;
+    for(const d of dzNeedDocs(j.need))(by[d]||(by[d]=[])).push(l.replace(/（.*$/,""))}
+  return DZ_ORDER.filter(d=>by[d]).map(d=>({id:d,kind:DZ_DOC[d][0],label:DZ_DOC[d][1],eqs:by[d]}));
+}
+function dzNeedForAI(kind){
+  const l=dzNeeds(MF,kind);if(!l.length)return "";
+  return "\n\n【先方に求める資料（画面が一覧の「次回お持ちいただきたい資料」に載せる。items で同じことを聞き直さない）】\n"+l.map(x=>"・"+x.label).join("\n");
+}
+/* AI の設備の一覧を、表のキーに当てる（要・条件しだいだけ） */
+function dzEqs(equip){
+  const o=[];for(const x of equip||[]){if(!/^(要|条件しだい)$/.test(x.need))continue;const h=DZ_EQ.find(([,re])=>re.test(x.name));if(h)o.push({key:h[0],name:x.name,need:x.need})}
+  return o;
+}
+const dzNm=e=>e.name+(e.need==="条件しだい"?"（設置する場合）":"");
+/* 設置届が要る防火対象物か（令第35条第1項、組合の第3号の指定） */
+function dzS35(B){
+  if(!B||!B.use)return {st:"unk",why:"用途・延べ面積で決まります（令第35条第1項）"};
+  const u=B.use,n=u.replace(/[イロハニ]$/,""),A=B.A===""||B.A==null?null:+B.A,sub=B.sub||"";
+  if(u==="2ニ"||u==="5イ"||u==="6ロ"||(u==="6イ"&&["1","2","3"].includes(sub))||(u==="6ハ"&&sub==="入居"))return {st:"req",why:"令第35条第1項第1号"};
+  const g2=["1","2イ","2ロ","2ハ","3イ","3ロ","4","6イ","6ハ","6ニ","9イ","16イ","16の2","16の3"];
+  if(g2.includes(u)||["1","3","4"].includes(n)){
+    if(A!=null&&A>=300)return {st:"req",why:"令第35条第1項第2号（延べ300㎡以上）"};
+    if(["16イ","16の2","16の3"].includes(u))return {st:"unk",why:"(6)項ロなどの部分があれば令第35条第1項第1号。延べ300㎡以上なら第2号"};
+    if(u==="6イ"&&!sub)return {st:"unk",why:"(6)項イ(1)〜(3)なら令第35条第1項第1号。延べ300㎡以上なら第2号"};
+    if(A==null)return {st:"unk",why:"延べ300㎡以上なら令第35条第1項第2号"};
+    const multi=(+B.up||0)>=2||(+B.dn||0)>=1||B.up===""||B.dn==="";
+    return multi?{st:"unk",why:"延べ300㎡未満。特定一階段等防火対象物なら令第35条第1項第4号"}:{st:"no",why:"延べ300㎡未満"};
+  }
+  // 第3号：組合の指定（令和7年消本告示第5号）
+  const X=u==="13ロ"||n==="17"?300:["5ロ","7","8","9ロ","10","12イ","12ロ","13イ","14"].includes(u)||["7","8","10","14"].includes(n)?500:["11","15","16ロ"].includes(u)||["11","15"].includes(n)?1000:null;
+  if(n==="18")return {st:"unk",why:"道路の全面をおおい、面積300㎡以上なら令第35条第1項第3号の指定"};
+  if(X==null)return {st:"no",why:""};
+  if(A==null)return {st:"unk",why:"延べ"+X+"㎡以上なら令第35条第1項第3号の指定"};
+  return A>=X?{st:"req",why:"令第35条第1項第3号（組合の指定。延べ"+X+"㎡以上）"}:{st:"no",why:"延べ"+X+"㎡未満（令第35条第1項第3号の指定に当たらない）"};
+}
+/* 使用開始届が要る防火対象物か（火災予防規則第16条第1項） */
+function dzS16(B,eqs){
+  if(B&&/^(19|20)/.test(B.use))return {st:"no",why:""};
+  if(eqs.some(e=>e.need==="要"))return {st:"req",why:"消防用設備等の設置義務がある（火災予防規則第16条第1項第1号）"};
+  if(!B||!B.use)return {st:"unk",why:"用途・収容人員・設置義務で決まります（火災予防規則第16条第1項）"};
+  const u=B.use,n=u.replace(/[イロハニ]$/,""),P=B.P===""||B.P==null?null:+B.P;
+  const X=["1","2","3","4","6","9イ","16イ","16の2"].some(c=>u===c||n===c)||u==="5イ"?30:50;
+  if(P!=null&&P>=X)return {st:"req",why:"収容人員"+X+"人以上（火災予防規則第16条第1項第"+(X===30?"2":"3")+"号）"};
+  if(P==null)return {st:"unk",why:"収容人員"+X+"人以上、または消防用設備等の設置義務があれば要（火災予防規則第16条第1項）"};
+  return {st:"unk",why:"収容人員"+X+"人未満。消防用設備等の設置義務があれば要（火災予防規則第16条第1項第1号）"};
+}
+function dzFilings(m){
+  const B=dzIn(m.mf,m.kind),eqs=dzEqs(m.equip),ex=m.kind==="exist",o=[];
+  const koji=eqs.filter(e=>DZ_KOJI[e.key]);
+  if(koji.length)o.push({name:"工事整備対象設備等着工届出書",who:"甲種消防設備士（工事をする者）",when:"工事に着手する日の10日前まで（2通）",
+    ref:"消防法第17条の14、規則第33条の18、火災予防事務処理規程第6条",
+    note:"対象："+koji.map(e=>e.key==="esc"?e.name+"（金属製避難はしご（固定式）・救助袋・緩降機を設ける場合）":dzNm(e)).join("、")+(ex?"。新設・増設・移設・変更の工事をするもの":"")+(koji.some(e=>/特定小規模/.test(e.name))?"。特定小規模施設用自動火災報知設備は、着工届の要否を窓口で確かめる":"")});
+  const set=eqs.filter(e=>!["kigu"].includes(e.key)&&!/簡易消火用具/.test(e.name)),s35=dzS35(B);
+  if(s35.st!=="no"&&set.length)o.push({name:"消防用設備等設置届出書（検査を受ける）",who:"防火対象物の関係者",when:"工事が完了した日から4日以内（2通）",
+    ref:"消防法第17条の3の2、令第35条、規則第31条の3、火災予防事務処理規程第8条",
+    note:(s35.st==="req"?"当たる："+s35.why:"条件："+s35.why)+"。対象："+set.map(dzNm).join("、")+(ex?"（今回設置・変更するもの）":"")});
+  const s16=dzS16(B,eqs);
+  if(s16.st!=="no")o.push({name:ex?"防火対象物使用開始（変更）届出書":"防火対象物使用開始届出書",who:"使用しようとする者",when:"使用開始"+(ex?"（変更）":"")+"の日の7日前まで",
+    ref:"火災予防条例第43条、火災予防規則第16条",note:(s16.st==="req"?"当たる：":"条件：")+s16.why});
+  return o;
+}
+function dzAttach(m){
+  const eqs=dzEqs(m.equip),ex=m.kind==="exist",fs=dzFilings(m),has=k=>fs.some(f=>f.name.indexOf(k)>=0),o=[];
+  o.push({name:"建築確認の申請（消防同意）"+(ex?"（確認申請を伴う場合）":""),docs:["消防用設備等の計画図書（消火器・簡易消火用具・非常警報器具・誘導標識を除く）。確認申請書に添付が無ければ、消防用設備等設置計画書（様式第2号）","無窓階の判定に要る資料"],per:[],ref:"火災予防事務処理規程第3条第1項第3号・第4号"});
+  if(has("着工届"))o.push({name:"着工届",docs:["平面図","配管及び配線の系統図","計算書"],sub:"いずれも工事の設計に関する図書の写し",
+    per:eqs.filter(e=>DZ_KOJI[e.key]).map(e=>[dzNm(e),"必要により "+DZ_KOJI[e.key].join("、")]),ref:"規則第33条の18、火災予防事務処理規程第6条・別表第1"});
+  if(has("設置届"))o.push({name:"設置届",docs:["平面図","配管及び配線の系統図","消防用設備等試験結果報告書（設備ごと）"],per:[],ref:"規則第31条の3第1項第1号"});
+  if(has("使用開始"))o.push({name:"使用開始"+(ex?"（変更）":"")+"届",docs:["案内図","配置図","各階平面図"],
+    per:eqs.filter(e=>DZ_B22[e.key]).map(e=>[dzNm(e),DZ_B22[e.key].join("、")]),ref:"火災予防規則第16条第3項・別表第2・別表第2の2"});
+  return o;
+}
+function dzBlocksHTML(m,H){
+  if(!m.dz)return "";
+  const at=dzAttach(m),nd=dzNeeds(m.mf,m.kind);
+  const atT=`<table><tr><th style="width:24%">届出・申請</th><th>添える図書</th><th style="width:22%">根拠</th></tr>${at.map(a=>`<tr class="blk"><td>${esc(a.name)}</td><td>${a.docs.map(d=>"・"+esc(d)).join("<br>")}${a.sub?`<div class="why">${esc(a.sub)}</div>`:""}${a.per.length?`<div class="why" style="margin-top:4px">${a.per.map(([e,d])=>esc(e)+"："+esc(d)).join("<br>")}</div>`:""}</td><td class="mref">${esc(a.ref)}</td></tr>`).join("")}</table><div class="mwarn">部数・様式・縮尺は窓口で確かめてください。</div>`;
+  const ndL=nd.length?`<ul class="mitems" style="list-style:none;padding-left:0">${nd.map(x=>`<li class="blk">□ ${esc(x.label)}<div class="why">${x.kind==="確認"?"お聞きしたいこと。":""}${esc(x.eqs.join("・"))}の判定に要ります</div></li>`).join("")}</ul>`:"";
+  return `<div class="blk">${H("届出・申請に添えていただく図書")}${atT}</div>`+(ndL?`<div class="blk keepnext">${H("次回お持ちいただきたい資料")}</div>${ndL}`:"");
+}
+function dzBlocksDocx(m,HN,P,R,tbl,W){
+  if(!m.dz)return [];
+  const at=dzAttach(m),nd=dzNeeds(m.mf,m.kind),k=[];
+  k.push(HN("届出・申請に添えていただく図書"));
+  k.push(tbl([["届出・申請","添える図書","根拠"].map(t=>P(R(t,{bold:true,size:18})))].concat(at.map(a=>[P(R(a.name,{size:18})),
+    a.docs.map(d=>P(R("・"+d,{size:18}))).concat(a.sub?[P(R(a.sub,{size:16,color:"555555"}))]:[]).concat(a.per.map(([e,d])=>P(R(e+"："+d,{size:16,color:"555555"})))),
+    P(R(a.ref,{size:16}))])),[2300,W-4600,2300]));
+  k.push(P(R("部数・様式・縮尺は窓口で確かめてください。",{size:16,color:"666666"})));
+  if(nd.length){k.push(HN("次回お持ちいただきたい資料"));nd.forEach(x=>{k.push(P(R("□ "+x.label,{size:20}),{keep:true,after:20}));k.push(P(R((x.kind==="確認"?"お聞きしたいこと。":"")+x.eqs.join("・")+"の判定に要ります",{size:16,color:"555555"}),{indent:{left:360}}))})}
+  return k;
+}
+/* 入力画面：判定に足りない資料 */
+function dzNeedRender(){
+  const box=document.getElementById("mf-need");if(!box)return;const k=memoKind();
+  const l=dzNeeds(MF,k);
+  if(!MF.now.use&&!(MF.aft&&MF.aft.use&&MF.aft.use!=="同じ")){box.innerHTML='<p class="note" style="margin:4px 0 0">用途を選ぶと出ます。</p>';return}
+  box.innerHTML=l.length?l.map(x=>`<div class="dzn">${x.kind==="確認"?"［聞く］":"□"} ${esc(x.label)}<span class="mbn">${esc(x.eqs.join("・"))}</span></div>`).join(""):'<p class="note" style="margin:4px 0 0">入力した値で、設備の判定に足りない資料はありません。</p>';
+}
 function memoInputs(){
-  const kind=memoKind(),plan=$("#m-plan").value.trim(),ledger=kind==="exist"?$("#m-ledger").value.trim():"",cond=condText();
+  const kind=memoKind(),plan=$("#m-plan").value.trim(),ledger=kind==="exist"?$("#m-ledger").value.trim():"",cond=mfText(kind);
   const qa=memoQs?memoQs.map((q,i)=>{const el=document.querySelector(`#m-qs input[data-qi="${i}"]`);return {q:q.q,to:q.to,a:el?el.value.trim():""}}):[];
   let u=(MKIND_RULE[kind]||"")+"\n\n【先方の計画】\n"+(plan||"（書かれていない）");
   if(ledger)u+="\n\n【消防の台帳で分かっていること（既存の建物）】\n"+ledger;
@@ -1486,7 +2170,7 @@ function memoInputs(){
 function memoPre(stEl){
   const {kind,plan,ledger,cond}=memoInputs();
   if(!kind){stEl("まず計画の種類（新築／既存の建物を変える）を選んでください。");return false}
-  if(!plan&&!cond&&!ledger){stEl("先方の計画か、対象物の条件を入れてください。");return false}
+  if(!plan&&!mfHas()&&!ledger){stEl("先方の計画か、建物のことを入れてください。");return false}
   if(!sample){stEl("この画面ではClaudeを使えないため、一覧を作れません。");return false}
   if(!ROWS||!NATOK){stEl("本文データを読み込み中です。数秒おいてからもう一度お試しください。");return false}
   return true;
@@ -1539,12 +2223,12 @@ async function makeMemo(){
   mctl=new AbortController();
   const _t0=performance.now();let _rq="";if(window.__TRIAL&&__TRIAL.on){__TRIAL.status=t=>st(t);document.querySelectorAll('.trate[data-for="m-out"]').forEach(x=>x.remove())}
   try{
-    const {kind,plan,ledger,qa,u}=memoInputs();_rq=u;
+    const {kind,plan,ledger,qa}=memoInputs(),u=memoInputs().u+dzNeedForAI(kind);_rq=u;
     const v=await sample.json([{role:"user",content:instr()+"\n"+MEMO_INSTR},{role:"assistant",content:"了解しました。ツールで調べてから、指定のJSONだけを返します。"},{role:"user",content:u}],
       {tools:tools(st),signal:mctl.signal,model:MODEL,modelTier:"default"});
     if(!v||typeof v!=="object")throw {code:"invalid_json"};
     const ord={"要":0,"条件しだい":1,"不要":2};
-    const m={t:Date.now(),kind,plan,ledger,qa:qa.filter(x=>x.a),cond:memoCondVals(),condBrief:condBrief(),use:String(v.use||""),
+    const m={t:Date.now(),dz:1,kind,plan,ledger,qa:qa.filter(x=>x.a),cond:memoCondVals(),condBrief:mfBrief(kind),mf:JSON.parse(JSON.stringify(MF)),use:String(v.use||""),
       equip:(Array.isArray(v.equip)?v.equip:[]).filter(x=>x&&x.name).slice(0,16).map(x=>{const nd=String(x.need||"");return {name:String(x.name),need:/不要/.test(nd)?"不要":/^要/.test(nd)?"要":"条件しだい",cond:String(x.cond||""),exist:String(x.exist||""),ref:refsText(x.refs)}}).sort((a,b)=>ord[a.need]-ord[b.need]),
       known:(v.known&&typeof v.known==="object")?Object.fromEntries(Object.entries(v.known).map(([k,x])=>[k,String(x||"")]).filter(([k,x])=>x)):{},
       items:(Array.isArray(v.items)?v.items:[]).filter(x=>x&&x.q).slice(0,16).map(x=>({q:String(x.q),why:String(x.why||""),ref:refsText(x.refs),to:/台帳/.test(x.to||"")?"台帳":"先方"})),
@@ -1562,6 +2246,7 @@ async function makeMemo(){
     st(e&&e.code==="cancelled"?"止めました。":e&&e.code==="invalid_json"?"一覧の形で返ってきませんでした。もう一度お試しください。":(ERR[e&&e.code]||"作れませんでした。もう一度お試しください。"));
   }finally{memoLock(false);mctl=null}
 }
+function dzFilAll(m){return m.dz?dzFilings(m).concat(m.filings.filter(x=>!/着工届|消防用設備等.{0,12}設置届|使用開始/.test(x.name))):m.filings}
 function memoDate(t){const d=new Date(t);return "令和"+(d.getFullYear()-2018)+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日"}
 function memoPremise(m){
   const a=[];if(m.ledger)a.push("台帳："+m.ledger);(m.qa||[]).forEach(x=>{const q=(String(x.q).match(/^.*?[か。？]/)||[x.q])[0];a.push(q.replace(/。$/,"")+" → "+x.a)});return a;
@@ -1574,13 +2259,15 @@ function memoHTML(m,forPrint,noStaff){
   const own=m.items.filter(x=>x.to==="台帳");
   const items=m.items.filter(x=>x.to!=="台帳").map(x=>`<li class="blk">□ ${esc(x.q)}${x.why?`<div class="why">${esc(x.why)}</div>`:""}${x.ref?`<div class="mref">根拠：${esc(x.ref)}</div>`:""}<div class="ans">回答：</div></li>`).join("");
   const eqt=eq.length?`<table class="eq"><colgroup><col style="width:17%"><col style="width:11%"><col><col style="width:19%"></colgroup><tr><th>設備</th><th>見込み</th><th>決め手・既存の設備との関係</th><th>根拠</th></tr>${eq.map(x=>`<tr class="blk"><td>${esc(x.name)}</td><td class="nd">${esc(x.need)}</td><td>${esc(x.cond)}${x.exist?`<div class="why">${esc(x.exist)}</div>`:""}</td><td class="mref">${esc(x.ref)}</td></tr>`).join("")}</table>`:"<p>（設備の判定は挙がっていません）</p>";
-  const fil=m.filings.length?`<table><tr><th>届出</th><th>出す人</th><th>期限</th><th>根拠</th></tr>${m.filings.map(x=>`<tr class="blk"><td>□ ${esc(x.name)}</td><td>${esc(x.who)}</td><td>${esc(x.when)}</td><td class="mref">${esc(x.ref)}</td></tr>`).join("")}</table>`:"<p>（挙がった届出はありません）</p>";
+  const filsAll=dzFilAll(m);
+  const fil=filsAll.length?`<table><tr><th>届出</th><th>出す人</th><th>期限</th><th>根拠</th></tr>${filsAll.map(x=>`<tr class="blk"><td>□ ${esc(x.name)}${x.note?`<div class="why">${esc(x.note)}</div>`:""}</td><td>${esc(x.who)}</td><td>${esc(x.when)}</td><td class="mref">${esc(x.ref)}</td></tr>`).join("")}</table>`:"<p>（挙がった届出はありません）</p>";
   let n=0;const H=t=>`<h3>${++n}　${t}</h3>`;
   return `<div class="blk"><h3>予防協議 確認事項一覧</h3><div class="msum">作成 ${esc(memoDate(m.t))}${m.kind?"\n種類："+esc(MKIND[m.kind]||""):""}${m.condBrief?"\n条件："+esc(m.condBrief):""}${m.plan?"\n計画："+esc(m.plan):""}${pre.length?"\n前提（台帳・聞き取りで分かったこと）：\n"+pre.map(x=>"・"+esc(x)).join("\n"):""}</div>
 <table style="margin-top:8px"><tr><td style="width:22%">事業者・担当</td><td></td></tr><tr><td>所在地・建物名</td><td></td></tr><tr><td>協議日・対応者</td><td></td></tr></table><div class="mwarn" style="margin-top:6px">この一覧は、例規ナビ（Claude）が条文・通知・京都市の運用基準から作ったものです。漏れや読み違いがあり得ます。根拠は例規ナビの本文で確かめてください。通知・運用基準は法令ではありません。設備の要否は見込みで、図面と現地で確定します。</div></div>
 ${m.cut&&!noStaff?`<div class="blk mwarn" style="border:1px solid var(--warn);padding:6px 8px;color:var(--warn)">職員用：この一覧は途中までです（末尾の「ナビで確かめきれなかった点」を参照）。</div>`:!noStaff&&m.unv&&m.unv.length?`<div class="blk mwarn">職員用：ナビが条文で確かめきれなかった点が${m.unv.length}件あります（末尾）。その点に関わる設備・届出は、条文で確かめてから伝えてください。</div>`:""}${m.use?`<div class="blk"><h3>用途の見立て</h3><div>${esc(m.use)}</div></div>`:""}
 ${m.equip?`<div class="blk">${H("必要になる消防用設備等（見込み）")}${eqt}<div class="mwarn">「条件しだい」は、下のお聞きしたいことの答えで決まります。</div></div>`:""}
 <div class="blk">${H("必要になる届出")}${fil}</div>
+${dzBlocksHTML(m,H)}
 <div class="blk">${H("お聞きしたいこと（基本）")}<table>${fixed}</table></div>
 <div class="blk keepnext">${H("この計画でお聞きしたいこと")}</div><ol class="mitems">${items}</ol>
 ${m.notes.length?`<div class="blk">${H("伝えておくこと")}<ul>${m.notes.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></div>`:""}
@@ -1591,7 +2278,7 @@ ${own.length||(m.unv&&m.unv.length)?`<div class="mwarn">先方に渡すときは
 function renderMemo(m){
   $("#m-out").innerHTML=`<div class="memo">${memoHTML(m)}<div class="mbtns"><button class="btn" id="m-docx">Wordで保存</button><button class="btn" id="m-pdf">PDFで保存</button><button class="btn ghost" id="m-new">新しく作る</button><label class="note" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="m-nostaff"> 先方用（職員用を除く）</label></div><div class="mwarn" id="m-save"></div></div>`;
   const ns=()=>!!($("#m-nostaff")&&$("#m-nostaff").checked);$("#m-docx").onclick=()=>saveMemoFile(m,"docx",ns());$("#m-pdf").onclick=()=>saveMemoFile(m,"pdf",ns());
-  $("#m-new").onclick=()=>{memoCur=null;memoQs=null;$("#m-ask").textContent="足りない情報を洗い出す";$("#m-out").innerHTML="";$("#m-qs").innerHTML="";$("#m-plan").value="";$("#m-ledger").value="";document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=false);syncKind();$("#m-plan").focus()};
+  $("#m-new").onclick=()=>{memoCur=null;memoQs=null;$("#m-ask").textContent="足りない情報を洗い出す";$("#m-out").innerHTML="";$("#m-qs").innerHTML="";$("#m-plan").value="";$("#m-ledger").value="";MF=mfNew();document.querySelectorAll('input[name="mkind"]').forEach(r=>r.checked=false);syncKind();$("#m-plan").focus()};
 }
 function loadMemos(){return stGet("memo")}
 function saveMemo(m){const l=loadMemos().filter(x=>x.t!==m.t);l.unshift(m);stSet("memo",l)}
@@ -1660,8 +2347,10 @@ async function memoDocx(m,noStaff){
       kids.push(P(R("「条件しだい」は、下のお聞きしたいことの答えで決まります。",{size:16,color:"666666"})))}
     else kids.push(P(R("（設備の判定は挙がっていません）")))}
   kids.push(HN("必要になる届出"));
-  if(m.filings.length)kids.push(tbl([["届出","出す人","期限","根拠"].map(t=>P(R(t,{bold:true,size:18})))].concat(m.filings.map(x=>[P(R("□ "+x.name,{size:18})),P(R(x.who,{size:18})),P(R(x.when,{size:18})),P(R(x.ref,{size:16}))])),[2600,1900,2200,W-6700]));
+  const filsAll=dzFilAll(m);
+  if(filsAll.length)kids.push(tbl([["届出","出す人","期限","根拠"].map(t=>P(R(t,{bold:true,size:18})))].concat(filsAll.map(x=>[[P(R("□ "+x.name,{size:18}))].concat(x.note?[P(R(x.note,{size:16,color:"555555"}))]:[]),P(R(x.who,{size:18})),P(R(x.when,{size:18})),P(R(x.ref,{size:16}))])),[2600,1900,2200,W-6700]));
   else kids.push(P(R("（挙がった届出はありません）")));
+  dzBlocksDocx(m,HN,P,R,tbl,W).forEach(x=>kids.push(x));
   const kn=m.known||{},own=m.items.filter(x=>x.to==="台帳");
   kids.push(HN("お聞きしたいこと（基本）"),tbl(MEMO_FIXED.map(([k,h,f])=>[P(R("□")),[P(R(k,{bold:true})),P(R(h,{size:16,color:"555555"}))],P(R(f(c)||kn[k]||""))]),[500,3300,W-3800]));
   kids.push(HN("この計画でお聞きしたいこと"));
@@ -1753,7 +2442,9 @@ $("#hclear").addEventListener("click",()=>{
   $("#asof").textContent="例規集 内容現在 "+IDX.asof;
   $("#foot").textContent="例規 "+IDX.laws.filter(l=>!l.nat&&!l.ntc).length+"件・条文 5,387箇所と、国の法令 "+IDX.laws.filter(l=>l.nat).length+"本を収録。取り込み日 "+IDX.built+"。出典は甲賀広域行政組合例規集（Reiki-Base インターネット版）と、e-Gov法令検索（デジタル庁）の法令データです。";
   renderToc();
-  $("#chips").innerHTML=EXAMPLES.map(t=>`<button class="chip">${esc(t)}</button>`).join("");
+  $("#chips").innerHTML=dailyExamples().map(t=>`<button class="chip">${esc(t)}</button>`).join("");
+  // 質問を送ったら、例と注意書きを畳む(新しい質問から始めると戻る)
+  {const sync=()=>{const has=$("#thread").children.length>0;$("#chips").hidden=has;const nt=$("#asknote");if(!nt.classList.contains("err"))nt.hidden=has};new MutationObserver(sync).observe($("#thread"),{childList:true});sync()}
   $("#chips").addEventListener("click",e=>{const c=e.target.closest(".chip");if(c){$("#q").value=c.textContent;$("#q").focus()}});
   getJSON("search.json").then(d=>{prepRows(d.rows);if($("#sq").value)doSearch();return getJSON("search_nat.json").then(n=>{prepRows(n.rows,true);NATOK=true;if($("#sq").value)doSearch();loadNotices().then(()=>{if($("#sq").value)doSearch()})}).catch(()=>{NATOK=true;$("#asknote").textContent="国の法令のデータを読み込めませんでした。例規だけで答えます。"})}).catch(()=>{$("#scount").textContent="本文データを読み込めませんでした。"});
   try{

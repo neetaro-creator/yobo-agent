@@ -60,7 +60,10 @@ sub('st("考えています…");$("#m-out").innerHTML="";\n  mctl=new AbortCont
     'st("考えています…");$("#m-out").innerHTML="";\n  mctl=new AbortController();\n'
     '  const _t0=performance.now();let _rq="";if(window.__TRIAL&&__TRIAL.on){__TRIAL.status=t=>st(t);document.querySelectorAll(\'.trate[data-for="m-out"]\').forEach(x=>x.remove())}',
     "makeMemo:開始")
-sub('const {kind,plan,ledger,qa,u}=memoInputs();', 'const {kind,plan,ledger,qa,u}=memoInputs();_rq=u;', "makeMemo:入力")
+if h.count('const {kind,plan,ledger,qa,u}=memoInputs();')==1:
+    sub('const {kind,plan,ledger,qa,u}=memoInputs();', 'const {kind,plan,ledger,qa,u}=memoInputs();_rq=u;', "makeMemo:入力")
+else:  # 2026-10-24 以降の版（v81〜）
+    sub('const {kind,plan,ledger,qa}=memoInputs(),u=memoInputs().u+dzNeedForAI(kind);', 'const {kind,plan,ledger,qa}=memoInputs(),u=memoInputs().u+dzNeedForAI(kind);_rq=u;', "makeMemo:入力")
 sub('memoCur=m;saveMemo(m);renderMemo(m);st("");renderMemoHist();',
     'memoCur=m;saveMemo(m);renderMemo(m);st("");renderMemoHist();\n'
     '    if(window.__TRIAL&&__TRIAL.on){const _cs=[...new Set((JSON.stringify(v).match(/\\[\\[\\d+#s\\d+\\]\\]/g)||[]).map(x=>x.slice(2,-2)))].map(k=>{const f=fmtRefLabel(k);return f&&f.row?{ref:k,law:short(f.law.t),label:f.row.label,doc:f.law.ntc?ctxOf(f.law):""}:{ref:k,law:"?",label:"",doc:""}});\n'
